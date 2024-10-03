@@ -80,7 +80,7 @@ def login():
         # De cette manière, à chaque requête de l'utilisateur, on pourra récupérer l'id dans le cookie session
         if error is None:
             session.clear()
-            session['user_id'] = user['id']
+            session['user_id'] = user['id_personne']
             # On redirige l'utilisateur vers la page principale une fois qu'il s'est connecté
             return redirect("/")
         
@@ -119,7 +119,7 @@ def load_logged_in_user():
     else:
          # On récupère la base de données et on récupère l'utilisateur correspondant à l'id stocké dans le cookie session
         db = get_db()
-        g.user = db.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()
+        g.user = db.execute('SELECT * FROM Personnes WHERE id_personne = ?', (user_id,)).fetchone()
         # On ferme la connexion à la base de données pour éviter les fuites de mémoire
         close_db()
 
