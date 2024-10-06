@@ -22,7 +22,7 @@ def send_email(to_address, subject, message, cc_addresses=None):
     # Connexion au serveur SMTP et envoi de l'email
     try:
         server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
-        # server.set_debuglevel(1)  # Activer les messages de débogage
+        server.set_debuglevel(1)  # Activer les messages de débogage
         server.ehlo()
         server.starttls()
         server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)

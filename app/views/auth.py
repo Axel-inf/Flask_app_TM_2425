@@ -13,35 +13,37 @@ def register():
     # Si des données de formulaire sont envoyées vers la route /register (ce qui est le cas lorsque le formulaire d'inscription est envoyé)
     if request.method == 'POST':
 
-        # On récupère les champs 'username' et 'password' de la requête HTTP
-        username = request.form['username']
-        password = request.form['password']
+        # On récupère les champs 'email' et 'mot_de_passe' de la requête HTTP
+        email = request.form['email']
+        mot_de_passe = request.form['mot_de_passe']
 
         # On récupère la base de donnée
         db = get_db()
 
-        # Si le nom d'utilisateur et le mot de passe ont bien une valeur
+        # Si l'email et le mot de passe ont bien une valeur
         # on essaie d'insérer l'utilisateur dans la base de données
-        if username and password:
+        if email and mot_de_passe:
             try:
-                db.execute("INSERT INTO Personnes (username, password) VALUES (?, ?)",(username, generate_password_hash(password)))
+                db.execute("INSERT INTO Personnes (email, mot_de_passe) VALUES (?, ?)",(username, generate_password_hash(mot_de_passe)))
                 # db.commit() permet de valider une modification de la base de données
                 db.commit()
                 # On ferme la connexion à la base de données pour éviter les fuites de mémoire
                 close_db()
+
+                
                 
             except db.IntegrityError:
 
                 # La fonction flash dans Flask est utilisée pour stocker un message dans la session de l'utilisateur
                 # dans le but de l'afficher ultérieurement, généralement sur la page suivante après une redirection
-                error = f"Utilisateur {username} déjà enregistré."
+                error = f"Utilisateur avec l'adresse {email} déjà enregistré."
                 flash(error)
                 return redirect(url_for("auth.register"))
             
             return redirect(url_for("auth.login"))
          
         else:
-            error = "Nom d'utilisateur ou mot de passe invalide"
+            error = "Email ou mot de passe invalide"
             flash(error)
             return redirect(url_for("auth.login"))
     else:
@@ -54,16 +56,16 @@ def login():
     # Si des données de formulaire sont envoyées vers la route /login (ce qui est le cas lorsque le formulaire de login est envoyé)
     if request.method == 'POST':
 
-        # On récupère les champs 'username' et 'password' de la requête HTTP
-        username = request.form['username']
-        password = request.form['password']
+        # On récupère les champs 'email' et 'mot_de_passe' de la requête HTTP
+        email = request.form['email']
+        mot_de_passe = request.form['mot_de_passe']
 
         # On récupère la base de données
         db = get_db()
         
         # On récupère l'utilisateur avec le username spécifié (une contrainte dans la db indique que le nom d'utilisateur est unique)
         # La virgule après username est utilisée pour créer un tuple contenant une valeur unique
-        user = db.execute('SELECT * FROM Personnes WHERE username = ?', (username,)).fetchone()
+        user = db.execute('SELECT * FROM Personnes WHERE username = ?', (email,)).fetchone()
 
         # On ferme la connexion à la base de données pour éviter les fuites de mémoire
         close_db()
@@ -72,8 +74,8 @@ def login():
         # on crée une variable error 
         error = None
         if user is None:
-            error = "Nom d'utilisateur incorrect"
-        elif not check_password_hash(user['password'], password):
+            error = "Email incorrect"
+        elif not check_password_hash(user['mot_de_passe'], mot_de_passe):
             error = "Mot de passe incorrect"
 
         # S'il n'y pas d'erreur, on ajoute l'id de l'utilisateur dans une variable de session

@@ -8,11 +8,11 @@
   <div class="content-register">
     <div>
       <form method="post">
-        <label for="username">Nom d'utilisateur</label>
-        <input name="username" id="username" required>
-        <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password" required>
-        <input type="submit" value="Se connecter">
+        <label for="email">Email</label>
+        <input name="email" id="email" required>
+        <label for="mot_de_passe">Mot de passe</label>
+        <input type="mot_de_passe" name="mot_de_passe" id="mot_de_passe" required>
+        <input type="submit" value="SE CONNECTER">
       </form>
 
       {% for message in get_flashed_messages() %}

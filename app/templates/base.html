@@ -9,12 +9,12 @@
         <nav id="header-nav">
             <div id="header-nav-logo">
                 <a href="{{url_for('home.landing_page')}}">
-                    <img src="{{url_for('static', filename='imgs/logo-csud.svg')}}" alt="logo-csud"/>
+                    <img src="{{url_for('static', filename='imgs/logo.svg')}}" alt="logo"/>
                 </a>
             </div>
             <ul id="header-nav-menu">
                 {% if g.user %}
-                    <li><span>{{ g.user['username'] }}</span>
+                    <li><span>{{ g.user['email'] }}</span>
                     <li><a href="{{ url_for('auth.logout') }}">Se déconnecter</a>
                     <li><a href="{{url_for('user.show_profile')}}">Consulter son profil</a></li>
                 {% else %}
