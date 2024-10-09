@@ -52,10 +52,6 @@
   --tertiary: #B5BFD5;
 }
 
-/*--HighEmphasis: #000000;
-  --Medium Emphasis: #4A919E;
-  --Disabled: #FFFFFF;
-  --Error Text:*/
 header{
     height: 100px;
 }
@@ -120,7 +116,7 @@ header{
     color: white;
 }
 
-.content-index, .content-404, .content-register, .content-profile{
+.content-index, .content-404, .content-profile{
     height:80vh;
     display: flex;
     align-items: center;
@@ -170,6 +166,7 @@ h6{
   font-size: 19px;
   font-weight: bolder;
 }
+
 body{
   font-family: "inter", sans-serif;
   font-size: 16px;
@@ -191,63 +188,98 @@ body{
 .container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 300px 300px 300px;
-  gap: 4px 40px;
+  grid-template-rows: 80px 1fr 304px;
+  column-gap: 40px;
   margin: 0px 80px;
   grid-template-areas: 
-    "header header header header header header header header header header header header header header"
-    "main main main main main main main main main main main main main main"
-    "footer footer footer footer footer footer footer footer footer footer footer footer footer footer";
+    "header header header header header header header header header header header header"
+    "main main main main main main main main main main main main"
+    "footer footer footer footer footer footer footer footer footer footer footer footer";
+  height: 100vh
 }
 
-.input-container {
+
+/* Section contenant le formulaire */
+.container > div:first-child {
   display: flex;
+  justify-content: center;
   align-items: center;
-  position: relative;
-  font-family: Inter, sans-serif;
+  background-color: #F4F4F9;
+  padding: 20px;
 }
 
-label {
-  position: absolute;
-  top: -10px;
-  left: 10px;
+/* Formulaire de connexion */
+form {
   background-color: white;
-  padding: 0 5px;
+  width: 100%; /* Prend toute la largeur disponible dans son conteneur */
+  max-width: 400px; /* Limite maximale pour éviter qu'il ne devienne trop large */
+}
+
+/* Conteneur d'entrée */
+.input-container {
+  margin-bottom: 15px;
+}
+
+/* Style des labels */
+label {
   font-size: 14px;
-  color: grey;
+  color: #333;
 }
 
+/* Champs de saisie */
+input[type="email"],
 input[type="password"] {
-  border: 1px solid grey;
-  border-radius: 5px;
+  width: 100%;
   padding: 10px;
-  font-size: 16px;
-  flex: 1;
-  padding-right: 40px; /* Espace pour l'icône */
-  outline: none;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-input[type="password"]:focus {
-  border-color: #007bff;
-}
-
-.toggle-password {
-  position: absolute;
-  right: 10px;
+/* Bouton de soumission */
+input[type="submit"] {
+  background-color: #3273DC;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
+  margin-top: 15px;
 }
 
-.toggle-password img {
-  width: 20px;
-  height: 20px;
+input[type="submit"]:hover {
+  background-color: #2755A4;
 }
 
+/* Texte d'information (mot de passe minimum) */
+body {
+  font-size: 12px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* Liens (mot de passe oublié, s'inscrire) */
+u {
+  color: #3273DC;
+  cursor: pointer;
+}
+
+u:hover {
+  text-decoration: none;
+}
+
+/* Style pour l'image qui occupe les deux tiers de l'écran */
 .image-container {
-  background-color: var(--primary); /* Couleur de fond bleu */
-  padding: 20px; /* Ajoute un peu d'espace autour de l'image */
-  display: flex; /* Centrer l'image */
-  justify-content: right; /* Centrer l'image horizontalement */
-  align-items: center; /* Centrer l'image verticalement */
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
+
+/* Conteneur pour l'image à droite */
+.content-register > div:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3A4E71; /* Couleur de fond similaire à celle de la maquette */
+}
+
