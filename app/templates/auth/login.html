@@ -8,10 +8,19 @@
   <div class="content-register">
     <div>
       <form method="post">
-        <label for="email">Email</label>
-        <input name="email" id="email" required>
-        <label for="mot_de_passe">Mot de passe</label>
-        <input type="mot_de_passe" name="mot_de_passe" id="mot_de_passe" required>
+        <div class="input-container">
+          <label for="email">Email</label>
+          <input type="email" id="email" required name="email" placeholder="john.doe@gmail.com">
+        </div>
+        <div class="input-container">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" required name="password" placeholder="......">
+      </div>
+      <body>8 caractères au minimum</body>
+      <u>Mot de passe oublié ?</u>
+      <body>Ou</body>
+      <body>Pas de compte? <u>Inscrivez-vous</u></body>
+      <img class="image-container" src="{{url_for('static', filename='imgs/illustration_connexion.png')}}" alt="Image pour illuster la connexion"/>
         <input type="submit" value="SE CONNECTER">
       </form>
 

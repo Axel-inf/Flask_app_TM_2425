@@ -46,7 +46,16 @@
   /*
 -----------------   ADD YOUR CSS RULES BELOW ------------------
 */
+:root {
+  --primary: #3E5F90;
+  --secondary: #8F9EBB;
+  --tertiary: #B5BFD5;
+}
 
+/*--HighEmphasis: #000000;
+  --Medium Emphasis: #4A919E;
+  --Disabled: #FFFFFF;
+  --Error Text:*/
 header{
     height: 100px;
 }
@@ -126,6 +135,119 @@ header{
     text-align:center;
 }
 
+h1{
+  font-family: "inter", sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+}
 
+h2{
+  font-family: "inter", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+}
 
+h3{
+  font-family: "inter", sans-serif;
+  font-size: 33px;
+  font-weight: 700;
+}
 
+h4{
+  font-family: "inter", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+h5{
+  font-family: "inter", sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+h6{
+  font-family: "inter", sans-serif;
+  font-size: 19px;
+  font-weight: bolder;
+}
+body{
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.header {
+  grid-area: header;
+  
+}
+.main {
+  grid-area: main;
+}
+
+.footer {
+  grid-area: footer;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 300px 300px 300px;
+  gap: 4px 40px;
+  margin: 0px 80px;
+  grid-template-areas: 
+    "header header header header header header header header header header header header header header"
+    "main main main main main main main main main main main main main main"
+    "footer footer footer footer footer footer footer footer footer footer footer footer footer footer";
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  font-family: Inter, sans-serif;
+}
+
+label {
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  background-color: white;
+  padding: 0 5px;
+  font-size: 14px;
+  color: grey;
+}
+
+input[type="password"] {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  flex: 1;
+  padding-right: 40px; /* Espace pour l'icône */
+  outline: none;
+}
+
+input[type="password"]:focus {
+  border-color: #007bff;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password img {
+  width: 20px;
+  height: 20px;
+}
+
+.image-container {
+  background-color: var(--primary); /* Couleur de fond bleu */
+  padding: 20px; /* Ajoute un peu d'espace autour de l'image */
+  display: flex; /* Centrer l'image */
+  justify-content: right; /* Centrer l'image horizontalement */
+  align-items: center; /* Centrer l'image verticalement */
+}

@@ -24,7 +24,7 @@ def register():
         # on essaie d'insérer l'utilisateur dans la base de données
         if email and mot_de_passe:
             try:
-                db.execute("INSERT INTO Personnes (email, mot_de_passe) VALUES (?, ?)",(username, generate_password_hash(mot_de_passe)))
+                db.execute("INSERT INTO Personnes (email, mot_de_passe) VALUES (?, ?)",(email, generate_password_hash(mot_de_passe)))
                 # db.commit() permet de valider une modification de la base de données
                 db.commit()
                 # On ferme la connexion à la base de données pour éviter les fuites de mémoire
@@ -65,7 +65,7 @@ def login():
         
         # On récupère l'utilisateur avec le username spécifié (une contrainte dans la db indique que le nom d'utilisateur est unique)
         # La virgule après username est utilisée pour créer un tuple contenant une valeur unique
-        user = db.execute('SELECT * FROM Personnes WHERE username = ?', (email,)).fetchone()
+        user = db.execute('SELECT * FROM Personnes WHERE email = ?', (email,)).fetchone()
 
         # On ferme la connexion à la base de données pour éviter les fuites de mémoire
         close_db()
