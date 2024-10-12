@@ -5,26 +5,24 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container">
+  <div class="content-login">
     <div>
       <form method="post">
-        <div class="input-container">
-          <h1>Se connecter</h1>
-          <img id="user_icon" src="{{url_for('static', filename='imgs/user.svg')}}" alt="Icône d'utilisateur"/>
-          <body for="email">Email</body>
-          <input type="email" id="email" required name="email" placeholder="john.doe@gmail.com">
-        </div>
-        <div class="input-container">
-          <body for="password">Mot de passe</body>
-          <input type="password" id="password" required name="password" placeholder="......">
-      </div>
-      <body>8 caractères au minimum</body>
-      <u>Mot de passe oublié ?</u>
-      <body>Ou</body>
-      <body>Pas de compte? <u>Inscrivez-vous</u></body>
-      <img id="connexion_img" src="{{url_for('static', filename='imgs/illustration_connexion.png')}}" alt="Image pour illuster la connexion"/>
+        <h1>Se connecter</h1>
+        <img id="user_icon" src="{{url_for('static', filename='imgs/user.svg')}}" alt="Icône d'utilisateur"/>
+        <p for="email">Email</p>
+        <input type="email" id="email" required name="email" placeholder="john.doe@gmail.com">
+        <p for="mot_de_passe">Mot de passe</p>
+        <input type="mot_de_passe" id="mot_de_passe" required name="mot_de_passe" placeholder="......">
+        <p>8 caractères au minimum</p>
+        <u>Mot de passe oublié ?</u>
+        <p>Ou</p>
+        <p>Pas de compte?
+        <a href="{{ url_for('auth.register') }}">Inscrivez-vous</a>
         <input type="submit" value="SE CONNECTER">
       </form>
+        <img id="connexion_img" src="{{url_for('static', filename='imgs/illustration_connexion.png')}}" alt="Image pour illuster la connexion"/>
+  
 
       {% for message in get_flashed_messages() %}
         <div>{{ message }}</div>

@@ -24,7 +24,7 @@
   
   /* 5. Improve media defaults */
   img, picture, video, canvas, svg {
-    display: block;
+    display: grid;
     max-width: 100%;
   }
   
@@ -135,6 +135,7 @@ h1{
   font-family: "inter", sans-serif;
   font-size: 48px;
   font-weight: 700;
+  text-align: center;
 }
 
 h2{
@@ -167,7 +168,7 @@ h6{
   font-weight: bolder;
 }
 
-body{
+p{
   font-family: "inter", sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -185,7 +186,7 @@ body{
   grid-area: footer;
 }
 
-.container {
+.container{
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 80px 1fr 304px;
@@ -198,26 +199,27 @@ body{
   height: 100vh
 }
 
-
-/* Section contenant le formulaire */
-.container > div:first-child {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #F4F4F9;
-  padding: 20px;
+.content-login{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 40px;
+  margin: 0px 0px 0px 40px;
+  height: 100vh
 }
 
-/* Formulaire de connexion */
+#connexion_img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  padding: 72px 40px;
+  background-color: var(--primary);
+  border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
+  grid-column: 5/ span 9;
+}
+
 form {
-  background-color: white;
-  width: 100%; /* Prend toute la largeur disponible dans son conteneur */
-  max-width: 400px; /* Limite maximale pour éviter qu'il ne devienne trop large */
-}
-
-/* Conteneur d'entrée */
-.input-container {
-  margin-bottom: 15px;
+  grid-column: 1 / span 3; 
 }
 
 /* Style des labels */
@@ -228,58 +230,46 @@ label {
 
 /* Champs de saisie */
 input[type="email"],
-input[type="password"] {
+input[type="password"], input[type="prenom"], input[type="nom"] {
   width: 100%;
-  padding: 10px;
-  margin-top: 5px;
+  padding-top: 12px;
+  padding-left: 16px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 /* Bouton de soumission */
 input[type="submit"] {
-  background-color: #3273DC;
+  background-color:var(--primary);
   color: white;
-  padding: 10px;
+  padding: 12.5px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 15px;
+}
+
+/* Texte du bouton de soumission */
+input[value="SE CONNECTER"], input[value="CRÉER MON COMPTE"] {
+  display: flex;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  align-items: center;
+
+
+  
 }
 
 input[type="submit"]:hover {
   background-color: #2755A4;
 }
 
-/* Texte d'information (mot de passe minimum) */
-body {
-  font-size: 12px;
-  color: #888;
-  margin-top: 5px;
-}
-
 /* Liens (mot de passe oublié, s'inscrire) */
-u {
-  color: #3273DC;
+a {
+  color: blue;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
   cursor: pointer;
-}
-
-u:hover {
-  text-decoration: none;
-}
-
-/* Style pour l'image qui occupe les deux tiers de l'écran */
-.image-container {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-/* Conteneur pour l'image à droite */
-.content-register > div:last-child {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #3A4E71; /* Couleur de fond similaire à celle de la maquette */
 }
 

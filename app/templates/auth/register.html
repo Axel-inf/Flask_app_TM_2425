@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_auth.html' %}
 
 {% block title %}
   S'enregistrer
@@ -8,13 +8,23 @@
   <div class="content-register">
     <div>
       <form method="post">
-        <label for="email">Email</label>
-        <input name="email" id="email" required>
-        
-        <label for="mot_de_passe">Mot de passe</label>
-        <input type="mot_de_passe" name="mot_de_passe" id="mot_de_passe" required>
+        <h1>Créer un compte</h1>
+        <img id="user_icon" src="{{url_for('static', filename='imgs/user.svg')}}" alt="Icône d'utilisateur"/>
+        <p for="prenom">Prénom</p>
+        <input type="prenom" id="prenom" required name="prenom" placeholder="John">
+        <p for="nom">Nom</p>
+        <input type="nom" id="nom" required name="nom" placeholder="Doe">
+        <p for="email">Email</p>
+        <input type="email" id="email" required name="email" placeholder="john.doe@gmail.com">
+        <p for="mot_de_passe">Mot de passe</p>
+        <input type="mot_de_passe" id="mot_de_passe" required name="mot_de_passe" placeholder="......">
+        <p>8 caractères au minimum</p>
         <input type="submit" value="CRÉER MON COMPTE">
+        <p>Ou</p>
+        <p>Déjà un compte?</p>
+        <a href="{{ url_for('auth.login') }}">Connectez-vous</a>
       </form>
+        <img id="connexion_img" src="{{url_for('static', filename='imgs/illustration_connexion.png')}}" alt="Image pour illuster la connexion"/>
     
       {% for message in get_flashed_messages() %}
         <div class="flash">{{ message }}</div>
