@@ -5,16 +5,42 @@
 {% endblock %}
 
 {% block content%}
-  <div class="content-index">
     {% if g.user %}
-      <h1>Vous êtes connectés</h1>
+    <h1>Vous êtes connectés</h1>
     {% else %}
-      <h1>Bienvenue sur le template de base de votre TM :)</h1>
+    <div class="partie1">
+      <div class="slogan">
+        <h1>Trouvez votre futur coach de tennis de table</h1>
+        <p>Découvrez notre nouvel outil de recherche de
+          coachs de tennis de table 100% gratuit!</p>
+        <a href="" id="bouton_fonce">Y aller</a>
+      </div>
+      <div class="coach-blob-container">
+        <img src="{{ url_for('static', filename='imgs/blob_avatars.png') }}" alt="Illustration des coachs et des blobs"/>
+      </div>
+    </div>
+      <h5>Trouvez votre coach</h5> 
+      <p>Utilisez notre outil de recherche de coach facile et gratuit</p>
+      <h5>Discutez avec nos coachs</h5>
+      <p>Fixez un rendez-vous avec un de nos coach via la messegarie de l’application</p>
+      <h6>Regroupe des entraîneurs de plusieurs associations</h6>
+      <img src="{{url_for('static', filename='imgs/logo_aftt.svg')}}" alt="Logo de l'AFTT"/>
+      <img src="{{url_for('static', filename='imgs/logo_avvf.svg')}}" alt="Logo de l'AVVF"/>
+      <img src="{{url_for('static', filename='imgs/logo_stt.svg')}}" alt="Logo de l'STT"/>
+      <h5>Progressez grâce à</h5>
+      <div id="header-nav-logo">
+        <a href="{{url_for('home.landing_page') }}">
+            <img src="{{url_for('static', filename='imgs/logo.svg') }}" alt="logo"/>
+        </a>
+      </div>
+      <p>Trouvez le coach qu’il vous faut et atteignez vos objectifs personnels. Pour les amateurs comme pour les plus avancés,
+          nous saurons satisfaire à vos attentes.</p>
+      <div>
+        <a href="{{url_for('home.landing_page') }}">
+            <img src="{{url_for('static', filename='imgs/illustration_progression.png') }}" alt="Illustration de progression"/>
+        </a>
+      </div>
+
+
     {% endif %}
-  </div>
-  <div class="container">
-    </div class="item item 1">1</div>
-  </div class="item item 2">2</div>
-  </div class="item item 3">3</div>
-  </div>
 {% endblock %}
