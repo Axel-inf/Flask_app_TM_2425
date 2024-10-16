@@ -17,19 +17,18 @@
             </div>
             <ul id="header-nav-menu">
                 {% if g.user %}
-                    <li><span>{{ g.user['email'] }}</span>
-                    <li><a href="{{ url_for('home.landing_page') }}">Accueil</a>
-                    <li><a href="{{ url_for('home.landing_page') }}">Recherche de coach</a>
-                    <li><a href="{{ url_for('home.landing_page') }}">Mes discussions</a>
-                    <li><a href="{{url_for('user.show_profile') }}">
+                    <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Accueil</a>
+                    <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Recherche de coach</a>
+                    <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Mes discussions</a>
+                    <li><a class="lien-page" href="{{url_for('user.show_profile') }}">
                         <img src="{{url_for('static', filename='imgs/avatar.png') }}" alt="photo de profil"/>
                     </a></li>
                 {% else %}
-                    <li><a href="{{ url_for('home.landing_page') }}">Accueil</a>
-                    <li><a href="{{ url_for('home.landing_page') }}">Recherche de coach</a>
-                    <li><a href="{{ url_for('home.landing_page') }}">Mes discussions</a>
-                    <li><a href="{{ url_for('auth.login') }}">Se connecter</a>
-                    <li><a href="{{ url_for('auth.register') }}">S'INSCRIRE</a>
+                    <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Accueil</a>
+                    <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Recherche de coach</a>
+                    <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Mes discussions</a>
+                    <li><a class="lien-page" href="{{ url_for('auth.login') }}">Se connecter</a>
+                    <li><a href="{{ url_for('auth.register') }}" id="bouton_fonce">S'INSCRIRE</a>
                 {% endif %}
             </ul>
         </nav>
@@ -56,14 +55,14 @@
             </div>
             </div>
             <div class="footer-section">
-            <p><b>Explorez</b></p>
+            <p class="titre-footer"><b>Explorez</b></p>
             <ul>
-                <li><a href="#">Recherche de coachs</a></li>
-                <li><a href="#">Mes discussions</a></li>
+                <li><a href="#">Recherche de coachs</a></li><!--lien à modifier-->
+                <li><a href="#">Mes discussions</a></li><!--lien à modifier-->
             </ul>
             </div>
             <div class="footer-section">
-            <p><b>Mentions légals</b></p>
+            <p class="titre-footer"><b>Mentions légals</b></p>
             <ul>
                 <li>Politique de confidentialité</li>
                 <li>Conditions d’utilisation</li>
@@ -71,7 +70,7 @@
             </ul>
             </div>
             <div class="footer-section">
-            <p><b>Contactez-nous</b></p>
+            <p class="titre-footer"><b>Contactez-nous</b></p>
             <p>nathan.roberts@example.com</p>
             <p>+41 79 286 98 16</p>
             </div>

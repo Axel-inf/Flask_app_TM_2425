@@ -19,28 +19,59 @@
         <img src="{{ url_for('static', filename='imgs/blob_avatars.png') }}" alt="Illustration des coachs et des blobs"/>
       </div>
     </div>
-      <h5>Trouvez votre coach</h5> 
-      <p>Utilisez notre outil de recherche de coach facile et gratuit</p>
-      <h5>Discutez avec nos coachs</h5>
-      <p>Fixez un rendez-vous avec un de nos coach via la messegarie de l’application</p>
-      <h6>Regroupe des entraîneurs de plusieurs associations</h6>
-      <img src="{{url_for('static', filename='imgs/logo_aftt.svg')}}" alt="Logo de l'AFTT"/>
-      <img src="{{url_for('static', filename='imgs/logo_avvf.svg')}}" alt="Logo de l'AVVF"/>
-      <img src="{{url_for('static', filename='imgs/logo_stt.svg')}}" alt="Logo de l'STT"/>
-      <h5>Progressez grâce à</h5>
-      <div id="header-nav-logo">
-        <a href="{{url_for('home.landing_page') }}">
-            <img src="{{url_for('static', filename='imgs/logo.svg') }}" alt="logo"/>
-        </a>
+
+
+    <div class="partie2">
+      <div class="item-gauche">
+        <div class="icone-partie2">
+          <a href="{{url_for('home.landing_page') }}"><!--à modifier-->
+            <img src="{{url_for('static', filename='imgs/icone_discussion.svg') }}" alt="lien vers la page de discussion"/>
+          </a>
       </div>
-      <p>Trouvez le coach qu’il vous faut et atteignez vos objectifs personnels. Pour les amateurs comme pour les plus avancés,
-          nous saurons satisfaire à vos attentes.</p>
-      <div>
-        <a href="{{url_for('home.landing_page') }}">
-            <img src="{{url_for('static', filename='imgs/illustration_progression.png') }}" alt="Illustration de progression"/>
-        </a>
+        <h5>Trouvez votre coach</h5> 
+        <p>Utilisez notre outil de recherche de coach facile et gratuit</p>
       </div>
 
+      <div class="item-droite">
+        <div class="icone-partie2">
+          <a href="{{url_for('home.landing_page') }}"><!--à modifier-->
+            <img src="{{url_for('static', filename='imgs/icone_recherche.svg') }}" alt="lien vers la page de discussion"/>
+          </a>
+      </div>
+        <h5>Discutez avec nos coachs</h5>
+        <p>Fixez un rendez-vous avec un de nos coach via la messegarie de l’application</p>
+      </div>
+    </div>
+    
+    
+    <div class="partie3">
+      <h6>Regroupe des entraîneurs de plusieurs associations</h6>
+      <div class="associations">
+        <img id="aftt" src="{{url_for('static', filename='imgs/logo_aftt.svg')}}" alt="Logo de l'AFTT"/>
+        <img id="avvf" src="{{url_for('static', filename='imgs/logo_avvf.svg')}}" alt="Logo de l'AVVF"/>
+        <img id="stt" src="{{url_for('static', filename='imgs/logo_stt.svg')}}" alt="Logo de l'STT"/>
+      </div>
+    </div>
+
+
+    <div class="partie4">
+      <div class="progression-img">
+        <img src="{{url_for('static', filename='imgs/illustration_progression.png') }}" alt="Illustration de progression"/>
+      </div>
+      
+      <div class="progression-txt">
+        <div class="progression-titre">
+          <h5>Progressez grâce à</h5>
+          <div>
+            <a href="{{url_for('home.landing_page') }}">
+                <img src="{{url_for('static', filename='imgs/logo.svg') }}" alt="logo"/>
+            </a>
+          </div>
+        </div>
+        <p>Trouvez le coach qu’il vous faut et atteignez vos objectifs personnels. Pour les amateurs comme pour les plus avancés,
+          nous saurons satisfaire à vos attentes.</p>
+      </div>
+    </div>
 
     {% endif %}
 {% endblock %}
