@@ -51,6 +51,8 @@
   --secondary: #8F9EBB;
   --tertiary: #B5BFD5;
   --fonce: #2C2C2C;
+  --shadow-6dp: 0px 4px 8px rgba(255, 255, 255, 0.15);
+  --hover-overlay:rgba(0,0,0,0.04)
 }
 
 #header {
@@ -182,6 +184,8 @@ p, li {
   grid-area: footer;
 }
 
+
+/* pas encore utile*/
 .container {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -195,53 +199,138 @@ p, li {
   height: 100vh
 }
 
-.content-login{
+
+
+.grid-container-login {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  column-gap: 40px;
-  margin: 0px 0px 0px 40px;
-  height: 100vh
+  grid-template-columns: 1fr 2fr; /* 1/3 pour le contenu, 2/3 pour l'image */
+  height: 100vh;
+  margin: 0; 
+}
+
+.image-container {
+  grid-column: 2;
+  background-color: var(--primary); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 32px;
+  border-bottom-left-radius: 32px;
+  width: 100%;
+  height: 100vh; 
+  overflow: hidden; /* Empêcher le débordement tout en maintenant les coins arrondis */
+  position: relative; 
+
 }
 
 #connexion_img {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  padding: 72px 40px;
-  background-color: var(--primary);
-  border-top-left-radius: 32px;
-  border-bottom-left-radius: 32px;
-  grid-column: 6 / span 7;
+  width: calc(100% - 80px);
+  max-height: calc(100% - 144px); 
+  object-fit: contain;
 }
 
 form {
-  grid-column: 1 / span 3; 
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  margin-left: 80px;
+  margin-right: 110px;
 }
 
-/* Style des labels */
-label {
-  font-size: 14px;
-  color: #333;
+form h1{
+  margin-top: 80px;
 }
 
-/* Champs de saisie */
-input[type="email"],
-input[type="password"], input[type="prenom"], input[type="nom"] {
+#user_icon{
+  margin-top: 86px;
+  margin-bottom: 86px;
+  height: 112.5px;
+  width: 100px;
+}
+
+.input-container {
   width: 100%;
-  padding-top: 12px;
-  padding-left: 16px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  display: inline-block;
+  position: relative;
+  margin-bottom: 32px;
 }
 
+label {
+  color: rgba(0, 0, 0, 0.60);
+  font-family: "inter", sans-serif;
+  background-color: white;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  z-index: 1;
+  display: inline-block;
+  position: absolute; 
+  margin-left: 16px; /* Positionne le label à 16 pixels à gauche de la bordure */
+  top: 50%;
+  transform: translateY(-52px);
+  /* Positionne le label à l'intérieur du conteneur.
+   Avec son fond blanc, il coupe la bordure */
+}
+
+input {
+  display: flex;
+  justify-content: center;
+  align-content: start;
+  padding-left: 26px;
+  height: 60px;
+  width: 100%;
+  border: 1px solid black; 
+  border-radius: 8px; 
+  color: rgba(0, 0, 0, 0.60); 
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+input::placeholder {
+  color: rgba(0, 0, 0, 0.5); /* Couleur du placeholder */
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+input:focus {
+  border-color: var(--secondary);
+  outline: none;
+}
+/* à continuer */
+.changement-visu {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#car-min {
+  margin-top: -24px;
+  align-self: flex-start; /* S'assure que le texte est aligné à gauche */
+}
+
+#mdp-oublie {
+  margin-top: 8px;
+  margin-bottom: 32px;
+  align-self: flex-end; /* Assure que le texte est aligné à droite */
+}
 /* Bouton de soumission */
 input[type="submit"] {
   background-color:var(--primary);
   color: white;
-  padding: 12.5px;
+  height: 44px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  box-shadow: var(--shadow-6dp);
 }
 
 /* Texte du bouton de soumission */
@@ -251,14 +340,38 @@ input[value="SE CONNECTER"], input[value="CRÉER MON COMPTE"] {
   font-size: 16px;
   font-weight: 400;
   align-items: center;
+  justify-items: center;
 }
 
-input[type="submit"]:hover {
-  background-color: #2755A4;
+.ligne-autour {
+  display: flex;
+  align-items: center; /* Centre verticalement le texte et les lignes */
+  text-align: center;
+  width: 100%;
+  margin-top: 42px;
+}
+
+.ligne-autour::before,
+.ligne-autour::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12); 
+  margin: 0 7.5px; 
+}
+
+.fin-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center; 
+  gap: 4.5px; 
+  margin-bottom: 48px;
+  margin-top: 32px;
+  width: 100%;
 }
 
 /* Liens (mot de passe oublié, s'inscrire) */
-.content-login a, .content-register a {
+.grid-container-login a, .grid-container-register a {
   color: blue;
   font-family: "inter", sans-serif;
   font-size: 16px;
@@ -299,7 +412,7 @@ input[type="submit"]:hover {
   font-family: "inter", sans-serif;
   font-size: 16px;
   font-weight: 400;
-  box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-6dp);
 }
 
 
