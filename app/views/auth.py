@@ -13,7 +13,9 @@ def register():
     # Si des données de formulaire sont envoyées vers la route /register (ce qui est le cas lorsque le formulaire d'inscription est envoyé)
     if request.method == 'POST':
 
-        # On récupère les champs 'email' et 'mot_de_passe' de la requête HTTP
+        # On récupère les champs 'prenom' , 'nom', 'email' et 'mot_de_passe' de la requête HTTP
+        prenom = request.form['prenom']
+        nom = request.form['nom']
         email = request.form['email']
         mot_de_passe = request.form['mot_de_passe']
 
@@ -22,9 +24,9 @@ def register():
 
         # Si l'email et le mot de passe ont bien une valeur
         # on essaie d'insérer l'utilisateur dans la base de données
-        if email and mot_de_passe:
+        if prenom and nom and email and mot_de_passe:
             try:
-                db.execute("INSERT INTO Personnes (email, mot_de_passe) VALUES (?, ?)",(email, generate_password_hash(mot_de_passe)))
+                db.execute("INSERT INTO Personnes (prenom, nom, email, mot_de_passe) VALUES (?, ?, ?, ?)",(prenom, nom, email, generate_password_hash(mot_de_passe)))
                 # db.commit() permet de valider une modification de la base de données
                 db.commit()
                 # On ferme la connexion à la base de données pour éviter les fuites de mémoire
@@ -63,7 +65,7 @@ def login():
         # On récupère la base de données
         db = get_db()
         
-        # On récupère l'utilisateur avec le username spécifié (une contrainte dans la db indique que le nom d'utilisateur est unique)
+        # On récupère l'utilisateur avec l'email spécifié (une contrainte dans la db indique que l'email est unique)
         # La virgule après username est utilisée pour créer un tuple contenant une valeur unique
         user = db.execute('SELECT * FROM Personnes WHERE email = ?', (email,)).fetchone()
 
