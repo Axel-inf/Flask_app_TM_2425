@@ -85,8 +85,8 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id_personne']
-            # On redirige l'utilisateur vers la page principale une fois qu'il s'est connecté
-            return redirect("/")
+            # On redirige l'utilisateur vers la page de validation de connexion une fois qu'il s'est connecté
+            return redirect(url_for('auth.validation_connexion'))
         
         else:
             # En cas d'erreur, on ajoute l'erreur dans la session et on redirige l'utilisateur vers le formulaire de login
@@ -128,4 +128,7 @@ def load_logged_in_user():
         close_db()
 
 
+@auth_bp.route('/validation_connexion')
+def validation_connexion():
+    return render_template('auth/validation_connexion.html')
 

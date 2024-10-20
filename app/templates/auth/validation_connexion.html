@@ -1,0 +1,22 @@
+{% extends 'base_auth.html' %}
+
+{% block title %}
+  Connexion Réussie
+{% endblock %}
+
+{% block content %}
+  <div class="grid-container-validation">
+    <div class="message">
+        <h1>Connexion réussie !</h1>
+        <p>Vous serez redirigé vers l'accueil dans quelques secondes...</p>
+        <img id="validation_icon" src="{{url_for('static', filename='imgs/icone_validation.svg')}}" alt="Icône validation"/>
+    </div>
+  </div>
+
+  <script>
+    // Redirection vers la page d'accueil après 3 secondes
+    setTimeout(function() {
+        window.location.href = "{{ url_for('home.landing_page') }}";
+    }, 3000);
+  </script>
+{% endblock %}

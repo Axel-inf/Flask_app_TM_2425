@@ -17,8 +17,7 @@
 
       <div class="input-container">
         <label for="mot_de_passe">Mot de passe</label>
-        <input type="mot_de_passe" id="mot_de_passe" required name="mot_de_passe" placeholder="......">
-        <img class="changement-visu" src="{{url_for('static', filename='imgs/voir_mot_de_passe.svg')}}" alt="mot de passe caché"/>
+        <input type="password" id="mot_de_passe" required name="mot_de_passe" required minlength="8" placeholder="......">
       </div>
       
       <p id="car-min">8 caractères au minimum</p>

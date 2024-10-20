@@ -105,7 +105,6 @@
     align-items: center;
 }
 
-
 .lien-page {
     color: white;
     text-decoration: none;
@@ -282,7 +281,7 @@ input, select {
   width: 100%;
   border: 1px solid black; 
   border-radius: 8px; 
-  color: rgba(0, 0, 0, 0.60); 
+  color: rgb(0, 0, 0); 
   font-family: "inter", sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -310,14 +309,8 @@ input:focus, select:focus, label:focus {
   outline: none;
 }
 
-/* à continuer */
-.changement-visu {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 20px;
+#mot_de_passe {
+  padding-right: 20px;
 }
 
 #car-min {
@@ -443,6 +436,41 @@ form h1{
   margin-top: -24px;
   align-self: flex-start;
 }
+
+
+
+.grid-container-validation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--primary);
+  gap: 32px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#validation_icon {
+  display: block;
+  color: white;
+  width: 125px;
+  height: auto;
+  margin-top: 84px;
+}
+
+.grid-container-validation h1, 
+.grid-container-validation p {
+  color: white;
+  text-align: center;
+}
+
 
 
 
@@ -680,4 +708,74 @@ footer {
   text-align: center;
   padding-top: 32px;
   border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+
+
+.sub-menu-wrap{
+  position: absolute;
+  top: 96px;
+  right: 80px;
+  width: 14vw;
+  max-height: 0px;
+  overflow: hidden;
+  transition: max-height 0.5s;
+}
+
+.sub-menu-wrap.open-menu{
+  max-height: 400px;
+}
+
+
+.sub-menu {
+  background-color: var(--fonce);
+  padding: 16px;
+  position: relative;
+}
+
+.sub-menu::after {
+  content: '';
+  position: absolute;
+  top: -10px; /* Positionner la pointe au-dessus du sous-menu */
+  right: 20px; /* Ajuster la position de la pointe par rapport à la droite */
+  border-width: 0 10px 10px 10px; /* Triangle qui pointe vers le bas */
+  border-style: solid;
+  background-color: red;
+}
+
+.user-info{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.user-info p{
+  color: white;
+}
+
+#body2{
+  color:rgba(255, 255, 255, 0.38);
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.38);
+  width: 100%;
+}
+
+.sub-menu-link{
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color:rgba(255, 255, 255, 0.38);
+  margin-top: 32px;
+  gap: 24px;
+}
+
+.sub-menu-link img{
+  width: 24px;
+  height: 24px;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.sub-menu-link :hover{
+  background-color: var(--secondary);
+  padding: 4px 8px;
 }
