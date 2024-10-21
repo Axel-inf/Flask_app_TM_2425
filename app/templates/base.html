@@ -40,7 +40,6 @@
                         </a>
                     </div>
                 </div>
-                    
 
                 {% else %}
                 <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Accueil</a>
@@ -101,12 +100,22 @@
         </footer>
         
     <script>
-        // Définissez la fonction en dehors de tout événement ou bloc
-        let subMenu = document.getElementById("subMenu");
-    
         function toggleMenu() {
+            const subMenu = document.getElementById("subMenu");
             subMenu.classList.toggle("open-menu");
         }
+        
+        document.addEventListener("click", function(e) {
+            const subMenu = document.getElementById("subMenu");
+            const userPic = document.querySelector(".user-pic");
+  
+    // Si le clic n'est pas dans le menu et pas sur l'icône de profil
+    if (!subMenu.contains(e.target) && !userPic.contains(e.target)) {
+        subMenu.classList.remove("open-menu"); // Fermer le menu
+    }
+    });
+
+        
     </script>
         
 </body>

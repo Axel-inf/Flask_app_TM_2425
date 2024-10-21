@@ -733,16 +733,6 @@ footer {
   position: relative;
 }
 
-.sub-menu::after {
-  content: '';
-  position: absolute;
-  top: -10px; /* Positionner la pointe au-dessus du sous-menu */
-  right: 20px; /* Ajuster la position de la pointe par rapport à la droite */
-  border-width: 0 10px 10px 10px; /* Triangle qui pointe vers le bas */
-  border-style: solid;
-  background-color: red;
-}
-
 .user-info{
   display: flex;
   flex-direction: column;
@@ -760,22 +750,29 @@ footer {
   width: 100%;
 }
 
-.sub-menu-link{
-  text-decoration: none;
+.sub-menu-link {
   display: flex;
   align-items: center;
-  color:rgba(255, 255, 255, 0.38);
-  margin-top: 32px;
-  gap: 24px;
+  padding: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-out;
+  margin-top: 24px;
 }
 
-.sub-menu-link img{
-  width: 24px;
-  height: 24px;
-  color: rgba(255, 255, 255, 0.38);
+.sub-menu-link img {
+  margin-right: 10px;
 }
 
-.sub-menu-link :hover{
+.sub-menu-link:hover {
   background-color: var(--secondary);
-  padding: 4px 8px;
+  padding: 8px; /* Augmente légèrement le padding lors du hover */
+  border-radius: 8px;
+}
+
+.sub-menu a{
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.38);
+
 }
