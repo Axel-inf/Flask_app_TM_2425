@@ -26,16 +26,16 @@
                     <div class="sub-menu">
                         <div class="user-info">
                             <p>{{g.user.prenom}} {{g.user.nom}}</p>
-                            <p id="body2">Joueur</p><!--à faire varier-->
+                            <p>Vous avez sélectionné : {{ role }}</p>
                         </div>
 
                         <a href="{{ url_for('user.show_profile') }}" class="sub-menu-link">
-                            <img src="{{url_for('static', filename='imgs/user-gris.svg') }}" alt="icône profil">
+                            <img id="user" src="{{url_for('static', filename='imgs/user-gris.svg') }}" alt="icône profil">
                             <p>Profil</p>
                         </a>
 
                         <a href="{{ url_for('auth.logout') }}" class="sub-menu-link">
-                            <img src="{{url_for('static', filename='imgs/icone_se_deconnecter.svg') }}" alt="icône déconnexion">
+                            <img id="deconnexion" src="{{url_for('static', filename='imgs/icone_se_deconnecter.svg') }}" alt="icône déconnexion">
                             <p>Se déconnecter</p>
                         </a>
                     </div>

@@ -32,8 +32,8 @@ def register():
                 # On ferme la connexion à la base de données pour éviter les fuites de mémoire
                 close_db()
 
-                
-                
+
+
             except db.IntegrityError:
 
                 # La fonction flash dans Flask est utilisée pour stocker un message dans la session de l'utilisateur
@@ -41,9 +41,9 @@ def register():
                 error = f"Utilisateur avec l'adresse {email} déjà enregistré."
                 flash(error)
                 return redirect(url_for("auth.register"))
-            
+
             return redirect(url_for("auth.login"))
-         
+
         else:
             error = "Email ou mot de passe invalide"
             flash(error)
@@ -64,7 +64,7 @@ def login():
 
         # On récupère la base de données
         db = get_db()
-        
+
         # On récupère l'utilisateur avec l'email spécifié (une contrainte dans la db indique que l'email est unique)
         # La virgule après username est utilisée pour créer un tuple contenant une valeur unique
         user = db.execute('SELECT * FROM Personnes WHERE email = ?', (email,)).fetchone()
@@ -87,7 +87,7 @@ def login():
             session['user_id'] = user['id_personne']
             # On redirige l'utilisateur vers la page de validation de connexion une fois qu'il s'est connecté
             return redirect(url_for('auth.validation_connexion'))
-        
+
         else:
             # En cas d'erreur, on ajoute l'erreur dans la session et on redirige l'utilisateur vers le formulaire de login
             flash(error)
@@ -131,4 +131,3 @@ def load_logged_in_user():
 @auth_bp.route('/validation_connexion')
 def validation_connexion():
     return render_template('auth/validation_connexion.html')
-

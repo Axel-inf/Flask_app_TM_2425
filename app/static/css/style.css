@@ -728,9 +728,11 @@ footer {
 
 
 .sub-menu {
-  background-color: var(--fonce);
+  background-image: url('/static/imgs/dropdown_menu.svg');
   padding: 16px;
   position: relative;
+  background-repeat: no-repeat;
+  background-size: cover; /* Couvre toute la zone définie */
 }
 
 .user-info{
@@ -755,7 +757,7 @@ footer {
   align-items: center;
   padding: 8px;
   text-decoration: none;
-  transition: background-color 0.3s ease-out;
+  transition: background-color;
   margin-top: 24px;
 }
 
@@ -764,11 +766,19 @@ footer {
 }
 
 .sub-menu-link:hover {
+  color: white;
   background-color: var(--secondary);
   padding: 8px; /* Augmente légèrement le padding lors du hover */
   border-radius: 8px;
 }
 
+.sub-menu-link:hover img#user {
+  content: url('/static/imgs/user_white.svg');
+}
+
+.sub-menu-link:hover img#deconnexion {
+  content: url('/static/imgs/icone_white_se_deconnecter.svg');
+}
 .sub-menu a{
   font-family: "inter", sans-serif;
   font-size: 16px;
