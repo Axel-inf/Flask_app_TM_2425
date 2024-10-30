@@ -8,8 +8,8 @@ home_bp = Blueprint('home', __name__)
 # Route /
 @home_bp.route('/', methods=('GET', 'POST'))
 def landing_page():
-    # Affichage de la page principale de l'application
-    return render_template('home/index.html')
+    role = session.get('role')  # Récupère le rôle depuis la session, avec 'joueur' par défaut
+    return render_template('home/index.html', role=role)
 
 # Gestionnaire d'erreur 404 pour toutes les routes inconnues
 @home_bp.route('/<path:text>', methods=['GET', 'POST'])

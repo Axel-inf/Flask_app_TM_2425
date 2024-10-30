@@ -9,36 +9,39 @@
   <form id="register" method="post">
     <h1>Créer un compte</h1>
     <img id="user_icon-register" src="{{url_for('static', filename='imgs/user.svg')}}" alt="Icône d'utilisateur"/>
-    
-    <div class="input-container">
-      <label for="role-select">Choisissez votre rôle :</label>
-      <select id="role-select" name="role">
-          <option value="joueur">Joueur</option>
-          <option value="coach">Coach</option>
-      </select>
-    </div>
+  
+    <div class="champs">
+      <div class="input-container">
+        <label for="role-select">Choisissez votre rôle :</label>
+        <select id="role-select" required name="role"> 
+            <option value="joueur">Joueur</option>
+            <option value="coach">Coach</option>
+        </select>
+      </div>
+  
+      <div class="input-container">
+        <label for="prenom">Prénom</label>
+        <input type="prenom" id="prenom" required name="prenom" placeholder="John">
+      </div>
+      
+      <div class="input-container">
+        <label for="nom">Nom</label>
+        <input type="nom" id="nom" required name="nom" placeholder="Doe">
+      </div>
+   
+      <div class="input-container">
+        <label for="email">Email</label>
+        <input type="email" id="email" required name="email" placeholder="john.doe@gmail.com">
+      </div>
+  
+      <div class="input-container">
+        <label for="mot_de_passe">Mot de passe</label>
+        <input type="password" id="mot_de_passe" required name="mot_de_passe" required minlength="8" placeholder="......">
+      </div>
 
-    <div class="input-container">
-      <label for="prenom">Prénom</label>
-      <input type="prenom" id="prenom" required name="prenom" placeholder="John">
     </div>
     
-    <div class="input-container">
-      <label for="nom">Nom</label>
-      <input type="nom" id="nom" required name="nom" placeholder="Doe">
-    </div>
- 
-    <div class="input-container">
-      <label for="email">Email</label>
-      <input type="email" id="email" required name="email" placeholder="john.doe@gmail.com">
-    </div>
-
-    <div class="input-container">
-      <label for="mot_de_passe">Mot de passe</label>
-      <input type="password" id="mot_de_passe" required name="mot_de_passe" required minlength="8" placeholder="......">
-    </div>
-    
-    <p id="car-min-register">8 caractères au minimum</p>
+    <p id="car-min">8 caractères au minimum</p>
     <input type="submit" value="CRÉER MON COMPTE">
 
     <div class="ligne-autour">

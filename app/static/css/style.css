@@ -94,7 +94,7 @@
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  padding-left: 312px;
+  padding-left: 6.9vw;
   padding-right: 0px;
 }
 
@@ -205,7 +205,8 @@ p, li {
   display: grid;
   grid-template-columns: 1fr 2fr; /* 1/3 pour le contenu, 2/3 pour l'image */
   height: 100vh;
-  margin: 0; 
+  margin: 0;
+  overflow: hidden;
 }
 
 .image-container-login {
@@ -240,10 +241,17 @@ p, li {
 }
 
 #user_icon-login{
-  margin-top: 86px;
-  margin-bottom: 86px;
+  margin-top: 8.4vh;
+  margin-bottom: 8.4vh;
   height: 112.5px;
   width: 100px;
+}
+
+#user_icon-register{
+  margin-top: 4.4vh;
+  margin-bottom: 4.4vh;
+  height: 81px;
+  width: 72px;
 }
 
 .input-container {
@@ -252,14 +260,18 @@ p, li {
   flex-direction: column;
   display: inline-block;
   position: relative;
-  margin-bottom: 32px;
+  margin-bottom: max(3vh, 32px);
+}
+
+.champs .input-container:last-child,.champs .input-container:last-child {
+  margin-bottom: 0;
 }
 
 label {
   color: rgba(0, 0, 0, 0.60);
   font-family: "inter", sans-serif;
   background-color: white;
-  padding: 10px;
+  padding: 0% 0.98%;
   font-size: 16px;
   font-weight: 400;
   z-index: 1;
@@ -267,7 +279,7 @@ label {
   position: absolute; 
   margin-left: 16px; /* Positionne le label à 16 pixels à gauche de la bordure */
   top: 50%;
-  transform: translateY(-52px);
+  transform: translateY(-150%);
   /* Positionne le label à l'intérieur du conteneur.
    Avec son fond blanc, il coupe la bordure */
 }
@@ -277,7 +289,8 @@ input, select {
   justify-content: center;
   align-content: start;
   padding-left: 26px;
-  height: 60px;
+  height: 5.8vh;
+  min-height: 44px;
   width: 100%;
   border: 1px solid black; 
   border-radius: 8px; 
@@ -313,22 +326,21 @@ input:focus, select:focus, label:focus {
   padding-right: 20px;
 }
 
-#car-min {
-  margin-top: -24px;
-  align-self: flex-start; /* S'assure que le texte est aligné à gauche */
+#car-min{
+  margin-top: 0.7vh;
+  align-self: flex-start;
 }
 
 #mdp-oublie {
   margin-top: 8px;
-  margin-bottom: 32px;
-  align-self: flex-end; /* Assure que le texte est aligné à droite */
+  align-self: flex-end;
 }
 
 /* Bouton de soumission */
 input[type="submit"] {
   background-color:var(--primary);
   color: white;
-  height: 44px;
+  height: 4.3vh;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -336,13 +348,24 @@ input[type="submit"] {
 }
 
 /* Texte du bouton de soumission */
-input[value="SE CONNECTER"], input[value="CRÉER MON COMPTE"] {
+input[value="SE CONNECTER"]{
   display: flex;
   font-family: "inter", sans-serif;
   font-size: 16px;
   font-weight: 400;
   align-items: center;
   justify-items: center;
+  margin-top: 3.125vh;
+}
+
+input[value="CRÉER MON COMPTE"] {
+  display: flex;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  align-items: center;
+  justify-items: center;
+  margin-top: 1.5625vh;
 }
 
 .ligne-autour {
@@ -350,7 +373,7 @@ input[value="SE CONNECTER"], input[value="CRÉER MON COMPTE"] {
   align-items: center; /* Centre verticalement le texte et les lignes */
   text-align: center;
   width: 100%;
-  margin-top: 22px;
+  margin-top: 2.1vh;
 }
 
 .ligne-autour::before,
@@ -368,7 +391,7 @@ input[value="SE CONNECTER"], input[value="CRÉER MON COMPTE"] {
   align-items: center; 
   gap: 4.5px; 
   margin-bottom: 48px;
-  margin-top: 13px;
+  margin-top: 1.2vh;
   width: 100%;
 }
 
@@ -382,7 +405,13 @@ input[value="SE CONNECTER"], input[value="CRÉER MON COMPTE"] {
 }
 
 form h1{
-  margin-top: 80px;
+  margin-top: 7.8vh;
+}
+
+@media (max-height: 800px) {
+  form h1 {
+    margin-top: 2vh; /* Nouvelle valeur pour petits écrans */
+  }
 }
 
 .grid-container-register {
@@ -422,19 +451,7 @@ form h1{
   align-items: center;
   margin-left: 110px;
   margin-right: 80px;
-}
-
-#user_icon-register{
-  margin-top: 30px;
-  margin-bottom: 34px;
-  height: 81px;
-  width: 72px;
-}
-
-#car-min-register{
-  margin-bottom: 16px;
-  margin-top: -24px;
-  align-self: flex-start;
+  overflow:auto;
 }
 
 
@@ -608,8 +625,8 @@ form h1{
 .partie4 {
   display: flex;
   flex-direction: row;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 8vw;
+  padding-right: 8vw;
   width: 100%;
   height: 752px;
   justify-content: space-between;
@@ -623,10 +640,9 @@ form h1{
 
 .progression-txt {
   height: 119px;
-  width: 400px;
+  width: 27vw;
   margin-top: 180px;
   margin-bottom: 420px;
-  margin-right: 80px;
 }
 
 .progression-titre {
@@ -741,10 +757,13 @@ footer {
   align-items: start;
 }
 
-.user-info p{
+#prenom-nom{
   color: white;
 }
 
+#role{
+  color: rgba(255, 255, 255, 0.38);
+}
 #body2{
   color:rgba(255, 255, 255, 0.38);
   padding-bottom: 8px;

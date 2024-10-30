@@ -25,8 +25,8 @@
                 <div class="sub-menu-wrap" id="subMenu">
                     <div class="sub-menu">
                         <div class="user-info">
-                            <p>{{g.user.prenom}} {{g.user.nom}}</p>
-                            <p>Vous avez sélectionné : {{ role }}</p>
+                            <p id="prenom-nom">{{g.user.prenom}} {{g.user.nom}}</p>
+                            <p id="role">{{ role }}</p>
                         </div>
 
                         <a href="{{ url_for('user.show_profile') }}" class="sub-menu-link">

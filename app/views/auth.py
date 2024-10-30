@@ -61,6 +61,7 @@ def login():
         # On récupère les champs 'email' et 'mot_de_passe' de la requête HTTP
         email = request.form['email']
         mot_de_passe = request.form['mot_de_passe']
+        role = request.form.get('role')
 
         # On récupère la base de données
         db = get_db()
@@ -85,6 +86,7 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id_personne']
+            session['role'] = role
             # On redirige l'utilisateur vers la page de validation de connexion une fois qu'il s'est connecté
             return redirect(url_for('auth.validation_connexion'))
 
