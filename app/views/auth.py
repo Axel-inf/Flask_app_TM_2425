@@ -18,17 +18,29 @@ def register():
         nom = request.form['nom']
         email = request.form['email']
         mot_de_passe = request.form['mot_de_passe']
+        role = request.form['role']
+        print(request.form)
+        print(role)
 
         # On récupère la base de donnée
         db = get_db()
+        curseur = db.cursor()
 
         # Si l'email et le mot de passe ont bien une valeur
         # on essaie d'insérer l'utilisateur dans la base de données
         if prenom and nom and email and mot_de_passe:
             try:
-                db.execute("INSERT INTO Personnes (prenom, nom, email, mot_de_passe) VALUES (?, ?, ?, ?)",(prenom, nom, email, generate_password_hash(mot_de_passe)))
+                curseur.execute("INSERT INTO Personnes (prenom, nom, email, mot_de_passe) VALUES (?, ?, ?, ?)",(prenom, nom, email, generate_password_hash(mot_de_passe)))
                 # db.commit() permet de valider une modification de la base de données
+               
+                
+                if role == "coach":
+                    db.execute("INSERT INTO Coachs (id_personne) VALUES (?)",(curseur.lastrowid))
+                else:
+                    db.execute("INSERT INTO Clients (id_personne) VALUES (?)",(curseur.lastrowid))
+                    
                 db.commit()
+                 
                 # On ferme la connexion à la base de données pour éviter les fuites de mémoire
                 close_db()
 
@@ -61,14 +73,14 @@ def login():
         # On récupère les champs 'email' et 'mot_de_passe' de la requête HTTP
         email = request.form['email']
         mot_de_passe = request.form['mot_de_passe']
-        role = request.form.get('role')
+        
 
         # On récupère la base de données
         db = get_db()
 
         # On récupère l'utilisateur avec l'email spécifié (une contrainte dans la db indique que l'email est unique)
         # La virgule après username est utilisée pour créer un tuple contenant une valeur unique
-        user = db.execute('SELECT * FROM Personnes WHERE email = ?', (email,)).fetchone()
+        user = db.execute('SELECT * FROM Personnes WHERE email = (?)', (email,)).fetchone()
 
         # On ferme la connexion à la base de données pour éviter les fuites de mémoire
         close_db()
@@ -86,7 +98,6 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id_personne']
-            session['role'] = role
             # On redirige l'utilisateur vers la page de validation de connexion une fois qu'il s'est connecté
             return redirect(url_for('auth.validation_connexion'))
 
@@ -125,7 +136,17 @@ def load_logged_in_user():
     else:
          # On récupère la base de données et on récupère l'utilisateur correspondant à l'id stocké dans le cookie session
         db = get_db()
-        g.user = db.execute('SELECT * FROM Personnes WHERE id_personne = ?', (user_id,)).fetchone()
+        g.user = db.execute('SELECT * FROM Personnes WHERE id_personne = (?)', (user_id,)).fetchone()
+        
+        # Faire une requete SQl pour aller récupéer la ligne qui contient l'id dans la table Coach
+        userrole = db.execute('SELECT * FROM Coachs WHERE id_personne = ?', (user_id,)).fetchone()
+        # Si oui, on peut rajouter le role dans la variable g.user['role'] = "Coach"
+        if userrole :
+            g.role = "Coach"
+        
+        else :
+            g.role = "Joueur"
+                
         # On ferme la connexion à la base de données pour éviter les fuites de mémoire
         close_db()
 
