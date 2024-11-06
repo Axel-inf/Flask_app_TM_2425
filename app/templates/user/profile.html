@@ -1,19 +1,55 @@
-{% extends 'base.html' %}
+{% extends 'base_profile.html' %}
 
 {% block title %}
   Profil
 {% endblock %}
 
 {% block content %}
+<div class ="page-entier">
+  <img id="profile_illustration" src="{{url_for('static', filename='imgs/illustration_modification_profil.png') }}"/>
   <div class="content-profile">
-    <div>
-      <div class="content-profile-title">
-        <h2>Profil de l'utilisateur connecté</h2>
-      </div>
-      <ul>
-        <li>Email: {{g.user.email}}</li>
-        <li>Mot de passe: {{g.user.mot_de_passe}}</li>
-      </ul>
+    <div class="content-profile-title">
+      <h1>Mon profil</h1>
+      <p>Gérez votre profil</p>
     </div>
-  </div>  
+
+      <h2>Votre photo de profil</h2>
+
+      <div class="relatif-a-photo">
+        <img id="profile-grand" src="{{url_for('static', filename='imgs/avatar.png') }}"/>
+        <div class="bouton-container">
+          <button id="changer-photo">CHANGER DE PHOTO</button>
+          <button class="bouton-suppr">SUPPRIMER <img src="{{url_for('static', filename='imgs/icone_corbeille.svg') }}"/></button>
+        </div>
+      </div>
+      
+
+      <h2>Vos informations personnels</h2>
+      <div class="champs">
+        <div class="input-container">
+          <label for="prenom">Prénom</label>
+          <input type="prenom" id="prenom" required name="prenom" placeholder={{g.user.prenom}} readonly>
+        </div>
+
+        <button class="bouton-icon">MODIFIER <img src="{{url_for('static', filename='imgs/icone_crayon_modification.svg') }}"/></button>
+
+        <div class="input-container">
+          <label for="nom">Nom</label>
+          <input type="nom" id="nom" required name="nom" placeholder={{g.user.nom}} readonly>
+        </div>
+     
+        <div class="input-container">
+          <label for="email">Email</label>
+          <input type="email" id="email" required name="email" placeholder={{g.user.email}} readonly>
+        </div>
+    
+        <div class="input-container">
+          <label for="mot_de_passe">Mot de passe</label>
+          <input type="password" id="mot_de_passe" required name="mot_de_passe" required minlength="8" placeholder="············" readonly>
+        </div>
+        <button>MODIFIER</button>
+        <img src="{{url_for('static', filename='imgs/icone_crayon_modification.svg') }}"/>
+      </div>
+  </div>
+</div>  
 {% endblock %}

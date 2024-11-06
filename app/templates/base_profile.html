@@ -3,8 +3,8 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -51,53 +51,12 @@
             </ul>
         </nav>
     </header>
-        
+
     <main id="main-content">
         {% block content %}
         {% endblock %}
     </main>
 
-        <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-            <div id="footer-logo">
-                <a href="{{url_for('home.landing_page') }}">
-                    <img src="{{url_for('static', filename='imgs/logo.svg') }}" alt="logo"/>
-                </a>
-            </div>
-            <p>ttcoach.ch vous offre la possibilité de trouver le coach de votre choix.</p>
-            <div class="social-icons">
-                <img src="{{url_for('static', filename='imgs/logo_X.svg') }}" alt="X"/>
-                <img src="{{url_for('static', filename='imgs/logo_Instagram.svg') }}" alt="Instagram"/>
-                <img src="{{url_for('static', filename='imgs/logo_YouTube.svg') }}" alt="YouTube"/>
-                <img src="{{url_for('static', filename='imgs/logo_LinkedIn.svg') }}" alt="LinkedIn"/>
-            </div>
-            </div>
-            <div class="footer-section">
-            <p class="titre-footer"><b>Explorez</b></p>
-            <ul>
-                <li><a href="#">Recherche de coachs</a></li><!--lien à modifier-->
-                <li><a href="#">Mes discussions</a></li><!--lien à modifier-->
-            </ul>
-            </div>
-            <div class="footer-section">
-            <p class="titre-footer"><b>Mentions légals</b></p>
-            <ul>
-                <li>Politique de confidentialité</li>
-                <li>Conditions d’utilisation</li>
-                <li>Conditions générales</li>
-            </ul>
-            </div>
-            <div class="footer-section">
-            <p class="titre-footer"><b>Contactez-nous</b></p>
-            <p>nathan.roberts@example.com</p>
-            <p>+41 79 286 98 16</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>Copyright © 2024. Tous droits réservés</p>
-        </div>
-        </footer>
         
     <script>
         function toggleMenu() {

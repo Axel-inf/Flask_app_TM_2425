@@ -35,9 +35,9 @@ def register():
                
                 
                 if role == "coach":
-                    db.execute("INSERT INTO Coachs (id_personne) VALUES (?)",(curseur.lastrowid))
+                    db.execute("INSERT INTO Coachs (id_personne) VALUES (?)",(curseur.lastrowid,))
                 else:
-                    db.execute("INSERT INTO Clients (id_personne) VALUES (?)",(curseur.lastrowid))
+                    db.execute("INSERT INTO Clients (id_personne) VALUES (?)",(curseur.lastrowid,))
                     
                 db.commit()
                  
