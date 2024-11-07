@@ -117,7 +117,9 @@ padding-right: 0px;
 
 #profile-petit{
 height: 40px;
-width: auto;
+width: 40px;
+background-color: var(--disabled);
+border-radius: 32px;
 }
 
 
@@ -638,6 +640,10 @@ margin-top: 180px;
 margin-bottom: 420px;
 }
 
+.progression-txt p{
+  color: black;
+}
+
 .progression-titre {
 display: flex;
 flex-direction: row;
@@ -667,15 +673,18 @@ align-items: start;
 #footer-logo {
 width: 132px;
 height: 32px;
-margin-bottom: 12px;
+margin-bottom: 32px;
 }
 
 .titre-footer {
 padding-bottom: 28px;
+color: black;
 }
 
 .footer-section p {
 margin-bottom: 12px;
+color: black;
+width: 290px;
 }
 
 .footer-section ul {
@@ -717,7 +726,12 @@ margin-right: 0;
 text-align: center;
 padding-top: 32px;
 border-top: 1px solid rgba(0, 0, 0, 0.12);
+color: black;
 }
+
+.footer-bottom p {
+  color: black;
+  }
 
 
 
@@ -842,12 +856,14 @@ color: white;
 }
 
 #profile-grand{
-height: 17.6%;
-width: auto;
+height: 180px;
+width: 180px;
+background-color: var(--disabled);
+border-radius: 90px;
 }
 
 #changer-photo{
-background-color: var(--tertiary);
+background-color: var(--secondary);
 padding: 10.5px 14px;
 border: none;
 border-radius: 8px;
@@ -899,8 +915,10 @@ margin-top: 16px; /* Espacement entre les boutons */
 .bouton-icon {
 display: flex;
 align-items: center;
+justify-content: center;
 gap: 16px; /* Espace entre le texte et l'icône */
-padding: 18px 34px;
+height: 5.8vh;
+width: 12.5vw;
 font-family: "inter", sans-serif;
 font-size: 16px;
 font-weight: 400;
@@ -941,3 +959,36 @@ color: white;
 background-color: var(--primary);
 }
 
+.relatif-a-champ {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 56px;
+}
+
+.modif-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+input[type="file"] {
+  display: none; /* Masquer le champ de fichier par défaut */
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: white;
+  background-color: #007bff;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+#file-name {
+  margin-left: 10px;
+  font-size: 14px;
+}

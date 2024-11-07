@@ -20,7 +20,7 @@
                 <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Accueil</a></li>
                 <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Recherche de coach</a></li>
                 <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Mes discussions</a></li>
-                <img id="profile-petit" src="{{url_for('static', filename='imgs/avatar.png') }}" class="user-pic" onclick="toggleMenu()" alt="photo de profil"/>
+                <img id="profile-petit" src="{{url_for('static', filename='imgs/user.svg') }}" class="user-pic" onclick="toggleMenu()" alt="photo de profil"/>
                 
                 <div class="sub-menu-wrap" id="subMenu">
                     <div class="sub-menu">
@@ -90,8 +90,11 @@
             </div>
             <div class="footer-section">
             <p class="titre-footer"><b>Contactez-nous</b></p>
-            <p>nathan.roberts@example.com</p>
-            <p>+41 79 286 98 16</p>
+            <ul>
+                <li>nathan.roberts@example.com</li>
+                <li>+41 79 286 98 16</li>
+            </ul>
+
             </div>
         </div>
         <div class="footer-bottom">

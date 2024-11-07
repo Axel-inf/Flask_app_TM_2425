@@ -13,31 +13,44 @@
       <p>Gérez votre profil</p>
     </div>
 
-      <h2>Votre photo de profil</h2>
+    <h2>Votre photo de profil</h2>
+
+    <div class="relatif-a-photo">
 
       <div class="relatif-a-photo">
-        <img id="profile-grand" src="{{url_for('static', filename='imgs/avatar.png') }}"/>
-        <div class="bouton-container">
-          <button id="changer-photo">CHANGER DE PHOTO</button>
-          <button class="bouton-suppr">SUPPRIMER <img src="{{url_for('static', filename='imgs/icone_corbeille.svg') }}"/></button>
-        </div>
+        <img id="profile-grand" src="{{ url_for('static', filename='imgs/user.svg') if not profile_image else url_for('static', filename=profile_image) }}"/>
       </div>
+
+      <div class="bouton-container">
+        <form id="upload-form" method="POST" action="/profile" enctype="multipart/form-data">
+           <label for="file-upload" class="custom-file-upload">
+             <i class="fa fa-cloud-upload"></i> Choisir une image 
+            </label> 
+            <input id="file-upload" type="file" name="file" required onchange="document.getElementById('upload-form').submit()"> 
+        </form>
+      
+       
+        
+        <button class="bouton-icon">CHANGER DE PHOTO <img src="{{url_for('static', filename='imgs/icone_crayon_modification.svg') }}"/></button>
+        <button class="bouton-suppr">SUPPRIMER <img src="{{url_for('static', filename='imgs/icone_corbeille.svg') }}"/></button>
+      </div>
+    </div>
       
 
-      <h2>Vos informations personnels</h2>
+    <h2>Vos informations personnels</h2>
+    <div class="relatif-a-champ">
+
       <div class="champs">
         <div class="input-container">
           <label for="prenom">Prénom</label>
           <input type="prenom" id="prenom" required name="prenom" placeholder={{g.user.prenom}} readonly>
         </div>
 
-        <button class="bouton-icon">MODIFIER <img src="{{url_for('static', filename='imgs/icone_crayon_modification.svg') }}"/></button>
-
         <div class="input-container">
           <label for="nom">Nom</label>
           <input type="nom" id="nom" required name="nom" placeholder={{g.user.nom}} readonly>
         </div>
-     
+      
         <div class="input-container">
           <label for="email">Email</label>
           <input type="email" id="email" required name="email" placeholder={{g.user.email}} readonly>
@@ -47,9 +60,22 @@
           <label for="mot_de_passe">Mot de passe</label>
           <input type="password" id="mot_de_passe" required name="mot_de_passe" required minlength="8" placeholder="············" readonly>
         </div>
-        <button>MODIFIER</button>
-        <img src="{{url_for('static', filename='imgs/icone_crayon_modification.svg') }}"/>
+      </div> 
+
+      <div class="modif-container">
+        <button class="bouton-icon">MODIFIER <img src="{{url_for('static', filename='imgs/icone_crayon_modification.svg') }}"/></button>
+        <button class="bouton-icon">RÉINITIALISER <img src="{{url_for('static', filename='imgs/icone_crayon_modification.svg') }}"/></button>
       </div>
+    </div>
   </div>
-</div>  
+</div>
+<script>
+  function updateLabel() {
+  var fileInput = document.getElementById('file-upload');
+  var label = document.querySelector('label[for="file-upload"]');
+  var fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'Choisir une image';
+  
+  label.innerHTML = '<i class="fa fa-cloud-upload"></i> ' + fileName;
+}
+</script>
 {% endblock %}
