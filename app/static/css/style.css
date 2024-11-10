@@ -204,6 +204,10 @@ margin: 0;
 overflow: hidden;
 }
 
+.grid-container-login p{
+  color: black;
+  }
+  
 .image-container-login {
 grid-column: 2;
 background-color: var(--primary); 
@@ -415,6 +419,10 @@ grid-template-columns: 2fr 1fr; /* 2/3 pour l'image, 1/3 pour le contenu*/
 height: 100vh;
 margin: 0;
 overflow: hidden;
+}
+
+.grid-container-register p {
+  color: black;
 }
 
 .image-container-register {
