@@ -863,12 +863,6 @@ margin-bottom: 16px;
 color: white;
 }
 
-#profile-grand{
-height: 180px;
-width: 180px;
-background-color: var(--disabled);
-border-radius: 90px;
-}
 
 #changer-photo{
 background-color: var(--secondary);

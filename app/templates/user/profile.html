@@ -14,12 +14,15 @@
     </div>
 
     <h2>Votre photo de profil</h2>
-
     <div class="relatif-a-photo">
-      <img id="profile-grand" src="{{ url_for('static', filename='imgs/user.svg') if not profile_image else url_for('static', filename='uploads/' ~ profile_image) }}"/>
+      {% if profile_image %}
+        <img id="profile-grand" src="{{ url_for('static', filename='uploads/' + profile_image) }}">
+      {% else %}
+        <img id="profile-grand" src="{{ url_for('static', filename='imgs/user.svg') }}">
+      {% endif %}
 
       <div class="bouton-container">
-        <form id="upload-form" method="POST" action="/profile" enctype="multipart/form-data">
+        <form id="upload-form" method="POST" action="/user/profile" enctype="multipart/form-data">
           <label for="file-upload" class="custom-file-upload">
             <i class="fa fa-cloud-upload"></i> Choisir une image
           </label>
@@ -29,6 +32,7 @@
     </div>
   </div>
 </div>
+
       
 
     <h2>Vos informations personnels</h2>
@@ -67,4 +71,3 @@
 <script>
 </script>
 {% endblock %}
-
