@@ -115,14 +115,37 @@ padding-right: 0px;
   font-weight: bolder;
 }
 
+#profile-petit-perso{
+height: 40px;
+width: 40px;
+background-color: var(--disabled);
+border-radius: 50%; /* Pour rendre l'image ronde */
+object-fit: cover;
+}
+
+#profile-grand-perso {
+  height: 180px;
+  width: 180px; /* Largeur égale à la hauteur */
+  border-radius: 50%; /* Pour rendre l'image ronde */
+  object-fit: cover; /* L'image remplira le carré sans se déformer */
+}
+
 #profile-petit{
 height: 40px;
 width: 40px;
 background-color: var(--disabled);
-border-radius: 32px;
+border-radius: 50%; /* Pour rendre l'image ronde */
+object-fit: cover;
+background-color: var(--disabled);
 }
 
-
+#profile-grand {
+  height: 180px;
+  width: 180px; /* Largeur égale à la hauteur */
+  border-radius: 50%; /* Pour rendre l'image ronde */
+  object-fit: cover; /* L'image remplira le carré sans se déformer */
+  background-color: var(--disabled);
+}
 
 h1 {
 font-family: "inter", sans-serif;
@@ -824,7 +847,7 @@ color: var(--disabled);
 
 .page-entier{
 background-color: var(--primary);
-height: 120vh;
+height: 100vh;
 width: 100%;
 }
 
@@ -904,6 +927,11 @@ flex-direction: row;
 align-items: center;
 }
 
+.relatif-a-photo button {
+  margin-left: 80px;
+}
+
+  
 .bouton-container {
 display: flex;
 flex-direction: column;
