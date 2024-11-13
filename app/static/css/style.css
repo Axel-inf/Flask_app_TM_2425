@@ -845,6 +845,7 @@ color: var(--disabled);
 }
 
 
+
 .page-entier{
 background-color: var(--primary);
 height: 100vh;
@@ -886,9 +887,9 @@ margin-bottom: 16px;
 color: white;
 }
 
-
-#changer-photo{
-background-color: var(--secondary);
+label.changer-photo{
+background-color: var(--secondary)!important;
+margin-bottom: 0px!important;
 padding: 10.5px 14px;
 border: none;
 border-radius: 8px;
@@ -898,6 +899,28 @@ color: white;
 font-family: "inter", sans-serif;
 font-size: 16px;
 font-weight: 400;
+margin-left: 0px;
+top: auto;
+}
+
+.profile-container {
+  display: flex;
+  align-items: space-around;
+}
+
+#profile-grand-perso,
+#profile-grand {
+    height: 180px;
+    width: 180px; /* Largeur égale à la hauteur */
+    border-radius: 50%; /* Pour rendre l'image ronde */
+    object-fit: cover; /* L'image remplira le carré sans se déformer */
+}
+
+.boutons {
+  display:flex;
+  flex-direction: column-reverse;
+  gap: 16px;
+  margin-left: 40px;
 }
 
 .bouton-suppr {
@@ -919,27 +942,6 @@ transition: background-color 0.3s ease; /* Animation vers hover */
 
 .bouton-suppr:hover {
 background-color: #16202A;
-}
-
-.relatif-a-photo{
-display: flex;
-flex-direction: row;
-align-items: center;
-}
-
-.relatif-a-photo button {
-  margin-left: 80px;
-}
-
-  
-.bouton-container {
-display: flex;
-flex-direction: column;
-margin-left: 40px;
-}
-
-.bouton-container button {
-margin-top: 16px; /* Espacement entre les boutons */
 }
 
 .bouton-icon {

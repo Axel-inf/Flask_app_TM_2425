@@ -14,32 +14,29 @@
     </div>
 
     <h2>Votre photo de profil</h2>
-    <div class="relatif-a-photo">
-
+    <div class="profile-container">
       {% if profile_image %}
         <img id="profile-grand-perso" src="{{ url_for('static', filename='uploads/' + profile_image) }}">
-        <form action="{{ url_for('user.delete_image') }}" method="post" style="display:inline;">
-          <button class="bouton-suppr" type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette image ?');" class="bouton-suppr">
-            SUPPRIMER
-            <img src="{{ url_for('static', filename='imgs/icone_corbeille.svg') }}">
-          </button>
-        </form>
-
+        <div class="boutons">
+          <form action="{{ url_for('user.delete_image') }}" method="post" style="display:inline;">
+            <button class="bouton-suppr" type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette image ?');">
+              SUPPRIMER
+              <img src="{{ url_for('static', filename='imgs/icone_corbeille.svg') }}">
+            </button>
+          </form>
       {% else %}
         <img id="profile-grand" src="{{ url_for('static', filename='imgs/user.svg') }}">
       {% endif %}
-
-      <div class="bouton-container">
-        <form id="upload-form" method="POST" action="/user/profile" enctype="multipart/form-data">
-          <label for="file-upload" class="custom-file-upload">
-            <button id="changer-photo" class="fa fa-cloud-upload">CHANGER DE PHOTO</button>
-          </label>
-          <input id="file-upload" type="file" name="file" required onchange="document.getElementById('upload-form').submit()">
-        </form>
-      </div>
+      
+          <form id="upload-form" method="POST" action="/user/profile" enctype="multipart/form-data">
+            <label for="file-upload" class="changer-photo">
+              CHANGER DE PHOTO
+            </label>
+            <input id="file-upload" type="file" name="file" required onchange="document.getElementById('upload-form').submit()">
+          </form>
+        </div>
     </div>
-  </div>
-</div>
+    
 
       
 
