@@ -41,38 +41,97 @@
       
 
     <h2>Vos informations personnels</h2>
+
     <div class="relatif-a-champ">
-
       <div class="champs">
-        <div class="input-container">
-          <label for="prenom">Prénom</label>
-          <input type="prenom" id="prenom" required name="prenom" placeholder={{g.user.prenom}} readonly>
-        </div>
+        <form id="update-form" method="POST" action="{{ url_for('user.update_user') }}">
+          <div class="relatif-a-champ">
+            <div class="champs">
+              <!-- Prénom -->
+              <div class="input-container">
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" name="prenom" value="{{ g.user.prenom }}" required readonly>
+              </div>
+        
+              <!-- Nom -->
+              <div class="input-container">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="nom" value="{{ g.user.nom }}" required readonly>
+              </div>
+            
+              <!-- Email -->
+              <div class="input-container">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{ g.user.email }}" required readonly>
+              </div>
 
-        <div class="input-container">
-          <label for="nom">Nom</label>
-          <input type="nom" id="nom" required name="nom" placeholder={{g.user.nom}} readonly>
-        </div>
-      
-        <div class="input-container">
-          <label for="email">Email</label>
-          <input type="email" id="email" required name="email" placeholder={{g.user.email}} readonly>
-        </div>
-    
-        <div class="input-container">
-          <label for="mot_de_passe">Mot de passe</label>
-          <input type="password" id="mot_de_passe" required name="mot_de_passe" required minlength="8" placeholder="············" readonly>
-        </div>
-      </div> 
+              <!-- Mot de passe -->
+              <div class="input-container">
+                <label for="mot_de_passe">Mot de passe</label>
+                <input type="password" id="mot_de_passe" required name="mot_de_passe" required minlength="8" placeholder="......" readonly>
+              </div>
+            </div>
+            
 
-      <div class="modif-container">
-        <button class="bouton-icon">MODIFIER <img src="{{url_for('static', filename='imgs/icone_crayon_modification.svg') }}"/></button>
-        <button class="bouton-icon">RÉINITIALISER <img src="{{url_for('static', filename='imgs/icone_crayon_modification.svg') }}"/></button>
+            <div class="modif-container">
+              <!-- Bouton Modifier -->
+              <button type="button" class="bouton-icon" id="modifier-btn">MODIFIER <img src="{{ url_for('static', filename='imgs/icone_crayon_modification.svg') }}" /></button>
+        
+              <!-- Bouton Annuler -->
+              <button type="button" class="bouton-icon hidden" id="annuler-btn">ANNULER <img src="{{ url_for('static', filename='imgs/icone_annuler.svg') }}" /></button>
+        
+              <!-- Bouton Confirmer -->
+              <button type="submit" class="bouton-icon hidden" id="confirmer-btn">CONFIRMER <img src="{{ url_for('static', filename='imgs/icone_confirmer.svg') }}" /></button>
+              
+              <a href="{{ url_for('home.landing_page') }}" class="bouton-icon">RÉINITIALISER <img src="{{url_for('static', filename='imgs/icone_crayon_modification.svg') }}"/></a>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
-
+        
 <script>
+  const modifierBtn = document.getElementById('modifier-btn');
+  const annulerBtn = document.getElementById('annuler-btn');
+  const confirmerBtn = document.getElementById('confirmer-btn');
+  const prenomInput = document.getElementById('prenom');
+  const nomInput = document.getElementById('nom');
+  const emailInput = document.getElementById('email');
+
+  // Lorsque le bouton Modifier est cliqué
+  modifierBtn.addEventListener('click', () => {
+    // Rendre les champs modifiables
+    prenomInput.removeAttribute('readonly');
+    nomInput.removeAttribute('readonly');
+    emailInput.removeAttribute('readonly');
+
+    // Afficher le bouton Annuler et Confirmer
+    annulerBtn.classList.remove('hidden');
+    confirmerBtn.classList.remove('hidden');
+
+    // Cacher le bouton Modifier
+    modifierBtn.classList.add('hidden');
+  });
+
+  // Lorsque le bouton Annuler est cliqué
+  annulerBtn.addEventListener('click', () => {
+    // Restaurer les valeurs initiales et rendre les champs en readonly
+    prenomInput.value = "{{ g.user.prenom }}";
+    nomInput.value = "{{ g.user.nom }}";
+    emailInput.value = "{{ g.user.email }}";
+    prenomInput.setAttribute('readonly', true);
+    nomInput.setAttribute('readonly', true);
+    emailInput.setAttribute('readonly', true);
+
+    // Cacher les boutons Annuler et Confirmer
+    annulerBtn.classList.add('hidden');
+    confirmerBtn.classList.add('hidden');
+
+    // Afficher le bouton Modifier
+    modifierBtn.classList.remove('hidden');
+  });
 </script>
+        
 {% endblock %}

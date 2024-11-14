@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, g, session, Blueprint, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, flash, g, session, Blueprint, send_from_directory, jsonify
 from werkzeug.utils import secure_filename
 import os
 import sqlite3
@@ -67,7 +67,7 @@ def profile():
                 return redirect(request.url)
 
     profile_image = get_profile_image(user_id)  # Récupérer l'image de profil après les opérations
-    return render_template('user/profile.html', profile_image=profile_image)
+    return render_template('user/profile.html', profile_image=profile_image, role=g.role)
 
 
 @user_bp.route('/user/delete_image', methods=['POST'])
@@ -90,6 +90,42 @@ def delete_image():
         flash("L'image de profil a été supprimée.")
 
     return redirect(url_for('user.profile'))
+
+@user_bp.route('/update_user', methods=['POST'])
+def update_user():
+    if g.user:
+        if request.method == 'POST':
+            # Récupérer les données envoyées par le formulaire
+            prenom = request.form['prenom']
+            nom = request.form['nom']
+            email = request.form['email']
+
+            # Vérifier que les champs sont valides
+            if prenom and nom and email:
+                # Connexion à la base de données
+                db = get_db()
+
+                # Mise à jour de l'utilisateur dans la table Personnes
+                db.execute('''
+                    UPDATE Personnes
+                    SET prenom = ?, nom = ?, email = ?
+                    WHERE id_personne = ?
+                ''', (prenom, nom, email, g.user['id_personne']))
+
+                # Commit des modifications
+                db.commit()
+                close_db()
+
+                # Rediriger l'utilisateur vers sa page de profil
+                return redirect(url_for('user.profile'))  # Redirection vers la page user/profil
+            else:
+                flash('Veuillez remplir tous les champs.')
+                return redirect(url_for('user.profile'))  # Rediriger vers la page de profil si les champs ne sont pas valides
+        else:
+            # Si l'utilisateur n'est pas connecté, rediriger vers la page de connexion
+            return redirect(url_for('auth.login'))
+
+
 
 
 if __name__ == '__main__':

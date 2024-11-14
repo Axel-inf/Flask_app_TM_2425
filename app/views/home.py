@@ -5,13 +5,13 @@ home_bp = Blueprint('home', __name__)
 
 
 
-# Route /
-@home_bp.route('/', methods=('GET', 'POST'))
+@home_bp.route('/', methods=['GET', 'POST'])
 def landing_page():
     if g.user:
         return render_template('home/index.html', role=g.role)
     else:
         return render_template('home/index.html')
+
 
 # Gestionnaire d'erreur 404 pour toutes les routes inconnues
 @home_bp.route('/<path:text>', methods=['GET', 'POST'])

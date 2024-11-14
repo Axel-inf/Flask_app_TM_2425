@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Template de base
+{% endblock %}
+
+{% block content%}
+<div class="form-container">
+    <h1>Commencez à créer votre cours</h1>
+    <form action="#" method="post">
+        <label for="tarif">Votre tarif horaire</label>
+        <input type="text" id="tarif" name="tarif" placeholder="Écrivez ici...">
+
+        <label for="apropos">À propos de vous</label>
+        <textarea id="apropos" name="apropos" placeholder="Écrivez ici..."></textarea>
+
+        <label for="description">Description de votre cours</label>
+        <textarea id="description" name="description" placeholder="Écrivez ici..."></textarea>
+
+        <fieldset>
+            <legend>Cochez vos disponibilités</legend>
+            <label><input type="checkbox" name="disponibilite" value="lundi"> Lundi</label>
+            <label><input type="checkbox" name="disponibilite" value="mardi"> Mardi</label>
+            <label><input type="checkbox" name="disponibilite" value="mercredi"> Mercredi</label>
+            <label><input type="checkbox" name="disponibilite" value="jeudi"> Jeudi</label>
+            <label><input type="checkbox" name="disponibilite" value="vendredi"> Vendredi</label>
+            <label><input type="checkbox" name="disponibilite" value="samedi"> Samedi</label>
+            <label><input type="checkbox" name="disponibilite" value="dimanche"> Dimanche</label>
+        </fieldset>
+
+        <button type="submit">Envoyer</button>
+        
+    </form>
+</div>
+{% endblock %}

@@ -846,10 +846,11 @@ color: var(--disabled);
 
 
 
-.page-entier{
-background-color: var(--primary);
-height: 100vh;
-width: 100%;
+.page-entier {
+  background-color: var(--primary);
+  min-height: 100vh;  /* Assure que la hauteur de la page soit toujours au moins 100% de la fenêtre */
+  width: 100%;
+  padding-bottom: 87px;
 }
 
 #profile_illustration {
@@ -905,7 +906,7 @@ top: auto;
 
 .profile-container {
   display: flex;
-  align-items: space-around;
+  align-items: center;
 }
 
 #profile-grand-perso,
@@ -919,8 +920,10 @@ top: auto;
 .boutons {
   display:flex;
   flex-direction: column-reverse;
+  justify-content: center;
   gap: 16px;
   margin-left: 40px;
+  margin-top: 58px;
 }
 
 .bouton-suppr {
@@ -960,6 +963,7 @@ border: none;
 border-radius: 8px;
 cursor: pointer;
 box-shadow: var(--shadow-6dp);
+text-decoration: none;
 }
 
 .page-entier input, .page-entier select {
@@ -1002,25 +1006,28 @@ background-color: var(--primary);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 32px;
 }
 
 input[type="file"] {
   display: none; /* Masquer le champ de fichier par défaut */
 }
 
-.custom-file-upload {
-  display: inline-block;
-  padding: 6px 12px;
-  cursor: pointer;
-  color: white;
-  background-color: #007bff;
-  border-radius: 4px;
-  text-align: center;
-  font-size: 14px;
-  margin-right: 10px;
-}
-
 #file-name {
   margin-left: 10px;
   font-size: 14px;
+}
+
+.input-modifiable {
+  border: 2px solid var(--secondary) !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.relatif-a-champ input {
+  color: white;
+  font-size: 19px;
+  font-weight: 700;
 }
