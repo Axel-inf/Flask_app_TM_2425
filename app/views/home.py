@@ -8,9 +8,10 @@ home_bp = Blueprint('home', __name__)
 @home_bp.route('/', methods=['GET', 'POST'])
 def landing_page():
     if g.user:
-        return render_template('home/index.html', role=g.role)
+        return render_template('home/index.html', chemin_image=g.chemin_image, role=g.role)
     else:
         return render_template('home/index.html')
+
 
 
 # Gestionnaire d'erreur 404 pour toutes les routes inconnues

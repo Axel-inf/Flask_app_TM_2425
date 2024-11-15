@@ -122,33 +122,23 @@ def logout():
 # La fonction permet d'ajouter un attribut 'user' représentant l'utilisateur connecté dans l'objet 'g' 
 @auth_bp.before_app_request
 def load_logged_in_user():
-
-    # On récupère l'id de l'utilisateur stocké dans le cookie session
     user_id = session.get('user_id')
-
-    # Si l'id de l'utilisateur dans le cookie session est nul, cela signifie que l'utilisateur n'est pas connecté
-    # On met donc l'attribut 'user' de l'objet 'g' à None
+    
     if user_id is None:
         g.user = None
-
-    # Si l'id de l'utilisateur dans le cookie session n'est pas nul, on récupère l'utilisateur correspondant et on stocke
-    # l'utilisateur comme un attribut de l'objet 'g'
+        g.chemin_image = None  # Assurez-vous que chemin_image est défini ici
     else:
-         # On récupère la base de données et on récupère l'utilisateur correspondant à l'id stocké dans le cookie session
         db = get_db()
-        g.user = db.execute('SELECT * FROM Personnes WHERE id_personne = (?)', (user_id,)).fetchone()
-        
-        # Faire une requete SQl pour aller récupéer la ligne qui contient l'id dans la table Coach
+        g.user = db.execute('SELECT * FROM Personnes WHERE id_personne = ?', (user_id,)).fetchone()
+
         userrole = db.execute('SELECT * FROM Coachs WHERE id_personne = ?', (user_id,)).fetchone()
-        # Si oui, on peut rajouter le role dans la variable g.user['role'] = "Coach"
-        if userrole :
-            g.role = "Coach"
-        
-        else :
-            g.role = "Joueur"
-                
-        # On ferme la connexion à la base de données pour éviter les fuites de mémoire
+        g.role = "Coach" if userrole else "Joueur"
+
+        # Récupérer le chemin de l'image de profil de l'utilisateur
+        g.chemin_image = session.get('chemin_image')  # Récupérer le chemin depuis la session
+
         close_db()
+
 
 
 @auth_bp.route('/validation_connexion')

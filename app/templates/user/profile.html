@@ -18,25 +18,43 @@
       {% if profile_image %}
         <img id="profile-grand-perso" src="{{ url_for('static', filename='uploads/' + profile_image) }}">
         <div class="boutons">
-          <form action="{{ url_for('user.delete_image') }}" method="post" style="display:inline;">
-            <button class="bouton-suppr" type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette image ?');">
-              SUPPRIMER
-              <img src="{{ url_for('static', filename='imgs/icone_corbeille.svg') }}">
-            </button>
-          </form>
-      {% else %}
-        <img id="profile-grand" src="{{ url_for('static', filename='imgs/user.svg') }}">
-      {% endif %}
-      
           <form id="upload-form" method="POST" action="/user/profile" enctype="multipart/form-data">
             <label for="file-upload" class="changer-photo">
               CHANGER DE PHOTO
             </label>
             <input id="file-upload" type="file" name="file" required onchange="document.getElementById('upload-form').submit()">
           </form>
+
+          <form action="{{ url_for('user.delete_image') }}" method="post" style="display:inline;">
+            <button class="bouton-suppr" type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette image ?');">
+              SUPPRIMER
+              <img src="{{ url_for('static', filename='imgs/icone_corbeille.svg') }}">
+            </button>
+          </form>
         </div>
-    </div>
-    
+
+      
+      {% else %}
+      <div id="profile-back">
+        <img id="profile-grand" src="{{ url_for('static', filename='imgs/user.svg') }}">
+      </div>
+      <div class="boutons">
+        <form id="upload-form" method="POST" action="/user/profile" enctype="multipart/form-data">
+          <label for="file-upload" class="changer-photo">
+            CHANGER DE PHOTO
+          </label>
+          <input id="file-upload" type="file" name="file" required onchange="document.getElementById('upload-form').submit()">
+        </form>
+
+        <form action="{{ url_for('user.delete_image') }}" method="post" style="display:inline;">
+          <button class="bouton-suppr" type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cette image ?');">
+            SUPPRIMER
+            <img src="{{ url_for('static', filename='imgs/icone_corbeille.svg') }}">
+          </button>
+        </form>
+      </div>
+  </div>
+      {% endif %}
 
       
 

@@ -139,13 +139,7 @@ object-fit: cover;
 background-color: var(--disabled);
 }
 
-#profile-grand {
-  height: 180px;
-  width: 180px; /* Largeur égale à la hauteur */
-  border-radius: 50%; /* Pour rendre l'image ronde */
-  object-fit: cover; /* L'image remplira le carré sans se déformer */
-  background-color: var(--disabled);
-}
+
 
 h1 {
 font-family: "inter", sans-serif;
@@ -851,6 +845,8 @@ color: var(--disabled);
   min-height: 100vh;  /* Assure que la hauteur de la page soit toujours au moins 100% de la fenêtre */
   width: 100%;
   padding-bottom: 87px;
+  display: flex;
+  flex-direction: column;
 }
 
 #profile_illustration {
@@ -902,30 +898,49 @@ font-size: 16px;
 font-weight: 400;
 margin-left: 0px;
 top: auto;
+margin-top: 32px;
 }
 
 .profile-container {
   display: flex;
-  align-items: center;
+  justify-content: start;
+  flex-direction: column;
 }
 
-#profile-grand-perso,
-#profile-grand {
+#profile-grand-perso {
     height: 180px;
     width: 180px; /* Largeur égale à la hauteur */
     border-radius: 50%; /* Pour rendre l'image ronde */
     object-fit: cover; /* L'image remplira le carré sans se déformer */
 }
 
-.boutons {
-  display:flex;
-  flex-direction: column-reverse;
+/* Conteneur principal avec un diamètre de 180px */
+#profile-back {
+  height: 180px;
+  width: 180px;
+  border-radius: 50%;
+  background-color: var(--disabled); /* Couleur de fond pour la marge */
+  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 16px;
-  margin-left: 40px;
-  margin-top: 58px;
 }
 
+/* Image avec une marge de 12px autour */
+#profile-grand {
+  height: 150px; /* 180px - 2 * 12px */
+  width: 150px;
+  border-radius: 50%;
+}
+
+
+.boutons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  margin-left: 280px;
+  margin-top: -114px;
+}
 .bouton-suppr {
 display: flex;
 align-items: center;
@@ -1030,4 +1045,17 @@ input[type="file"] {
   color: white;
   font-size: 19px;
   font-weight: 700;
+}
+
+.changer-photo{
+  margin-left: 40px;
+  margin-bottom: 40px;
+}
+
+
+
+.form-container{
+  min-height: 100vh; /* S'assure que le contenu couvre au moins toute la hauteur de la fenêtre */
+  display: flex;
+  flex-direction: column;
 }

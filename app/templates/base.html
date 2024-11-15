@@ -24,12 +24,12 @@
                         <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Recherche de coach</a></li>
                         <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Mes discussions</a></li>
                     {% else %}
-                        <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Proposer un cours</a></li>
+                        <li><a class="lien-page" href="{{ url_for('coach.landing_page') }}">Proposer un cours</a></li>
                         <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Mes discussions</a></li>
                     {% endif %}
 
-                    {% if profile_image %}
-                        <img id="profile-petit-perso" src="{{ url_for('static', filename='uploads/' + profile_image) }}" class="user-pic" onclick="toggleMenu()" alt="photo de profil"/>
+                    {% if g.chemin_image %}
+                        <img id="profile-petit-perso" src="{{ url_for('static', filename='uploads/' + g.chemin_image) }}" class="user-pic" onclick="toggleMenu()" alt="photo de profil"/>
                     {% else %}
                         <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}" class="user-pic" onclick="toggleMenu()" alt="photo de profil"/>
                     {% endif %}
