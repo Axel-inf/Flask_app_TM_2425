@@ -142,58 +142,58 @@ background-color: var(--disabled);
 
 
 h1 {
-font-family: "inter", sans-serif;
-font-size: 48px;
-font-weight: 700;
-text-align: center;
+  font-family: "inter", sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  text-align: center;
 }
 
 h2 {
-font-family: "inter", sans-serif;
-font-size: 40px;
-font-weight: 700;
+  font-family: "inter", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
 }
 
 h3 {
-font-family: "inter", sans-serif;
-font-size: 33px;
-font-weight: 700;
+  font-family: "inter", sans-serif;
+  font-size: 33px;
+  font-weight: 700;
 }
 
 h4 {
-font-family: "inter", sans-serif;
-font-size: 28px;
-font-weight: 700;
+  font-family: "inter", sans-serif;
+  font-size: 28px;
+  font-weight: 700;
 }
 
 h5 {
-font-family: "inter", sans-serif;
-font-size: 23px;
-font-weight: 700;
+  font-family: "inter", sans-serif;
+  font-size: 23px;
+  font-weight: 700;
 }
 
 h6 {
-font-family: "inter", sans-serif;
-font-size: 19px;
-font-weight: 700;
+  font-family: "inter", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
 }
 
 p, li {
-font-family: "inter", sans-serif;
-font-size: 16px;
-font-weight: 400;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .header {
-grid-area: header;
+  grid-area: header;
 
 }
 .main {
-grid-area: main;
+  grid-area: main;
 }
 
 .footer {
-grid-area: footer;
+  grid-area: footer;
 }
 
 
@@ -1054,8 +1054,58 @@ input[type="file"] {
 
 
 
-.form-container{
-  min-height: 100vh; /* S'assure que le contenu couvre au moins toute la hauteur de la fenêtre */
+
+/* Conteneur principal */
+.form-container {
+  max-width: 100vw;
+  margin: 0;
+  padding: 56px 740px 32px 80px;
+  background-color: var(--primary);
+}
+
+/* Titre */
+.form-container h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-align: left;
+}
+
+/* Champs du formulaire */
+form {
   display: flex;
   flex-direction: column;
+  gap: 32px;
+}
+
+.input-container h5{
+  margin-bottom: 16px;
+  font-family: "inter", sans-serif;
+  font-size: 23px;
+  font-weight: 700;
+  text-align: left;
+  color: white;
+}
+
+
+/* Légende et checkbox */
+fieldset {
+  border: none;
+  margin-bottom: 12px;
+}
+
+#tarif, #apropos, #description{
+  border: 1px solid white;
+  background-color: var(--primary);
+}
+
+.input-container input::placeholder {
+  color: white;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  }
+
+fieldset h5{
+  color: white; 
 }

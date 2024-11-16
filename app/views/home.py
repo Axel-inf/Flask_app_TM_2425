@@ -1,4 +1,5 @@
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
+from app.utils import get_profile_image
 
 # Routes /...
 home_bp = Blueprint('home', __name__)
@@ -8,7 +9,7 @@ home_bp = Blueprint('home', __name__)
 @home_bp.route('/', methods=['GET', 'POST'])
 def landing_page():
     if g.user:
-        return render_template('home/index.html', chemin_image=g.chemin_image, role=g.role)
+        return render_template('home/index.html', profile_image=g.chemin_image, role=g.role)
     else:
         return render_template('home/index.html')
 

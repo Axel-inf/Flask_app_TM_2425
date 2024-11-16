@@ -1,6 +1,7 @@
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
 from werkzeug.security import check_password_hash, generate_password_hash
 from app.db.db import get_db, close_db
+from app.utils import get_profile_image
 import os
 
 # Création d'un blueprint contenant les routes ayant le préfixe /auth/...
@@ -126,7 +127,7 @@ def load_logged_in_user():
     
     if user_id is None:
         g.user = None
-        g.chemin_image = None  # Assurez-vous que chemin_image est défini ici
+        g.chemin_image = None
     else:
         db = get_db()
         g.user = db.execute('SELECT * FROM Personnes WHERE id_personne = ?', (user_id,)).fetchone()
@@ -134,10 +135,12 @@ def load_logged_in_user():
         userrole = db.execute('SELECT * FROM Coachs WHERE id_personne = ?', (user_id,)).fetchone()
         g.role = "Coach" if userrole else "Joueur"
 
-        # Récupérer le chemin de l'image de profil de l'utilisateur
-        g.chemin_image = session.get('chemin_image')  # Récupérer le chemin depuis la session
+        # Utiliser la fonction utilitaire pour obtenir le chemin de l'image
+        g.chemin_image = get_profile_image(user_id)
+        print(f"Chemin de l'image de profil: {g.chemin_image}")  # Log de débogage
 
         close_db()
+
 
 
 

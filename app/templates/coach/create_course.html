@@ -7,28 +7,35 @@
 {% block content%}
 <div class="form-container">
     <h1>Commencez à créer votre cours</h1>
+    <img src="{{ url_for('static', filename='imgs/illustration_creation_cours.png') }}">
     <form action="#" method="post">
-        <label for="tarif">Votre tarif horaire</label>
-        <input type="text" id="tarif" name="tarif" placeholder="Écrivez ici...">
+        <div class="input-container">
+            <h5>Votre tarif horaire</h5>
+            <input type="tarif" id="tarif" name="tarif" placeholder="Écrivez ici..">
+        </div>
 
-        <label for="apropos">À propos de vous</label>
-        <textarea id="apropos" name="apropos" placeholder="Écrivez ici..."></textarea>
+        <div class="input-container">
+            <h5>À propos de vous</h5>
+            <input type="apropos" id="apropos" name="apropos" placeholder="Écrivez ici..">
+        </div>
 
-        <label for="description">Description de votre cours</label>
-        <textarea id="description" name="description" placeholder="Écrivez ici..."></textarea>
+        <div class="input-container" >
+            <h5>À propos de vous</h5>
+            <input type="description" id="description" name="description" placeholder="Écrivez ici..">
+        </div>
 
         <fieldset>
-            <legend>Cochez vos disponibilités</legend>
-            <label><input type="checkbox" name="disponibilite" value="lundi"> Lundi</label>
-            <label><input type="checkbox" name="disponibilite" value="mardi"> Mardi</label>
-            <label><input type="checkbox" name="disponibilite" value="mercredi"> Mercredi</label>
-            <label><input type="checkbox" name="disponibilite" value="jeudi"> Jeudi</label>
-            <label><input type="checkbox" name="disponibilite" value="vendredi"> Vendredi</label>
-            <label><input type="checkbox" name="disponibilite" value="samedi"> Samedi</label>
-            <label><input type="checkbox" name="disponibilite" value="dimanche"> Dimanche</label>
+            <h5>Cochez vos disponibilités</h5>
+            <p class="dispo"><input type="checkbox" name="disponibilite" value="lundi"> Lundi</p>
+            <p class="dispo"><input type="checkbox" name="disponibilite" value="mardi"> Mardi</p>
+            <p class="dispo"><input type="checkbox" name="disponibilite" value="mercredi"> Mercredi</p>
+            <p class="dispo"><input type="checkbox" name="disponibilite" value="jeudi"> Jeudi</p>
+            <p class="dispo"><input type="checkbox" name="disponibilite" value="vendredi"> Vendredi</p>
+            <p class="dispo"><input type="checkbox" name="disponibilite" value="samedi"> Samedi</p>
+            <p class="dispo"><input type="checkbox" name="disponibilite" value="dimanche"> Dimanche</p>
         </fieldset>
 
-        <button type="submit">Envoyer</button>
+        <button type="submit" class="bouton-icon">Envoyer <img src="{{ url_for('static', filename='imgs/icone_envoie_message.svg') }}"></button>
         
     </form>
 </div>

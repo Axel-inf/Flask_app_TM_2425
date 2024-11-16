@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import sqlite3
 from app.db.db import get_db, close_db
+from app.utils import get_profile_image
 
 app = Flask(__name__)
 user_bp = Blueprint('user', __name__, url_prefix='/user')
@@ -13,16 +14,6 @@ app.secret_key = 'supersecretkey'
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
-
-
-def get_profile_image(user_id):
-    db = get_db()
-    curseur = db.cursor()
-    curseur.execute("SELECT chemin_vers_image FROM Personnes WHERE id_personne = ?", (user_id,))
-    result = curseur.fetchone()
-    db.commit()
-    close_db()
-    return os.path.basename(result[0]) if result and result[0] else None
 
 
 @user_bp.route('profile', methods=['GET', 'POST'])
