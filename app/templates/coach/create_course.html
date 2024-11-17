@@ -7,12 +7,40 @@
 {% block content%}
 <div class="form-container">
     <img id="illustration_creation_cours" src="{{ url_for('static', filename='imgs/illustration_creation_cours.png') }}">
-    <form class="inputs-creation" action="#" method="post">
+    <form class="inputs-creation" method="post">
         <h1>Commencez à créer votre cours</h1>
-        <div class="input-creation">
-            <h5>Votre tarif horaire</h5>
-            <textarea type="tarif" id="tarif" name="tarif" placeholder="Écrivez ici.."></textarea>
+
+        <h5 for="canton-select">Votre canton</h5>
+        <select id="canton-select" required name="canton"> 
+            <option value="Vaud">Vaud</option>
+            <option value="Valais">Valais</option>
+            <option value="Genève">Genève</option>
+            <option value="Fribourg">Fribourg</option>
+            <option value="Neuchâtel">Neuchâtel</option>
+            <option value="Jura">Jura</option>
+        </select>
+
+        <h5 for="langue-select">Votre langue</h5>
+        <select id="langue-select" required name="langue"> 
+            <option value="Vaud">Français</option>
+            <option value="Valais">Allemand</option>
+            <option value="Genève">Anglais</option>
+            <option value="Fribourg">Fribourg</option>
+            <option value="Neuchâtel">Autres</option>
+        </select>
+
+        
+        
+        <div class="input-creation" id="input-tarif">
+            <h5>Votre tarif horaire (CHF)</h5>
+            <input type="number" id="tarif" name="tarif" min="0" max="1000" step="1" value="0" />
         </div>
+        
+        <div class="input-creation" >
+            <h5>Votre ville</h5>
+            <textarea type="ville" id="ville" name="ville" placeholder="Écrivez ici.."></textarea>
+        </div> 
+        
 
         <div class="input-creation">
             <h5>À propos de vous</h5>
@@ -39,4 +67,5 @@
         
     </form>
 </div>
+
 {% endblock %}

@@ -1087,7 +1087,7 @@ input[type="file"] {
   margin-bottom: 40px;
 }
 
-.input-creation h5 {
+.inputs-creation h5 {
   margin-bottom: 16px;
   font-family: "inter", sans-serif;
   font-size: 23px;
@@ -1103,32 +1103,85 @@ fieldset {
   margin-bottom: 12px;
 }
 
-#tarif, #apropos, #description {
+#apropos, #description, #ville {
   border: 1px solid white;
   background-color: var(--primary);
   color: white;
   top: 20px; /* Aligne le texte en haut */
   line-height: 1.5;
+  padding-left: 22px;
+  padding-top: 12px;
+}
+#tarif{
+  border: 1px solid white;
+  background-color: var(--primary);
+  color: white;
+  top: 20px; /* Aligne le texte en haut */
+  line-height: 1.5;
+  padding-left: 22px;    
 }
 
 #apropos, #description {
   height: 140px;
+  color: white;
 }
 
-#apropos::placeholder, #description::placeholder {
+#apropos::placeholder, #description::placeholder, #ville::placeholder {
   color: white;
-  font-family: "inter", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  transform: translateY(-200%);
 }
 
 #tarif::placeholder{
   color: white;
-
 }
 
 fieldset h5 {
   color: white; 
 }
 
+.inputs-creation select{
+  background-color: var(--primary);
+  border: 1px solid white;
+}
+
+.inputs-creation select option{
+  background-color: var(--secondary);
+  color: white;
+}
+
+.inputs-creation select{
+  color: white;
+}
+
+.inputs-creation select option{
+  background-color: var(--secondary);
+  color: white;
+}
+
+.input-creation textarea{
+  width: 43.01vw;
+  border-radius: 8px;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  background-color: var(--primary);
+}
+
+.inputs-creation fieldset{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+}
+
+.dispo {
+  display: flex; /* Aligner la checkbox et le texte sur la même ligne */
+  text-align: left;
+  align-items: center; /* Aligner verticalement la checkbox et le texte */
+  margin-bottom: -10px; /* Espacement de 12px entre chaque ligne */
+}
+
+.dispo input[type="checkbox"] {
+  transform: scale(1.5); /* Agrandit la checkbox de 1.5 fois */
+  margin-right: 8px; /* Espace entre la checkbox et le texte */
+}
