@@ -6,22 +6,22 @@
 
 {% block content%}
 <div class="form-container">
-    <h1>Commencez à créer votre cours</h1>
-    <img src="{{ url_for('static', filename='imgs/illustration_creation_cours.png') }}">
-    <form action="#" method="post">
-        <div class="input-container">
+    <img id="illustration_creation_cours" src="{{ url_for('static', filename='imgs/illustration_creation_cours.png') }}">
+    <form class="inputs-creation" action="#" method="post">
+        <h1>Commencez à créer votre cours</h1>
+        <div class="input-creation">
             <h5>Votre tarif horaire</h5>
-            <input type="tarif" id="tarif" name="tarif" placeholder="Écrivez ici..">
+            <textarea type="tarif" id="tarif" name="tarif" placeholder="Écrivez ici.."></textarea>
         </div>
 
-        <div class="input-container">
+        <div class="input-creation">
             <h5>À propos de vous</h5>
-            <input type="apropos" id="apropos" name="apropos" placeholder="Écrivez ici..">
+            <textarea type="apropos" id="apropos" name="apropos" placeholder="Écrivez ici.."></textarea>
         </div>
 
-        <div class="input-container" >
-            <h5>À propos de vous</h5>
-            <input type="description" id="description" name="description" placeholder="Écrivez ici..">
+        <div class="input-creation" >
+            <h5>Description de votre cours</h5>
+            <textarea type="description" id="description" name="description" placeholder="Écrivez ici.."></textarea>
         </div>
 
         <fieldset>

@@ -1057,36 +1057,45 @@ input[type="file"] {
 
 /* Conteneur principal */
 .form-container {
-  max-width: 100vw;
+  display: flex;
+  width: 100vw;
   margin: 0;
   padding: 56px 740px 32px 80px;
   background-color: var(--primary);
+  align-items: flex-start;
+}
+.form-container #illustration_creation_cours {
+  position: absolute;
+  top: 56px;
+  right: 80px;
+  width: 43.01vw;
+  height: auto;
 }
 
-/* Titre */
-.form-container h1 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #ffffff;
-  text-align: left;
+.inputs-creation {
+  display: block;
+  font-size: 16px;
+  color: var(--primary);
 }
 
-/* Champs du formulaire */
-form {
+.inputs-creation h1 {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  justify-content: flex-start;
+  color: white;
+  text-align: left;
+  margin-bottom: 40px;
 }
 
-.input-container h5{
+.input-creation h5 {
   margin-bottom: 16px;
   font-family: "inter", sans-serif;
   font-size: 23px;
   font-weight: 700;
   text-align: left;
   color: white;
+  margin-top: 32px;
 }
-
 
 /* Légende et checkbox */
 fieldset {
@@ -1094,18 +1103,32 @@ fieldset {
   margin-bottom: 12px;
 }
 
-#tarif, #apropos, #description{
+#tarif, #apropos, #description {
   border: 1px solid white;
   background-color: var(--primary);
+  color: white;
+  top: 20px; /* Aligne le texte en haut */
+  line-height: 1.5;
 }
 
-.input-container input::placeholder {
+#apropos, #description {
+  height: 140px;
+}
+
+#apropos::placeholder, #description::placeholder {
   color: white;
   font-family: "inter", sans-serif;
   font-size: 16px;
   font-weight: 400;
-  }
+  transform: translateY(-200%);
+}
 
-fieldset h5{
+#tarif::placeholder{
+  color: white;
+
+}
+
+fieldset h5 {
   color: white; 
 }
+
