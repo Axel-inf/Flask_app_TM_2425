@@ -1103,12 +1103,20 @@ fieldset {
   margin-bottom: 12px;
 }
 
-#apropos, #description, #ville {
+#apropos, #description {
   border: 1px solid white;
   background-color: var(--primary);
   color: white;
   top: 20px; /* Aligne le texte en haut */
   line-height: 1.5;
+  padding-left: 22px;
+  padding-top: 12px;
+}
+
+#ville{
+  border: 1px solid white;
+  background-color: var(--primary);
+  color: white;
   padding-left: 22px;
   padding-top: 12px;
 }
