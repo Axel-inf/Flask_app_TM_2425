@@ -90,7 +90,7 @@ def create_course():
                 close_db()
 
                 flash("Cours créé avec succès!", "success")
-                return redirect(url_for('auth.validation_connexion'))
+                return redirect(url_for('coach.confirmation'))
 
             except Exception as e:
                 print(f"Erreur lors de l'insertion dans la base de données: {e}")
@@ -105,5 +105,5 @@ def create_course():
 
 
 @coach_bp.route('/confirmation')
-def validation_connexion():
+def confirmation():
     return render_template('coach/confirmation.html')

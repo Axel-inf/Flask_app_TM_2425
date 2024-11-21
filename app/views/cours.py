@@ -7,13 +7,6 @@ from app.utils import get_profile_image
 # Définir le blueprint
 cours_bp = Blueprint('cours', __name__)
 
-from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
-from werkzeug.security import check_password_hash, generate_password_hash
-from app.db.db import get_db, close_db
-from app.utils import get_profile_image
-
-# Définir le blueprint
-cours_bp = Blueprint('cours', __name__)
 
 # Définir la fonction `load_logged_in_user` en haut
 def load_logged_in_user():
@@ -42,8 +35,25 @@ def before_request():
 @cours_bp.route('/recherche', methods=['GET', 'POST'])
 def recherche():
     if g.user:
-        print(f"Accès à la page recherche avec g.user: {g.user}, g.chemin_image: {g.chemin_image}, g.role: {g.role}")
-        return render_template('cours/recherche.html', profile_image=g.chemin_image, role=g.role)
+        db = get_db()
+        cursor = db.cursor()
+
+        # Récupérer les coachs ayant proposé des cours
+        cursor.execute(
+            """
+            SELECT p.chemin_vers_image, p.nom, p.prenom, p.ville, c.tarif, p.langue
+            FROM Coachs co
+            JOIN Personnes p ON co.id_personne = p.id_personne
+            JOIN Cours c ON co.FK_idcours = c.id_cours
+            WHERE co.FK_idcours IS NOT NULL
+            """
+        )
+        results = cursor.fetchall()
+        close_db()
+
+        return render_template('cours/recherche.html', coachs=results, profile_image=g.chemin_image, role=g.role)
+            
     else:
         print("Redirection vers la page d'accueil")
         return render_template('home/index.html')
+

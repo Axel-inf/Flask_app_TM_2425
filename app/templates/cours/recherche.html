@@ -1,15 +1,55 @@
-{% extends 'base.html' %}
+{% extends 'base_recherche.html' %}
 
 {% block title %}
   Template de base
 {% endblock %}
 
 {% block content%}
-<div class="slogan">
-    <h1>Trouvez votre futur coach de tennis de table</h1>
-    <p>Découvrez notre nouvel outil de recherche de
-      coachs de tennis de table 100% gratuit !</p>
-    <a href="" id="bouton_fonce">Y aller</a>
+{% if coachs %}
+<div class="background-photo">
+  <div class="content-overlay">
+    <h1 id="titre-recherche">Le coach qu’il vous faut</h1>
+
+    <div class="top-buttons">
+      <div class="search-container">
+        <div class="search-wrapper">
+          <button class="search-btn">
+            <img src="{{url_for('static', filename='imgs/icone_barre_recherche_.svg') }}" alt="Recherche" class="search-icon">
+          </button>
+          <input type="text" class="search-bar" placeholder="Trouvez le coach dont vous rêvez">
+        </div>
+      </div>
+
+      <button class="filter-btn">
+        <img src="{{url_for('static', filename='imgs/icone_filtres.svg') }}" alt="Filtre" class="filter-icon">
+        <span>Filtres</span>
+      </button>
+    </div>
+
+    <div class="coach-cards">
+      {% for coach in coachs %}
+      <div class="coach-card">
+        <div class="coach-photo">
+          <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }}">
+        </div>
+        <div class="coach-info">
+          <h6>{{ coach['nom'] }} {{ coach['prenom'] }}</h6>
+          <p class="city">{{ coach['ville'] }}</p>
+          <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
+          <p class="langue">{{ coach['langue'] }}</p>
+          <div class="card-buttons">
+            <button class="more-btn">EN SAVOIR PLUS</button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
 </div>
+
+    {% else %}
+        <p>Aucun cours disponible pour le moment.</p>
+    {% endif %}
 
 {% endblock %}

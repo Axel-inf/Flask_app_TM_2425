@@ -1193,3 +1193,200 @@ fieldset h5 {
   transform: scale(1.5); /* Agrandit la checkbox de 1.5 fois */
   margin-right: 8px; /* Espace entre la checkbox et le texte */
 }
+
+
+
+/* Style de l'image de fond */
+#background-image {
+  position: relative; /* Permet de positionner les éléments au-dessus */
+  height: 100vh; /* Hauteur égale à la hauteur de la fenêtre */
+  width: 100%; /* Largeur égale à la fenêtre */
+  background-image: url('/static/imgs/image_fond_Ma_Long.jpg'); /* Chemin de l'image */
+  background-size: cover; /* L'image couvre tout le conteneur */
+  background-position: center; /* Centre l'image */
+  background-repeat: no-repeat; /* Empêche la répétition */
+  z-index: 1;
+}
+
+/* Style du header pour le superposer */
+#header-sans-fond {
+  position: relative;
+  height: 80px;
+  width: 100%;
+  padding-left: 80px;
+  padding-right: 80px;
+  z-index: 10;
+  }
+
+.background-photo{
+  background-image: url('/static/imgs/image_fond_Ma_Long.jpg');
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* L'image de fond occupe toute la hauteur de la fenêtre */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -80px;
+}
+
+
+/* Filtre sombre */
+.content-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.38); /* Noir avec 38% d'opacité */
+  z-index: 1; /* Juste en dessous du header */
+  overflow-y: auto; /* Permet de faire défiler le contenu verticalement */
+}
+
+#liste-coachs{
+  margin-top: 112px;
+  margin-bottom: 32px;
+}
+
+#titre-recherche{
+  margin-top: 112px;
+  color: white;
+}
+
+/* Conteneur de la barre de recherche */
+.search-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 88px;
+}
+
+/* Wrapper pour la barre de recherche et l'icône */
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 43.05vw;
+}
+
+/* Bouton de recherche */
+.search-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  left: 0.84vw; /* Décalage de l'icône */
+}
+
+/* Icône de recherche */
+.search-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Style de la barre de recherche */
+.search-bar {
+  width: 100%;
+  padding: 12px 30px 12px 3.34vw; /* Décalage à gauche de 12px pour laisser de l'espace pour l'icône */
+  border-radius: 30px;
+  border: none;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  background-color: var(--secondary); /* Couleur de fond légèrement transparente */
+  height: 56px;
+}
+
+/* Bouton avec icône et texte */
+.filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary); /* Fond légèrement transparent */
+  border-radius: 32px; /* Coins arrondis */
+  border: none;
+  padding: 0.84vw 1.0416vw 16px 0.84vw;
+  color: black; /* Couleur du texte */
+  cursor: pointer;
+  height: 56px;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+
+/* Icône du filtre */
+.filter-icon {
+  width: 24px; /* Taille de l'icône */
+  height: 24px;
+  object-fit: contain;
+  margin-right: 0.84vw; /* Espace entre l'icône et le texte */
+}
+
+.top-buttons {
+  display: flex; /* Utilisation de Flexbox pour aligner les éléments horizontalement */
+  align-items: end; /* Alignement vertical des éléments au centre */
+  width: fit-content;
+  gap: 40px;
+  margin-left: 28.472vw;
+}
+
+
+/* Conteneur des cartes de coach */
+.coach-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.8vw;
+  justify-content: center;
+  margin: 80px;
+
+}
+
+/* Carte de chaque coach */
+.coach-card {
+  background: var(--primary); /* Transparence pour le fond */
+  border-radius: 15px;
+  overflow: hidden;
+  width: 20.138vw;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.coach-photo img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.coach-info {
+  padding: 0.84vw;
+}
+.coach-info .city,
+.coach-info .tarif,
+.coach-info .langue {
+  margin-top: 0.84vw;
+}
+
+/* Style des boutons */
+.card-buttons {
+  display: flex;
+  margin-top: 0.84vw;
+}
+
+.card-buttons button {
+  display: flex;
+  background-color: var(--secondary); /* Couleur d'un bouton */
+  color: white;
+  border: none;
+  padding: 0.56vw 5.03472vw;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 100%;
+  justify-self: center;
+}
