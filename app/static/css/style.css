@@ -46,6 +46,10 @@ ul{
 /*
 -----------------   ADD YOUR CSS RULES BELOW ------------------
 */
+
+/*
+-----------------   HEADER ------------------
+*/
 :root {
 --primary: #3E5F90;
 --secondary: #8F9EBB;
@@ -141,6 +145,10 @@ background-color: var(--disabled);
 
 
 
+/*
+-----------------   MATERIAL DESIGN ------------------
+*/
+
 h1 {
   font-family: "inter", sans-serif;
   font-size: 48px;
@@ -212,7 +220,9 @@ height: 100vh
 }
 
 
-
+/*
+-----------------   LOGIN AND REGISTER ------------------
+*/
 .grid-container-login {
 display: grid;
 grid-template-columns: 1fr 2fr; /* 1/3 pour le contenu, 2/3 pour l'image */
@@ -476,6 +486,9 @@ overflow:hidden;
 
 
 
+/*
+-----------------   VALIDATION CONNEXION ------------------
+*/
 .grid-container-validation {
 display: flex;
 flex-direction: column;
@@ -510,7 +523,9 @@ text-align: center;
 
 
 
-
+/*
+-----------------   HOME ------------------
+*/
 .partie1 {
 display: flex;
 background-color: var(--primary);
@@ -839,7 +854,9 @@ color: var(--disabled);
 }
 
 
-
+/*
+-----------------   PROFILE ------------------
+*/
 .page-entier {
   background-color: var(--primary);
   min-height: 100vh;  /* Assure que la hauteur de la page soit toujours au moins 100% de la fenêtre */
@@ -1054,7 +1071,9 @@ input[type="file"] {
 
 
 
-
+/*
+-----------------   CREATION COURS ------------------
+*/
 /* Conteneur principal */
 .form-container {
   display: flex;
@@ -1196,6 +1215,9 @@ fieldset h5 {
 
 
 
+/*
+-----------------   RECHERCHE DE COACHS ------------------
+*/
 /* Style de l'image de fond */
 #background-image {
   position: relative; /* Permet de positionner les éléments au-dessus */
@@ -1377,7 +1399,7 @@ fieldset h5 {
   margin-top: 0.84vw;
 }
 
-.card-buttons button {
+.card-buttons a {
   display: flex;
   background-color: var(--secondary); /* Couleur d'un bouton */
   color: white;
@@ -1389,4 +1411,83 @@ fieldset h5 {
   font-size: 16px;
   font-weight: 100%;
   justify-self: center;
+  width: 100%;
+  text-decoration: none;
+  
+}
+
+
+/* Panneau des filtres masqué par défaut */
+#filters-panel.hidden {
+  display: none; /* Cache le panneau */
+}
+
+/* Panneau des filtres visible */
+#filters-panel {
+  position: absolute; /* Position fixe pour rester en haut à droite */
+  top: 380px; /* Distance par rapport au haut */
+  right: 80px; /* Distance par rapport à la droite */
+  background-color: var(--secondary); /* Fond rouge */
+  color: black; /* Texte blanc pour contraste */
+  padding: 16px; /* Espacement interne */
+  border-radius: 8px; /* Coins arrondis */
+  z-index: 1000; /* S'assure que l'élément est au-dessus des autres */
+  width: 21.25vw; /* Largeur du panneau */
+  height: 780px; /* Hauteur maximale, évite le débordement */
+  overflow-y: none; /* Barre de défilement si le contenu dépasse */
+}
+
+/* Bouton Appliquer */
+.apply-filters {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 92px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+#filters-panel fieldset h4, #filters-panel fieldset h5{
+  margin-bottom: 12px;
+  padding-left: 0px!important;
+  margin-left: 0px!important;
+  color: black;
+}
+
+#filters-panel fieldset{
+  margin-bottom: 24px;
+}
+/* Taille réduite pour les checkboxes */
+#filters-panel input[type="checkbox"] {
+  width: 18px; /* Réduit la taille des checkboxes */
+  height: 18px; /* Réduit la taille des checkboxes */
+  margin-right: 8px; /* Espacement entre la checkbox et le texte */
+  vertical-align: middle; /* Aligne la checkbox verticalement */
+}
+
+/* Champs de saisie pour les filtres */
+#filters-panel input[type="number"] {
+  width: calc(50% - 10px); /* Largeur de moitié avec un espacement entre les champs */
+  padding: 10px;
+  margin-right: 10px; /* Espacement entre les champs de saisie */
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+#filters-panel fieldset p{
+  color: black;
+}
+
+#filtre-tarif{
+  display: flex;
+  gap:16px;
+  align-items: center;
+}
+
+#filtre-tarif-base-selection::placeholder {
+  color: grey; /* Couleur grise pour le texte du placeholder */
 }

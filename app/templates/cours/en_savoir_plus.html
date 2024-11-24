@@ -1,15 +1,29 @@
-{% extends 'base.html' %}
+{% extends 'base_recherche.html' %}
 
 {% block title %}
-  Template de base
+  Détails du Coach
 {% endblock %}
 
-{% block content%}
+{% block content %}
+<div class="background-photo">
+    <div class="content-overlay">
+        <div class="coach-details">
+        <div class="coach-header">
+            <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }}">
+            <h1>{{ coach['prenom'] }} {{ coach['nom'] }}, coach de tennis de table</h1>
+            <p class="city">{{ coach['ville'] }}</p>
+            <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
+            <p class="langue">{{ coach['langue'] }}</p>
+        </div>
+        <div class="coach-body">
+            <h2>À propos de {{ coach['prenom'] }} {{ coach['nom'] }}</h2>
+            <p>{{ coach['biographie'] }}</p>
+            
+            <h2>À propos du cours</h2>
+            <p>{{ coach['description'] }}</p>
 
-
-
-<!--<td>{{ coach['description'] }}</td>
-              <td>{{ coach['disponibilites'] }}</td>
-              <td>{{ coach['canton'] }}</td>!-->
-
+            <h3>Disponibilités</h3>
+            <p>{{ coach['disponibilites'] }}</p>
+        </div>
+        </div>
 {% endblock %}

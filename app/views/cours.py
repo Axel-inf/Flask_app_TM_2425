@@ -31,29 +31,74 @@ def load_logged_in_user():
 def before_request():
     load_logged_in_user()
 
-# Définir la route `recherche`
 @cours_bp.route('/recherche', methods=['GET', 'POST'])
 def recherche():
-    if g.user:
-        db = get_db()
-        cursor = db.cursor()
+    search_query = request.form.get('search_query', '').strip().lower()
+    filtre_tarif_min = request.form.get('filtre_tarif_min', '').strip()
+    filtre_tarif_max = request.form.get('filtre_tarif_max', '').strip()
+    filtre_region = request.form.getlist('region')
+    filtre_langue = request.form.getlist('langue')
+    
+    # Connexion à la base de données
+    db = get_db()
+    cursor = db.cursor()
 
-        # Récupérer les coachs ayant proposé des cours
-        cursor.execute(
-            """
-            SELECT p.chemin_vers_image, p.nom, p.prenom, p.ville, c.tarif, p.langue
-            FROM Coachs co
-            JOIN Personnes p ON co.id_personne = p.id_personne
-            JOIN Cours c ON co.FK_idcours = c.id_cours
-            WHERE co.FK_idcours IS NOT NULL
-            """
-        )
-        results = cursor.fetchall()
-        close_db()
+    # Construction de la requête SQL avec les filtres
+    query = """
+        SELECT Personnes.*, Coachs.*, Cours.description, Cours.tarif, Cours.disponibilites
+        FROM Personnes
+        JOIN Coachs ON Personnes.id_personne = Coachs.id_personne
+        JOIN Cours ON Coachs.FK_idcours = Cours.id_cours
+        WHERE Coachs.FK_idcours IS NOT NULL
+    """
+    params = []
 
-        return render_template('cours/recherche.html', coachs=results, profile_image=g.chemin_image, role=g.role)
-            
-    else:
-        print("Redirection vers la page d'accueil")
-        return render_template('home/index.html')
+    if search_query:
+        query += " AND (LOWER(Personnes.nom) LIKE ? OR LOWER(Personnes.prenom) LIKE ?)"
+        params.extend([f'%{search_query}%', f'%{search_query}%'])
+
+    if filtre_tarif_min and filtre_tarif_max:
+        query += " AND Cours.tarif BETWEEN ? AND ?"
+        params.extend([filtre_tarif_min, filtre_tarif_max])
+
+    if filtre_region:
+        query += " AND Personnes.canton IN ({})".format(','.join('?' for _ in filtre_region))
+        params.extend(filtre_region)
+
+    if filtre_langue:
+        query += " AND Personnes.langue IN ({})".format(','.join('?' for _ in filtre_langue))
+        params.extend(filtre_langue)
+
+    cursor.execute(query, params)
+    coachs = cursor.fetchall()
+    close_db()
+
+    return render_template('cours/recherche.html', coachs=coachs, profile_image=g.chemin_image, role=g.role)
+
+
+
+
+
+@cours_bp.route('/en_savoir_plus/<int:coach_id>', methods=['GET'])
+def en_savoir_plus(coach_id):
+    # Connexion à la base de données
+    db = get_db()
+    cursor = db.cursor()
+
+    # Requête pour récupérer les détails du coach
+    cursor.execute("""
+        SELECT Personnes.*, Coachs.*, Cours.description, Cours.tarif, Cours.disponibilites
+        FROM Personnes
+        JOIN Coachs ON Personnes.id_personne = Coachs.id_personne
+        JOIN Cours ON Coachs.FK_idcours = Cours.id_cours
+        WHERE Personnes.id_personne = ?
+    """, (coach_id,))
+    coach = cursor.fetchone()
+    close_db()
+
+    if not coach:
+        flash("Coach non trouvé.", "error")
+        return redirect(url_for('cours.recherche'))
+
+    return render_template('cours/en_savoir_plus.html', coach=coach)
 

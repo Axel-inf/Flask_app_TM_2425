@@ -4,52 +4,91 @@
   Template de base
 {% endblock %}
 
-{% block content%}
-{% if coachs %}
+{% block content %}
 <div class="background-photo">
   <div class="content-overlay">
     <h1 id="titre-recherche">Le coach qu’il vous faut</h1>
 
     <div class="top-buttons">
       <div class="search-container">
-        <div class="search-wrapper">
-          <button class="search-btn">
+        <form method="POST" class="search-wrapper">
+          <button type="submit" class="search-btn">
             <img src="{{url_for('static', filename='imgs/icone_barre_recherche_.svg') }}" alt="Recherche" class="search-icon">
           </button>
-          <input type="text" class="search-bar" placeholder="Trouvez le coach dont vous rêvez">
-        </div>
+          <input type="text" name="search_query" class="search-bar" placeholder="Trouvez le coach dont vous rêvez">
+        </form>
       </div>
 
-      <button class="filter-btn">
+      <!-- Bouton pour afficher/masquer le panneau de filtres -->
+      <button id="toggle-filters-btn" class="filter-btn">
         <img src="{{url_for('static', filename='imgs/icone_filtres.svg') }}" alt="Filtre" class="filter-icon">
         <span>Filtres</span>
       </button>
     </div>
 
-    <div class="coach-cards">
-      {% for coach in coachs %}
-      <div class="coach-card">
-        <div class="coach-photo">
-          <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }}">
-        </div>
-        <div class="coach-info">
-          <h6>{{ coach['nom'] }} {{ coach['prenom'] }}</h6>
-          <p class="city">{{ coach['ville'] }}</p>
-          <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
-          <p class="langue">{{ coach['langue'] }}</p>
-          <div class="card-buttons">
-            <button class="more-btn">EN SAVOIR PLUS</button>
+    <!-- Panneau des filtres -->
+    <form method="POST" id="filters-panel" class="hidden">
+        <fieldset>
+          <h4>Région</h4>
+          <p class="dispo"><input type="checkbox" name="region" value="Vaud"> Vaud</p>
+          <p class="dispo"><input type="checkbox" name="region" value="Valais"> Valais</p>
+          <p class="dispo"><input type="checkbox" name="region" value="Genève"> Genève</p>
+          <p class="dispo"><input type="checkbox" name="region" value="Fribourg"> Fribourg</p>
+          <p class="dispo"><input type="checkbox" name="region" value="Neuchâtel"> Neuchâtel</p>
+          <p class="dispo"><input type="checkbox" name="region" value="Jura"> Jura</p>
+        </fieldset>
+        
+        <fieldset>
+          <h4>Tarif horaire</h4>
+          <div id="filtre-tarif">
+            <h5>De</h5> 
+            <input type="number" id="filtre_tarif_min" name="filtre_tarif_min" min="0" max="1000" step="1" placeholder="0 CHF">
+            <h5>à</h5> 
+            <input type="number" id="filtre_tarif_max" name="filtre_tarif_max" min="0" max="1000" step="1" placeholder="60 CHF">
           </div>
-        </div>
-      </div>
-      {% endfor %}
+        </fieldset>
+        
+        <fieldset>
+          <h4>Langue</h4>
+          <p class="dispo"><input type="checkbox" name="langue" value="Français"> Français</p>
+          <p class="dispo"><input type="checkbox" name="langue" value="Allemand"> Allemand</p>
+          <p class="dispo"><input type="checkbox" name="langue" value="Anglais"> Anglais</p>
+          <p class="dispo"><input type="checkbox" name="langue" value="Autres"> Autres</p>
+        </fieldset>
+        
+        <button type="submit" id="apply-filters-btn" class="apply-filters">Appliquer</button>
+    </form>
+
+    <div class="coach-cards">
+      {% if coachs %}
+        {% for coach in coachs %}
+          <div class="coach-card">
+            <div class="coach-photo">
+              <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }} ">
+            </div>
+            <div class="coach-info">
+              <h6>{{ coach['nom'] }} {{ coach['prenom'] }}</h6>
+              <p class="city">{{ coach['ville'] }}</p>
+              <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
+              <p class="langue">{{ coach['langue'] }}</p>
+              <div class="card-buttons">
+                <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" class="more-btn">EN SAVOIR PLUS</a>              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>Aucun coach trouvé pour ces critères.</p>
+      {% endif %}
     </div>
 
   </div>
 </div>
 
-    {% else %}
-        <p>Aucun cours disponible pour le moment.</p>
-    {% endif %}
+<script>
+  document.getElementById('toggle-filters-btn').addEventListener('click', () => {
+    const filtersPanel = document.getElementById('filters-panel');
+    filtersPanel.classList.toggle('hidden'); // Ajoute ou retire la classe "hidden"
+  });
+</script>
 
 {% endblock %}
