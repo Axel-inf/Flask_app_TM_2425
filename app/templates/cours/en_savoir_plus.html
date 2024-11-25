@@ -7,23 +7,94 @@
 {% block content %}
 <div class="background-photo">
     <div class="content-overlay">
-        <div class="coach-details">
-        <div class="coach-header">
-            <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }}">
+        <div class="coach-text">
             <h1>{{ coach['prenom'] }} {{ coach['nom'] }}, coach de tennis de table</h1>
-            <p class="city">{{ coach['ville'] }}</p>
-            <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
-            <p class="langue">{{ coach['langue'] }}</p>
-        </div>
-        <div class="coach-body">
             <h2>À propos de {{ coach['prenom'] }} {{ coach['nom'] }}</h2>
             <p>{{ coach['biographie'] }}</p>
-            
             <h2>À propos du cours</h2>
             <p>{{ coach['description'] }}</p>
 
-            <h3>Disponibilités</h3>
-            <p>{{ coach['disponibilites'] }}</p>
+            <div class="avis-section">
+                <h2>Avis</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat.</p>
+                
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat.</p>
+                
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip ex ea commodo consequat.</p>
+            </div>
+
+            <h2>Coachs similaires à John Doe</h2>
         </div>
+
+        <div class="coach-cards">
+            {% if coachs %}
+                {% for coach in coachs %}
+                    <div class="coach-card">
+                        <div class="coach-photo">
+                            <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }}">
+                        </div>
+                        <div class="coach-info">
+                            <h6>{{ coach['prenom'] }} {{ coach['nom'] }}</h6>
+                            <p class="city">{{ coach['ville'] }}</p>
+                            <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
+                            <p class="langue">{{ coach['langue'] }}</p>
+                            <div class="card-buttons">
+                                <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" class="more-btn">EN SAVOIR PLUS</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Pas de coachs similaires trouvés</p>
+            {% endif %}
         </div>
+        
+
+        <div class="coach-card" id="coach-card-detailed">
+            <div class="coach-photo">
+              <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }} ">
+            </div>
+            <div class="coach-info-detailed">
+                <div class="top-section">
+                    <div>
+                        <h6>{{ coach['prenom'] }} {{ coach['nom'] }}</h6>
+                    </div>
+                    <div class="evaluation">
+                    4.4
+                    <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                    </div>
+                </div>
+
+                <div class="bottom-section">
+                    <div class="city">
+                        <p>Lieu</p>
+                        <p>{{ coach['ville'] }}, {{ coach['canton'] }}</p>
+                    </div>
+
+                    <div class="tarif">
+                        <p>Tarif</p>
+                        <p>{{ coach['tarif'] }} CHF/h</p>
+                    </div>
+
+                    <div class="langue">
+                        <p>Langue</p>
+                        <p>{{ coach['langue'] }}</p>
+                    </div>
+
+                    <div class="disponibilites">
+                        <p>Disponibilités : {{ coach['disponibilites'] }}</p>
+                    </div>
+
+                    <div class="card-buttons">
+                        <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" class="more-btn">CONTACTER <img src="{{url_for('static', filename='imgs/icone_contacter.svg') }}"/></a>
+                    </div>
+                </div>
+            </div>
+          </div>
 {% endblock %}

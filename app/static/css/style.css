@@ -922,6 +922,7 @@ margin-top: 32px;
   display: flex;
   justify-content: start;
   flex-direction: column;
+  margin-bottom: 32px;
 }
 
 #profile-grand-perso {
@@ -1363,7 +1364,7 @@ fieldset h5 {
   flex-wrap: wrap;
   gap: 2.8vw;
   justify-content: center;
-  margin: 80px;
+  margin: 80px 0px;
 
 }
 
@@ -1490,4 +1491,73 @@ fieldset h5 {
 
 #filtre-tarif-base-selection::placeholder {
   color: grey; /* Couleur grise pour le texte du placeholder */
+}
+
+
+
+/*
+-----------------   RECHERCHE DE COACHS ------------------
+*/
+#coach-card-detailed{
+  position: absolute;
+  top: 136px;
+  right: 80px;
+}
+
+.coach-text{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  margin-left: 80px;
+  margin-top: 136px;
+  max-width: 58.34vw;
+}
+
+.coach-text h1, .coach-text p{
+  color: white;
+  margin-bottom: 28px;
+}
+
+.coach-text h2{
+  margin-bottom: 16px;
+}
+
+.coach-text h2:last-child{
+  margin-bottom: -64px;
+}
+
+.avis-section p {
+  background-color: var(--primary);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.coach-info-detailed {
+  display: flex;
+  flex-direction: column;
+  padding: 0.84vw;
+}
+
+.top-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.evaluation{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+
+.city, .tarif, .langue, .disponibilites{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }

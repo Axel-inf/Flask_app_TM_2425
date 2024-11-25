@@ -67,12 +67,13 @@
               <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }} ">
             </div>
             <div class="coach-info">
-              <h6>{{ coach['nom'] }} {{ coach['prenom'] }}</h6>
+              <h6>{{ coach['prenom'] }} {{ coach['nom'] }} </h6>
               <p class="city">{{ coach['ville'] }}</p>
               <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
               <p class="langue">{{ coach['langue'] }}</p>
               <div class="card-buttons">
-                <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" class="more-btn">EN SAVOIR PLUS</a>              </div>
+                <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" class="more-btn">EN SAVOIR PLUS</a>
+              </div>
             </div>
           </div>
         {% endfor %}

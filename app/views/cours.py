@@ -94,11 +94,23 @@ def en_savoir_plus(coach_id):
         WHERE Personnes.id_personne = ?
     """, (coach_id,))
     coach = cursor.fetchone()
+
+    # Requête pour récupérer les coachs similaires
+    coachs_similaires = db.execute("""
+        SELECT Personnes.*, Coachs.*, Cours.tarif
+        FROM Personnes
+        JOIN Coachs ON Personnes.id_personne = Coachs.id_personne
+        JOIN Cours ON Coachs.FK_idcours = Cours.id_cours
+        WHERE Personnes.langue = ? AND Personnes.id_personne != ?
+    """, (coach['langue'], coach_id)).fetchall()
+
     close_db()
 
     if not coach:
         flash("Coach non trouvé.", "error")
         return redirect(url_for('cours.recherche'))
 
-    return render_template('cours/en_savoir_plus.html', coach=coach)
+    return render_template('cours/en_savoir_plus.html', coach=coach, coachs=coachs_similaires)
+
+
 
