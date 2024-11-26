@@ -85,9 +85,9 @@ def en_savoir_plus(coach_id):
     db = get_db()
     cursor = db.cursor()
 
-    # Requête pour récupérer les détails du coach
+    # Requête pour récupérer les détails du coach et du cours
     cursor.execute("""
-        SELECT Personnes.*, Coachs.*, Cours.description, Cours.tarif, Cours.disponibilites
+        SELECT Personnes.*, Coachs.*, Cours.*
         FROM Personnes
         JOIN Coachs ON Personnes.id_personne = Coachs.id_personne
         JOIN Cours ON Coachs.FK_idcours = Cours.id_cours
@@ -110,7 +110,9 @@ def en_savoir_plus(coach_id):
         flash("Coach non trouvé.", "error")
         return redirect(url_for('cours.recherche'))
 
-    return render_template('cours/en_savoir_plus.html', coach=coach, coachs=coachs_similaires)
+    # Passer les informations du cours au template
+    return render_template('cours/en_savoir_plus.html', coach=coach, coachs=coachs_similaires, cours=coach)
+
 
 
 

@@ -64,10 +64,20 @@
         {% for coach in coachs %}
           <div class="coach-card">
             <div class="coach-photo">
+              <div class="card-buttons-contacter-little">
+                <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" class="more-btn">CONTACTER <img src="{{url_for('static', filename='imgs/icone_contacter.svg') }}"/></a>
+              </div>
               <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }} ">
             </div>
             <div class="coach-info">
-              <h6>{{ coach['prenom'] }} {{ coach['nom'] }} </h6>
+              <div class="coach-info-head">
+                <h6>{{ coach['prenom'] }} {{ coach['nom'] }} </h6>
+                <div class="evaluation-right">
+                  4.4
+                  <img id="little-star" src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                </div>
+              </div>
+              
               <p class="city">{{ coach['ville'] }}</p>
               <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
               <p class="langue">{{ coach['langue'] }}</p>

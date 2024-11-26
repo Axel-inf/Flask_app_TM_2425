@@ -1493,7 +1493,47 @@ fieldset h5 {
   color: grey; /* Couleur grise pour le texte du placeholder */
 }
 
+.coach-info-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
+#little-star {
+  width: 18px;
+  height: 19px;
+}
+
+.card-buttons-contacter-little {
+  position: absolute;
+  top: 50%;
+  right: 8px; 
+}
+
+.card-buttons-contacter-little a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary); /* Couleur d'un bouton */
+  color: white;
+  border: none;
+  padding: 8px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 100%;
+  justify-self: center;
+  width: 100%;
+  text-decoration: none;
+  gap: 12px;
+}
+
+.card-buttons-contacter-little a img {
+  width: 24px;
+  height: 24px;
+}
 
 /*
 -----------------   RECHERCHE DE COACHS ------------------
@@ -1553,6 +1593,7 @@ fieldset h5 {
   font-family: "inter", sans-serif;
   font-size: 16px;
   font-weight: 400;
+  gap: 4px;
 }
 
 
@@ -1560,4 +1601,76 @@ fieldset h5 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
+}
+
+/* Style des boutons */
+.card-buttons-contacter {
+  display: flex;
+  margin-top: 0.84vw;
+}
+
+.card-buttons-contacter a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--secondary); /* Couleur d'un bouton */
+  color: white;
+  border: none;
+  padding: 0.56vw 5.03472vw;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 100%;
+  justify-self: center;
+  width: 100%;
+  text-decoration: none;
+  gap: 12px;
+}
+
+.evaluation-right {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  gap: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.disponibilites {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.jour {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* Taille des carrés */
+  height: 40px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
+
+.jour.disponible {
+  background-color: var(--secondary); /* Jour disponible en gris */
+}
+
+.jour.non-disponible {
+  background-color: red; /* Jour non disponible en rouge */
 }
