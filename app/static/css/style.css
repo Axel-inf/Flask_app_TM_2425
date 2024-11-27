@@ -1332,7 +1332,7 @@ fieldset h5 {
   background-color: var(--secondary); /* Fond légèrement transparent */
   border-radius: 32px; /* Coins arrondis */
   border: none;
-  padding: 0.84vw 1.0416vw 16px 0.84vw;
+  padding: 0.84vw 1.0416vw 0.84vw 1.0416vw;
   color: black; /* Couleur du texte */
   cursor: pointer;
   height: 56px;
@@ -1447,7 +1447,6 @@ fieldset h5 {
   border-radius: 8px; /* Coins arrondis */
   z-index: 1000; /* S'assure que l'élément est au-dessus des autres */
   width: 21.25vw; /* Largeur du panneau */
-  height: 780px; /* Hauteur maximale, évite le débordement */
   overflow-y: none; /* Barre de défilement si le contenu dépasse */
 }
 
@@ -1466,15 +1465,12 @@ fieldset h5 {
 }
 
 #filters-panel fieldset h4, #filters-panel fieldset h5{
-  margin-bottom: 12px;
   padding-left: 0px!important;
   margin-left: 0px!important;
   color: black;
 }
 
-#filters-panel fieldset{
-  margin-bottom: 24px;
-}
+
 /* Taille réduite pour les checkboxes */
 #filters-panel input[type="checkbox"] {
   width: 18px; /* Réduit la taille des checkboxes */
@@ -1498,8 +1494,9 @@ fieldset h5 {
 
 #filtre-tarif{
   display: flex;
-  gap:16px;
+  gap: 16px;
   align-items: center;
+  margin-top: 12px;
 }
 
 #filtre-tarif-base-selection::placeholder {
