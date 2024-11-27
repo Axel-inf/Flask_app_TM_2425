@@ -88,18 +88,19 @@
                     </div>
 
                     <div class="disponibilites">
-                        {% set jours = ['L', 'M', 'M', 'J', 'V', 'S', 'D'] %}
-                        {% set jours_long = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'] %}
-                        {% set disponibilites = cours['disponibilites'].split(',') %}
                         <p>Disponibilités :</p>
-                        {% for i in range(0, 7) %}
-                        <div class="jour {% if jours_long[i] in disponibilites %}disponible{% else %}non-disponible{% endif %}">
-                            {{ jours[i] }}
+                        <div class="jour-container">
+                          {% set jours = ['L', 'M', 'M', 'J', 'V', 'S', 'D'] %}
+                          {% set jours_long = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'] %}
+                          {% set disponibilites = cours['disponibilites'].split(',') %}
+                          {% for i in range(0, 7) %}
+                            <div class="jour {% if jours_long[i] in disponibilites %}disponible{% else %}non-disponible{% endif %}">
+                              {{ jours[i] }}
+                            </div>
+                          {% endfor %}
                         </div>
-                        {% endfor %}
-
-
                     </div>
+                      
 
                     <div class="card-buttons-contacter">
                         <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" class="more-btn">CONTACTER <img src="{{url_for('static', filename='imgs/icone_contacter.svg') }}"/></a>

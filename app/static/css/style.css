@@ -59,7 +59,8 @@ ul{
 --shadow-6dp: 0px 4px 8px rgba(255, 255, 255, 0.15);
 --hover-overlay:rgba(0,0,0,0.04);
 --disabled:rgba(0,0,0,0.38);
---disabled-white:rgba(255,255,255,0.38)
+--disabled-white:rgba(255,255,255,0.38);
+--red: #FA1C1C;
 }
 
 #header {
@@ -1365,7 +1366,6 @@ fieldset h5 {
   gap: 2.8vw;
   justify-content: center;
   margin: 80px 0px;
-
 }
 
 /* Carte de chaque coach */
@@ -1377,17 +1377,28 @@ fieldset h5 {
   color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   position: relative;
+  display: flex;
+  flex-direction: column; /* Assurer un alignement vertical */
+}
+
+/* Conteneur de la photo pour assurer des proportions fixes */
+.coach-photo {
+  width: 100%;
+  height: 20.138vw; /* Fixe une hauteur pour les images */
+  overflow: hidden;
 }
 
 .coach-photo img {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
 }
 
 .coach-info {
   padding: 0.84vw;
+  flex-grow: 1; /* Assurer que cette section occupe l'espace restant */
 }
+
 .coach-info .city,
 .coach-info .tarif,
 .coach-info .langue {
@@ -1398,7 +1409,9 @@ fieldset h5 {
 .card-buttons {
   display: flex;
   margin-top: 0.84vw;
+  justify-content: center; /* Centrer les boutons horizontalement */
 }
+
 
 .card-buttons a {
   display: flex;
@@ -1536,7 +1549,7 @@ fieldset h5 {
 }
 
 /*
------------------   RECHERCHE DE COACHS ------------------
+-----------------   EN SAVOIR PLUS ------------------
 */
 #coach-card-detailed{
   position: absolute;
@@ -1576,7 +1589,7 @@ fieldset h5 {
 .coach-info-detailed {
   display: flex;
   flex-direction: column;
-  padding: 0.84vw;
+  padding: 0.56vw 1.67vw 0.834vw;
 }
 
 .top-section{
@@ -1638,39 +1651,40 @@ fieldset h5 {
   gap: 4px;
 }
 
-
-
-
-
-
-
-
-
-
-
 .disponibilites {
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  flex-direction: column;
+}
+
+.jour-container {
+  display: flex;
+  gap: 10px; /* Espace entre les carrés */
+  justify-content: space-between;
+  margin-top: 14px;
+  margin-bottom: 16px;
+  width: 100%;
 }
 
 .jour {
+  width: 1.67vw; /* Taille des carrés */
+  height: 1.67vw;;
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 40px; /* Taille des carrés */
-  height: 40px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 5px;
+  justify-content: center;
+}
+
+.disponible {
+  background-color: var(--secondary);
   color: white;
-  text-align: center;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 }
 
-.jour.disponible {
-  background-color: var(--secondary); /* Jour disponible en gris */
-}
-
-.jour.non-disponible {
-  background-color: red; /* Jour non disponible en rouge */
+.non-disponible {
+  background-color: var(--red);
+  color: white;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 }
