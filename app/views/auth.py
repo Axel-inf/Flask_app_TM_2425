@@ -134,11 +134,19 @@ def load_logged_in_user():
 
         userrole = db.execute('SELECT * FROM Coachs WHERE id_personne = ?', (user_id,)).fetchone()
         g.role = "Coach" if userrole else "Joueur"
+        course = db.execute("""
+            SELECT id_cours 
+            FROM Coachs Co
+            JOIN Cours C ON Co.FK_idcours = C.id_cours
+            WHERE Co.id_personne = ?
+        """, (user_id,)).fetchone()
+
+        # Définir g.has_course en fonction de l'existence du cours
+        g.has_course = True if course else None
 
         # Utiliser la fonction utilitaire pour obtenir le chemin de l'image
         g.chemin_image = get_profile_image(user_id)
         print(f"Chemin de l'image de profil: {g.chemin_image}")  # Log de débogage
-
         close_db()
 
 

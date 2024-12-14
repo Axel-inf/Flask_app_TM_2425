@@ -54,8 +54,8 @@ def recherche():
     params = []
 
     if search_query:
-        query += " AND (LOWER(Personnes.nom) LIKE ? OR LOWER(Personnes.prenom) LIKE ?)"
-        params.extend([f'%{search_query}%', f'%{search_query}%'])
+        query += " AND (LOWER(Personnes.nom) LIKE ? OR LOWER(Personnes.prenom) LIKE ? OR LOWER(Personnes.ville) LIKE ? OR LOWER(Personnes.canton) LIKE ?)"
+        params.extend([f'%{search_query}%', f'%{search_query}%',f'%{search_query}%', f'%{search_query}%'])
 
     if filtre_tarif_min and filtre_tarif_max:
         query += " AND Cours.tarif BETWEEN ? AND ?"

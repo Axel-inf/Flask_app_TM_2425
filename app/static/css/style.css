@@ -1685,3 +1685,29 @@ fieldset h5 {
   font-size: 16px;
   font-weight: 400;
 }
+
+/*
+-----------------   PAGE D'ERREUR 404 ------------------
+*/
+
+.content-404{
+  background-color: var(--primary);
+  height: 100vh;
+  overflow-y: hidden;
+}
+.text-content-404{
+  color: white;
+  position: absolute;
+  top: 300px;
+  left: 80px;
+}
+
+.text-content-404 h1{
+  margin-bottom: 36px;
+}
+
+#illustration-404{
+  position: absolute;
+  right: 80px;
+  overflow-y: hidden;
+}

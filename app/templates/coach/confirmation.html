@@ -7,9 +7,15 @@
 {% block content %}
   <div class="grid-container-validation">
     <div class="message">
-        <h1>Cours créé!</h1>
-        <p>Votre cours a été enregistré avec succès ! Les joueurs peuvent désormais le consulter et s’y inscrire.</p>
-        <img id="validation_icon" src="{{url_for('static', filename='imgs/icone_validation.svg')}}" alt="Icône validation"/>
+        <h1>{% if request.args.get('action') == 'created' %}Cours créé!{% else %}Cours modifié!{% endif %}</h1>
+        <p>
+            {% if request.args.get('action') == 'created' %}
+                Votre cours a été enregistré avec succès ! Les joueurs peuvent désormais le consulter et s’y inscrire.
+            {% else %}
+                Votre cours a été modifié avec succès. Les joueurs peuvent désormais consulter les mises à jour.
+            {% endif %}
+        </p>
+        <img id="validation_icon" src="{{ url_for('static', filename='imgs/icone_validation.svg') }}" alt="Icône validation"/>
     </div>
   </div>
 

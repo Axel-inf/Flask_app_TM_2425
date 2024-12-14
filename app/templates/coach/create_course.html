@@ -1,71 +1,77 @@
 {% extends 'base.html' %}
 
 {% block title %}
-  Template de base
+  Création de cours
 {% endblock %}
 
-{% block content%}
+{% block content %}
 <div class="form-container">
     <img id="illustration_creation_cours" src="{{ url_for('static', filename='imgs/illustration_creation_cours.png') }}">
     <form class="inputs-creation" method="post">
-        <h1>Commencez à créer votre cours</h1>
+        {% if g.has_course %}
+            <h1>Modifiez votre cours</h1>
+        {% else %}
+            <h1>Commencez à créer votre cours</h1>
+        {% endif %}
 
+
+        <!-- Sélection du canton -->
         <h5 for="canton-select">Votre canton</h5>
-        <select id="canton-select" required name="canton"> 
-            <option value="Vaud">Vaud</option>
-            <option value="Valais">Valais</option>
-            <option value="Genève">Genève</option>
-            <option value="Fribourg">Fribourg</option>
-            <option value="Neuchâtel">Neuchâtel</option>
-            <option value="Jura">Jura</option>
+        <select id="canton-select" required name="canton">
+            {% for canton in ['Vaud', 'Valais', 'Genève', 'Fribourg', 'Neuchâtel', 'Jura'] %}
+                <option value="{{ canton }}" {% if data['canton'] == canton %}selected{% endif %}>{{ canton }}</option>
+            {% endfor %}
         </select>
 
+        <!-- Sélection de la langue -->
         <h5 for="langue-select">Votre langue</h5>
-        <select id="langue-select" required name="langue"> 
-            <option value="Français">Français</option>
-            <option value="Allemand">Allemand</option>
-            <option value="Anglais">Anglais</option>
-            <option value="Fribourg">Fribourg</option>
-            <option value="Autres">Autres</option>
+        <select id="langue-select" required name="langue">
+            {% for langue in ['Français', 'Allemand', 'Anglais', 'Fribourg', 'Autres'] %}
+                <option value="{{ langue }}" {% if data['langue'] == langue%}selected{% endif %}>{{ langue }}</option>
+            {% endfor %}
         </select>
 
-        
-        
+        <!-- Tarif -->
         <div class="input-creation" id="input-tarif">
             <h5>Votre tarif horaire (CHF)</h5>
-            <input type="number" id="tarif" name="tarif" min="0" max="1000" step="1" value="0" />
+            <input type="number" id="tarif" name="tarif" min="0" max="1000" step="1" value="{{ data['tarif'] }}" />
         </div>
-        
-        <div class="input-creation" >
-            <h5>Votre ville</h5>
-            <textarea type="ville" id="ville" name="ville" placeholder="Écrivez ici.."></textarea>
-        </div> 
-        
 
+        <!-- Ville -->
+        <div class="input-creation">
+            <h5>Votre ville</h5>
+            <textarea id="ville" name="ville" placeholder="Écrivez ici..">{{ data['ville'] }}</textarea>
+        </div>
+
+        <!-- À propos -->
         <div class="input-creation">
             <h5>À propos de vous</h5>
-            <textarea type="apropos" id="apropos" name="apropos" placeholder="Écrivez ici.."></textarea>
+            <textarea id="apropos" name="apropos" placeholder="Écrivez ici..">{{ data['apropos'] }}</textarea>
         </div>
 
-        <div class="input-creation" >
+        <!-- Description du cours -->
+        <div class="input-creation">
             <h5>Description de votre cours</h5>
-            <textarea type="description" id="description" name="description" placeholder="Écrivez ici.."></textarea>
+            <textarea id="description" name="description" placeholder="Écrivez ici..">{{ data['description'] }}</textarea>
         </div>
 
+        <!-- Disponibilités -->
         <fieldset>
             <h5>Cochez vos disponibilités</h5>
-            <p class="dispo"><input type="checkbox" name="disponibilite" value="lundi"> Lundi</p>
-            <p class="dispo"><input type="checkbox" name="disponibilite" value="mardi"> Mardi</p>
-            <p class="dispo"><input type="checkbox" name="disponibilite" value="mercredi"> Mercredi</p>
-            <p class="dispo"><input type="checkbox" name="disponibilite" value="jeudi"> Jeudi</p>
-            <p class="dispo"><input type="checkbox" name="disponibilite" value="vendredi"> Vendredi</p>
-            <p class="dispo"><input type="checkbox" name="disponibilite" value="samedi"> Samedi</p>
-            <p class="dispo"><input type="checkbox" name="disponibilite" value="dimanche"> Dimanche</p>
+            {% for jour in ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'] %}
+                <p class="dispo">
+                    <input type="checkbox" name="disponibilite" value="{{ jour }}" 
+                           {% if jour in data['disponibilites'] %}checked{% endif %}> 
+                    {{ jour.capitalize() }}
+                </p>
+            {% endfor %}
         </fieldset>
 
-        <button type="submit" class="bouton-icon">Envoyer <img src="{{ url_for('static', filename='imgs/icone_envoie_message.svg') }}"></button>
-        
+        <!-- Bouton d'envoi -->
+        <button type="submit" class="bouton-icon">
+            Envoyer 
+            <img src="{{ url_for('static', filename='imgs/icone_envoie_message.svg') }}">
+        </button>
     </form>
 </div>
-
 {% endblock %}

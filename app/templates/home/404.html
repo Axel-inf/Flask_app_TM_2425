@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_erreur.html' %}
 
 {% block title %}
   404 not found (Page non trouvée)
@@ -6,6 +6,13 @@
 
 {% block content%}
     <div class="content-404">
-      <h1>Page non trouvée, cliquez <a href="{{ url_for('home.landing_page') }}" >ici</a> pour retourner à l'accueil</h1>
+      <div class="text-content-404">
+        <h1>Oops! Cette page est introuvable</h1>
+        <a href="{{ url_for('home.landing_page') }}" class="bouton-icon">
+        ACCUEIL 
+        <img src="{{ url_for('static', filename='imgs/icone_retour_fleche.svg') }}">
+        </a>
+      </div>
+      <img id="illustration-404" src="{{ url_for('static', filename='imgs/image_erreur_404.png') }}">    
     </div>
 {% endblock %}
