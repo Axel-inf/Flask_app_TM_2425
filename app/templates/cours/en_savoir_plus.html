@@ -27,6 +27,26 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                         aliquip ex ea commodo consequat.</p>
+                
+               
+                <form class="input-avis" action="{{ url_for('home.landing_page') }}" method="post">
+                    <!-- Image de profil -->
+                    {% if g.chemin_image %}
+                        <img id="profile-petit-perso" src="{{ url_for('static', filename='uploads/' + g.chemin_image) }}" class="user-pic" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" alt="photo de profil"/>
+                    {% else %}
+                        <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}" class="user-pic" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" alt="photo de profil"/>
+                    {% endif %}
+                    
+                    <!-- Champ de texte -->
+                    <textarea id="avis" name="avis" placeholder="Ajouter un avis ..."></textarea>
+                    
+                    <!-- Bouton d'envoi -->
+                    <button type="submit" id="envoie-avis">
+                        <img src="{{ url_for('static', filename='imgs/icone_envoie_message.svg') }}" alt="envoyer">
+                    </button>
+                </form>
+                        
+        
             </div>
 
             <h2>Coachs similaires à John Doe</h2>

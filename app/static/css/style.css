@@ -1686,6 +1686,44 @@ fieldset h5 {
   font-weight: 400;
 }
 
+.input-avis{
+  display:flex;
+  align-items: center;
+  background-color: var(--secondary);
+  border-radius: 64px;
+  padding: 20px 32px 20px 16px;
+  height: 80px;
+}
+
+#avis {
+  display: flex;
+  align-items: center; /* Centre verticalement */
+  justify-content: stretch;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  color: rgba(0, 0, 0, 0.60);
+  font-family: "inter", sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  height: 40px; /* Contrôle de la hauteur */
+  padding: 0;
+}
+#avis::placeholder {
+  color: rgba(0, 0, 0, 0.60);
+  font-family: "inter", sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+}
+
+
+#envoie-avis{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 /*
 -----------------   PAGE D'ERREUR 404 ------------------
 */
