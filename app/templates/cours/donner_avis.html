@@ -6,27 +6,23 @@
 
 {% block content %}
 <div class="form-container">
-    <img id="illustration_creation_cours" src="{{ url_for('static', filename='imgs/illustration_creation_cours.png') }}">
+    <img id="illustration_creation_cours" src="{{ url_for('static', filename='imgs/illustration_feedback.png') }}">
     <form class="inputs-creation" method="post">
-        <h1>Modifiez votre cours</h1>
-        
-        <h1>Commencez à créer votre cours</h1>
-      
+        <h1>Bonjour, nous aimerions avoir votre avis sur {{ prenom }} {{ nom }}</h1>
 
-
-        <!-- Tarif -->
+        <!-- note -->
         <div class="input-creation" id="input-tarif">
-            <h5>Votre note</h5>
-            <input type="number" id="tarif" name="tarif" min="0" max="1000" step="1" />
-
-        <!-- Description du cours -->
+            <h5>Quelle note donneriez-vous à {{ prenom}} {{ nom }}</h5>
+            <input type="number" id="tarif" name="note" min="0" max="5" step="1" placeholder="Donnez votre note sur une échelle de 1 à 5."/>
+        </div>
+        <!-- Commentaire -->
         <div class="input-creation">
-            <h5>Description de votre cours</h5>
-            <textarea id="description" name="description" placeholder="Écrivez ici.."></textarea>
+            <h5>Merci de laisser un petit commentaire sur votre expérience pongiste.</h5>
+            <textarea id="description" name="commentaire" placeholder="Écrivez ici.."></textarea>
         </div>
 
         <!-- Bouton d'envoi -->
-        <button type="submit" class="bouton-icon">
+        <button type="submit" id="envoie-avis">
             Envoyer 
             <img src="{{ url_for('static', filename='imgs/icone_envoie_message.svg') }}">
         </button>

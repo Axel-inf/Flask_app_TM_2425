@@ -1717,7 +1717,7 @@ fieldset h5 {
   font-size: 19px;
 }
 
-#envoie-avis{
+#vers-avis{
   background: none;
   border: none;
   cursor: pointer;
@@ -1747,4 +1747,28 @@ fieldset h5 {
   position: absolute;
   right: 80px;
   overflow-y: hidden;
+}
+
+/*
+-----------------   PAGE POUR DONNER AVIS------------------
+*/
+
+#envoie-avis{
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px; /* Espace entre le texte et l'icône */
+  height: 5.8vh;
+  width: 12.5vw;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  background-color: var(--secondary);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: var(--shadow-6dp);
+  text-decoration: none;
 }

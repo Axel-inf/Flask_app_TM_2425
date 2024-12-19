@@ -41,14 +41,13 @@
                     <h6 id="avis">Ajouter un avis ...</h6>
                     
                     <!-- Bouton d'envoi -->
-                    <button type="submit" id="envoie-avis">
-                        <a href="{{ url_for('cours.donner_avis') }}">
+                    <button type="submit" id="vers-avis">
+                        <a href="{{ url_for('cours.donner_avis', coach_id=coach.id_personne, nom=coach.nom, prenom=coach.prenom) }}">
                             <img src="{{ url_for('static', filename='imgs/ajouter_avis.svg') }}" alt="envoyer">
                         </a>
                     </button>
                 </div>
-                        
-        
+
             </div>
 
             <h2>Coachs similaires à John Doe</h2>
