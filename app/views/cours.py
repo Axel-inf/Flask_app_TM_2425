@@ -114,5 +114,7 @@ def en_savoir_plus(coach_id):
     return render_template('cours/en_savoir_plus.html', coach=coach, coachs=coachs_similaires, cours=coach)
 
 
-
+@cours_bp.route('/donner_avis')
+def donner_avis():
+    return render_template('cours/donner_avis.html')
 

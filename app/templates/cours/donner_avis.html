@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Laisser un avis
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <img id="illustration_creation_cours" src="{{ url_for('static', filename='imgs/illustration_creation_cours.png') }}">
+    <form class="inputs-creation" method="post">
+        <h1>Modifiez votre cours</h1>
+        
+        <h1>Commencez à créer votre cours</h1>
+      
+
+
+        <!-- Tarif -->
+        <div class="input-creation" id="input-tarif">
+            <h5>Votre note</h5>
+            <input type="number" id="tarif" name="tarif" min="0" max="1000" step="1" />
+
+        <!-- Description du cours -->
+        <div class="input-creation">
+            <h5>Description de votre cours</h5>
+            <textarea id="description" name="description" placeholder="Écrivez ici.."></textarea>
+        </div>
+
+        <!-- Bouton d'envoi -->
+        <button type="submit" class="bouton-icon">
+            Envoyer 
+            <img src="{{ url_for('static', filename='imgs/icone_envoie_message.svg') }}">
+        </button>
+    </form>
+</div>
+{% endblock %}

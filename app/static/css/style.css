@@ -1696,9 +1696,7 @@ fieldset h5 {
 }
 
 #avis {
-  display: flex;
-  align-items: center; /* Centre verticalement */
-  justify-content: stretch;
+  flex-grow: 1;
   border: none;
   background-color: transparent;
   resize: none;
@@ -1707,16 +1705,17 @@ fieldset h5 {
   font-family: "inter", sans-serif;
   font-size: 19px;
   font-weight: 700;
-  height: 40px; /* Contrôle de la hauteur */
-  padding: 0;
+  height: 40px; /* Hauteur totale du champ */
+  line-height: 40px; /* Hauteur de ligne égale à la hauteur totale */
+  padding: 0; /* Pas de marges internes */
 }
+
 #avis::placeholder {
   color: rgba(0, 0, 0, 0.60);
   font-family: "inter", sans-serif;
   font-weight: 700;
   font-size: 19px;
 }
-
 
 #envoie-avis{
   background: none;
