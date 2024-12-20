@@ -124,7 +124,7 @@ def donner_avis(coach_id, nom, prenom):
     if request.method == 'POST':
         # Méthode POST : Traite et insère l'avis dans la base de données
         commentaire = request.form.get('commentaire')
-        note = int(request.form.get('note', 0))
+        note = float(request.form.get('note', 0))
         date_envoi = datetime.now().strftime('%Y-%m-%d %H:%M:%S')  # Date au format AAAA-MM-JJ HH:MM:SS
 
         client_id = session.get('user_id')  # ID de l'utilisateur connecté
@@ -147,7 +147,9 @@ def donner_avis(coach_id, nom, prenom):
         db.commit()
 
         flash("Votre avis a été enregistré avec succès.", "success")
-        return redirect(url_for('cours.en_savoir_plus', coach_id=coach_id))
+        return redirect(url_for('cours.validation_avis', coach_id=coach_id))
 
 
-
+@cours_bp.route('/validation_avis/<int:coach_id>')
+def validation_avis(coach_id):
+    return render_template('cours/validation_avis.html', coach_id=coach_id)

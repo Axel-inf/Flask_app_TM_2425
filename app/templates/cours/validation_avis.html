@@ -1,0 +1,22 @@
+{% extends 'base_auth.html' %}
+
+{% block title %}
+  Avis envoyé
+{% endblock %}
+
+{% block content %}
+<div class="container-validation-avis">
+    <div class="message-avis">
+        <h1>Avis envoyé</h1>
+        <p>Nous vous remercions pour votre avis. Cela aidera à améliorer notre plateforme. Merci beaucoup !</p>
+        <img id="validation_icon" src="{{url_for('static', filename='imgs/icone_validation_fonce.svg')}}" alt="Icône validation"/>
+        <div>
+            <a href="{{ url_for('home.landing_page') }}"  id="boutton-accueil-avis">ACCUEIL</a>
+        </div>
+    </div>
+    <div id="email_envoye">
+        <img src="{{url_for('static', filename='imgs/email_envoye.png')}}" alt="email envoyé"/>
+    </div>
+</div>
+
+{% endblock %}

@@ -81,8 +81,8 @@
               <p class="city">{{ coach['ville'] }}</p>
               <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
               <p class="langue">{{ coach['langue'] }}</p>
-              <div class="card-buttons">
-                <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" class="more-btn">EN SAVOIR PLUS</a>
+              <div>
+                <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" id="more-btn">EN SAVOIR PLUS</a>
               </div>
             </div>
           </div>
