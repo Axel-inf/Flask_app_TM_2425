@@ -1569,12 +1569,6 @@ fieldset h5 {
   margin-bottom: -64px;
 }
 
-.avis-section p {
-  background-color: var(--primary);
-  padding: 16px;
-  border-radius: 8px;
-}
-
 .coach-info-detailed {
   display: flex;
   flex-direction: column;
@@ -1678,6 +1672,65 @@ fieldset h5 {
   font-weight: 400;
 }
 
+/*
+-----------------   EN SAVOIR PLUS/section avis des clients ------------------
+*/
+
+.avis-section{
+  width: 100%;
+}
+.commentaire{
+  background-color: var(--primary);
+  border: white;
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.ligne-haut-avis{
+  display: flex;
+  justify-content: space-between;
+}
+
+.infos-client-avis{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.infos-client-avis h6{
+  color: white;
+}
+
+.note-client-sur-coach{
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  align-items: center;
+}
+
+.note-client-sur-coach span{
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+}
+.details-commentaire{
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+  gap: 8px;
+}
+
+/*
+-----------------   EN SAVOIR PLUS/section ajouter un avis ------------------
+*/
 .input-avis{
   display:flex;
   align-items: center;
@@ -1713,6 +1766,19 @@ fieldset h5 {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.coach-similaires-titres{
+  margin-top: 260px;
+  margin-left: 80px;
+}
+/* Conteneur des cartes de coach */
+.coach-cards-similaires {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.8vw;
+  justify-content: center;
+  margin: 16px 0px;
 }
 
 /*

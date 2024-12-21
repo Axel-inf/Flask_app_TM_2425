@@ -56,7 +56,7 @@ def recherche():
 
     if search_query:
         query += " AND (LOWER(Personnes.nom) LIKE ? OR LOWER(Personnes.prenom) LIKE ? OR LOWER(Personnes.ville) LIKE ? OR LOWER(Personnes.canton) LIKE ?)"
-        params.extend([f'%{search_query}%', f'%{search_query}%',f'%{search_query}%', f'%{search_query}%'])
+        params.extend([f'%{search_query}%', f'%{search_query}%', f'%{search_query}%', f'%{search_query}%'])
 
     if filtre_tarif_min and filtre_tarif_max:
         query += " AND Cours.tarif BETWEEN ? AND ?"
@@ -72,9 +72,30 @@ def recherche():
 
     cursor.execute(query, params)
     coachs = cursor.fetchall()
+
+    # Récupérer les moyennes des notes pour chaque coach
+    coachs_with_ratings = []
+    for coach in coachs:
+        coach_id = coach['id_personne']
+        moyenne_note = db.execute("""
+            SELECT AVG(Evaluer.note) as moyenne
+            FROM Evaluer
+            WHERE Evaluer.FK_idpersonnecoach = ?
+        """, (coach_id,)).fetchone()['moyenne']
+        
+        # Si aucune note n'est trouvée, on met la moyenne à 0
+        if moyenne_note is None:
+            moyenne_note = 0
+        
+        coachs_with_ratings.append({
+            **coach,
+            'moyenne_note': moyenne_note  # Ajoutez la moyenne au coach
+        })
+
     close_db()
 
-    return render_template('cours/recherche.html', coachs=coachs, profile_image=g.chemin_image, role=g.role)
+    return render_template('cours/recherche.html', coachs=coachs_with_ratings, profile_image=g.chemin_image, role=g.role)
+
 
 
 
@@ -96,6 +117,10 @@ def en_savoir_plus(coach_id):
     """, (coach_id,))
     coach = cursor.fetchone()
 
+    if not coach:
+        flash("Coach non trouvé.", "error")
+        return redirect(url_for('cours.recherche'))
+
     # Requête pour récupérer les coachs similaires
     coachs_similaires = db.execute("""
         SELECT Personnes.*, Coachs.*, Cours.tarif
@@ -105,14 +130,33 @@ def en_savoir_plus(coach_id):
         WHERE Personnes.langue = ? AND Personnes.id_personne != ?
     """, (coach['langue'], coach_id)).fetchall()
 
+    # Requête pour récupérer les avis du coach
+    commentaires = db.execute("""
+        SELECT Evaluer.commentaire, Evaluer.note, Evaluer.date, Personnes.nom, Personnes.prenom, Personnes.chemin_vers_image
+        FROM Evaluer
+        JOIN Personnes ON Evaluer.FK_idpersonneclient = Personnes.id_personne
+        WHERE Evaluer.FK_idpersonnecoach = ?
+        ORDER BY Evaluer.date DESC
+    """, (coach_id,)).fetchall()
+
+    # Requête pour calculer la moyenne des notes
+    moyenne_note = db.execute("""
+        SELECT AVG(Evaluer.note) as moyenne
+        FROM Evaluer
+        WHERE Evaluer.FK_idpersonnecoach = ?
+    """, (coach_id,)).fetchone()['moyenne']
+
     close_db()
 
-    if not coach:
-        flash("Coach non trouvé.", "error")
-        return redirect(url_for('cours.recherche'))
-
-    # Passer les informations du cours au template
-    return render_template('cours/en_savoir_plus.html', coach=coach, coachs=coachs_similaires, cours=coach)
+    # Passer les informations au template
+    return render_template(
+        'cours/en_savoir_plus.html',
+        coach=coach,
+        coachs=coachs_similaires,
+        cours=coach,
+        commentaires=commentaires,
+        moyenne_note=moyenne_note  # Passe la moyenne des notes
+    )
 
 
 @cours_bp.route('/donner_avis/<int:coach_id>/<nom>/<prenom>', methods=['GET', 'POST'])

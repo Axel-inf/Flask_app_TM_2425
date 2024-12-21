@@ -73,10 +73,16 @@
               <div class="coach-info-head">
                 <h6>{{ coach['prenom'] }} {{ coach['nom'] }} </h6>
                 <div class="evaluation-right">
-                  4.4
-                  <img id="little-star" src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                  {% if coach['moyenne_note'] %}
+                      {{ coach['moyenne_note']|round(1) }}  <!-- Arrondir à 1 décimale -->
+                      <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                  {% else %}
+                      Pas encore de note
+                      <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                  {% endif %}
                 </div>
               </div>
+              
               
               <p class="city">{{ coach['ville'] }}</p>
               <p class="tarif">{{ coach['tarif'] }} CHF/h</p>

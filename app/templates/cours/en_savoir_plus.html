@@ -14,19 +14,33 @@
             <h2>À propos du cours</h2>
             <p>{{ coach['description'] }}</p>
 
+            
             <div class="avis-section">
                 <h2>Avis</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat.</p>
-                
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat.</p>
-                
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat.</p>
+                {% for commentaire in commentaires %}
+                    <div class="commentaire">
+                        <div class="ligne-haut-avis">
+                            <div class="infos-client-avis">
+                                <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + commentaire.chemin_vers_image) }}" alt="Photo de profil" class="avatar">
+                                <h6>{{ commentaire.prenom }} {{ commentaire.nom }}</h6>
+                            </div>
+    
+                            <div class="note-client-sur-coach">
+                                <span>{{ commentaire.note }}</span>
+                                <img id="little-star" src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                            </div>
+                        </div>
+
+                        <div class="details-commentaire">
+                            <span>{{ commentaire.commentaire }}</span>
+                            <!-- Affichage uniquement de l'année, du mois et du jour (pas l'heure) --> 
+                            <span>{{ commentaire.date.split(' ')[0] }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            
+               
+            
                 
                
                 <div class="input-avis" method="post">
@@ -49,11 +63,13 @@
                 </div>
 
             </div>
+        </div>
 
+        <div class="coach-similaires-titres">
             <h2>Coachs similaires à John Doe</h2>
         </div>
 
-        <div class="coach-cards">
+        <div class="coach-cards-similaires">
             {% if coachs %}
                 {% for coach in coachs %}
                     <div class="coach-card">
@@ -61,6 +77,15 @@
                             <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }}">
                         </div>
                         <div class="coach-info">
+                            <div class="evaluation-right">
+                                {% if moyenne_note %}
+                                    {{ moyenne_note|round(1) }}  <!-- Arrondir à 1 décimale -->
+                                    <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                                {% else %}
+                                    Pas encore de note
+                                    <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                                {% endif %}
+                            </div>
                             <h6>{{ coach['prenom'] }} {{ coach['nom'] }}</h6>
                             <p class="city">{{ coach['ville'] }}</p>
                             <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
@@ -87,9 +112,17 @@
                         <h6>{{ coach['prenom'] }} {{ coach['nom'] }}</h6>
                     </div>
                     <div class="evaluation">
-                        4.4
-                        <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                        {% if moyenne_note %}
+                            {{ moyenne_note|round(1) }}  <!-- Arrondir à 1 décimale -->
+                            <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                        {% else %}
+                            Pas encore de note
+                            <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                        {% endif %}
                     </div>
+                    
+
+
                 </div>
 
                 <div class="bottom-section">
