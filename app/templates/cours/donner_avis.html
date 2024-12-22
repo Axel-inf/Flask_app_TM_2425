@@ -12,13 +12,15 @@
 
         <!-- note -->
         <div class="input-creation" id="input-tarif">
-            <h5>Quelle note donneriez-vous à {{ prenom}} {{ nom }}</h5>
-            <input type="number" id="tarif" name="note" min="0" max="5" step="0.1" placeholder="Donnez votre note sur une échelle de 1 à 5."/>
+            <h5>Quelle note donneriez-vous à {{ prenom }} {{ nom }}</h5>
+            <input type="number" id="tarif" name="note" min="0" max="5" step="0.1" 
+                   placeholder="Donnez votre note sur une échelle de 1 à 5."
+                   value="{{ review_data.note }}" />
         </div>
         <!-- Commentaire -->
         <div class="input-creation">
             <h5>Merci de laisser un petit commentaire sur votre expérience pongiste.</h5>
-            <textarea id="description" name="commentaire" placeholder="Écrivez ici.."></textarea>
+            <textarea id="description" name="commentaire" placeholder="Écrivez ici..">{{ review_data.commentaire }}</textarea>
         </div>
 
         <!-- Bouton d'envoi -->
@@ -29,3 +31,4 @@
     </form>
 </div>
 {% endblock %}
+

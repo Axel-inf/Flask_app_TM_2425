@@ -1686,6 +1686,7 @@ fieldset h5 {
   border-radius: 8px;
   width: 100%;
   margin-bottom: 40px;
+  border: 1px solid white;
 }
 
 .ligne-haut-avis{
@@ -1727,6 +1728,85 @@ fieldset h5 {
   color: white;
   gap: 8px;
 }
+
+
+
+/*
+-----------------   EN SAVOIR PLUS/section modifier ou supprimer son avis ------------------
+*/
+
+.menu-actions-container{
+  display: flex;
+  justify-content: end;
+  margin-top: -24px;
+}
+
+.menu-actions-container {
+  position: relative; /* Ce positionnement permet au menu de se placer correctement à l'extérieur du conteneur */
+}
+
+.menu-actions-button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.menu-actions-dropdown {
+  display: none; /* Cacher par défaut */
+  position: absolute; /* Positionner le menu en dehors du flux */
+  background-image: url('/static/imgs/menu-ouvrant-avis.svg');
+  background-size: cover;
+  top: -340%;
+  left: 110%;
+  transform: translateX(-50%); /* Centrer parfaitement le menu */
+  padding: 16px;
+  z-index: 10; /* Assurer que le menu s'affiche au-dessus des autres éléments */
+  border-radius: 8px;
+  width: 116px;
+  height: 86px;
+}
+
+
+
+.menu-actions-dropdown.show {
+  display: block;  /* Afficher le menu lorsque la classe 'show' est présente */
+}
+
+
+.menu-actions-container:hover .menu-actions-dropdown,
+.menu-actions-button:focus + .menu-actions-dropdown {
+  display: block; /* Afficher le menu lors du survol du conteneur ou du focus sur le bouton */
+}
+
+
+
+.menu-action:hover {
+  background-color: var(--secondary);
+}
+
+.menu-actions-dropdown #option-menu-avis{
+  margin-bottom: 16px;
+
+}
+
+#option-1-avis{
+  margin-bottom: 20px;
+}
+
+.option-menu-avis{
+  background: none;
+  border: none;
+  color: white;
+  background-color: none;
+  font-size: 16px;
+  font-family: "inter", sans-serif;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0px;
+}
+
 
 /*
 -----------------   EN SAVOIR PLUS/section ajouter un avis ------------------

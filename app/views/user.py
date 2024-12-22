@@ -18,6 +18,8 @@ def allowed_file(filename):
 
 @user_bp.route('profile', methods=['GET', 'POST'])
 def profile():
+    if not g.get('user'):
+        return redirect(url_for('auth.login'))
     user_id = session.get('user_id')  # Identifiant de l'utilisateur en session
     if not user_id:
         return redirect(url_for('auth.login'))
@@ -63,6 +65,8 @@ def profile():
 
 @user_bp.route('/delete_image', methods=['POST'])
 def delete_image():
+    if not g.get('user'):
+        return redirect(url_for('auth.login'))
     user_id = session.get('user_id')
     if not user_id:
         return redirect(url_for('auth.login'))

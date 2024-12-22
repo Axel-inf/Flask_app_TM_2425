@@ -18,88 +18,155 @@
             <div class="avis-section">
                 <h2>Avis</h2>
                 {% for commentaire in commentaires %}
-                    <div class="commentaire">
-                        <div class="ligne-haut-avis">
-                            <div class="infos-client-avis">
-                                <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + commentaire.chemin_vers_image) }}" alt="Photo de profil" class="avatar">
-                                <h6>{{ commentaire.prenom }} {{ commentaire.nom }}</h6>
-                            </div>
-    
-                            <div class="note-client-sur-coach">
-                                <span>{{ commentaire.note }}</span>
-                                <img id="little-star" src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
-                            </div>
+                <div class="commentaire">
+                    <div class="ligne-haut-avis">
+                        <div class="infos-client-avis">
+                            <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + commentaire.chemin_vers_image) }}" alt="Photo de profil" class="avatar">
+                            <h6>{{ commentaire.prenom }} {{ commentaire.nom }}</h6>
                         </div>
-
-                        <div class="details-commentaire">
-                            <span>{{ commentaire.commentaire }}</span>
-                            <!-- Affichage uniquement de l'année, du mois et du jour (pas l'heure) --> 
-                            <span>{{ commentaire.date.split(' ')[0] }}</span>
+            
+                        <div class="note-client-sur-coach">
+                            <span>{{ commentaire.note }}</span>
+                            <img id="little-star" src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
                         </div>
                     </div>
-                {% endfor %}
+                       
+                 
+
+                    
+                    
+                    
+                    
+                    
             
-               
-            
-                
-               
-                <div class="input-avis" method="post">
-                    <!-- Image de profil -->
-                    {% if g.chemin_image %}
-                        <img id="profile-petit-perso" src="{{ url_for('static', filename='uploads/' + g.chemin_image) }}" class="user-pic" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" alt="photo de profil"/>
-                    {% else %}
-                        <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}" class="user-pic" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" alt="photo de profil"/>
+                    <div class="details-commentaire">
+                        <span>{{ commentaire.commentaire }}</span>
+                        <!-- Affichage uniquement de l'année, du mois et du jour (pas l'heure) -->
+                        <span>{{ commentaire.date.split(' ')[0] }}</span>
+                    </div>
+                    {% if commentaire.FK_idpersonneclient == user_id %}
+                    <div class="menu-actions-container">
+                        <!-- Bouton des trois petits points -->
+                        <button class="menu-actions-button" onclick="toggleAvisMenu('menu-{{ loop.index }}')">
+                            <img id="trois-points-avis" src="{{ url_for('static', filename='imgs/plus.svg') }}" alt="options"/>
+                        </button>
+                        
+                        <!-- Menu déroulant -->
+                        <div id="menu-{{ loop.index }}" class="menu-actions-dropdown">
+                            <!-- Option Modifier -->
+                            <a class="option-menu-avis" id="option-1-avis" href="{{ url_for('cours.donner_avis', coach_id=coach.id_personne) }}">
+                                <span>Modifier</span>
+                            </a>  
+                    
+                            <!-- Option Supprimer -->
+                            <form method="POST" action="{{ url_for('cours.supprimer_avis', coach_id=coach.id_personne) }}">
+                                <input type="hidden" name="action" value="supprimer">
+                                <input type="hidden" name="date" value="{{ commentaire.date }}">
+                                <button type="submit" class="option-menu-avis" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">Supprimer</button>
+                            </form>
+                        </div>
+                    </div>
+                    
                     {% endif %}
-                    
-                    <!-- Champ de texte -->
-                    <h6 id="avis">Ajouter un avis ...</h6>
-                    
-                    <!-- Bouton d'envoi -->
-                    <button type="submit" id="vers-avis">
-                        <a href="{{ url_for('cours.donner_avis', coach_id=coach.id_personne, nom=coach.nom, prenom=coach.prenom) }}">
-                            <img src="{{ url_for('static', filename='imgs/ajouter_avis.svg') }}" alt="envoyer">
-                        </a>
-                    </button>
-                </div>
-
+                </div> 
+                {% endfor %}
+            
+                <script>
+                    // Fonction pour ouvrir/fermer le menu
+                    function toggleAvisMenu(menuId) {
+                        var menu = document.getElementById(menuId);
+                        menu.classList.toggle('show');  // Ajoute ou enlève la classe 'show' pour afficher/masquer le menu
+                    }
+                
+                    // Écouter les clics sur le document pour fermer le menu si on clique ailleurs
+                    document.addEventListener('click', function (event) {
+                        // Vérifier si le clic est à l'intérieur du menu ou du bouton
+                        var isClickInsideButton = event.target.closest('.menu-actions-button');
+                        var isClickInsideMenu = event.target.closest('.menu-actions-dropdown');
+                
+                        // Si le clic n'est ni dans le bouton ni dans le menu, fermer le menu
+                        if (!isClickInsideButton && !isClickInsideMenu) {
+                            var menus = document.querySelectorAll('.menu-actions-dropdown.show');
+                            menus.forEach(function (menu) {
+                                menu.classList.remove('show');
+                            });
+                        }
+                    });
+                
+                    // Ajouter un écouteur de clic spécifique sur le bouton des trois petits points
+                    var buttons = document.querySelectorAll('.menu-actions-button');
+                    buttons.forEach(function (button, index) {
+                        button.addEventListener('click', function (event) {
+                            event.stopPropagation();  // Empêcher le clic de se propager au document
+                            var menuId = 'menu-' + (index + 1);  // ID dynamique pour chaque menu
+                            toggleAvisMenu(menuId);  // Ouvrir/fermer le menu correspondant
+                        });
+                    });
+                </script>
+                
+                
+        
+           
+        
+            
+           
+            <div class="input-avis" method="post">
+                <!-- Image de profil -->
+                {% if g.chemin_image %}
+                    <img id="profile-petit-perso" src="{{ url_for('static', filename='uploads/' + g.chemin_image) }}" class="user-pic" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" alt="photo de profil"/>
+                {% else %}
+                    <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}" class="user-pic" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" alt="photo de profil"/>
+                {% endif %}
+                
+                <!-- Champ de texte -->
+                <h6 id="avis">Ajouter un avis ...</h6>
+                
+                <!-- Bouton d'envoi -->
+                <button type="submit" id="vers-avis">
+                    <a href="{{ url_for('cours.donner_avis', coach_id=coach.id_personne, nom=coach.nom, prenom=coach.prenom) }}">
+                        <img src="{{ url_for('static', filename='imgs/ajouter_avis.svg') }}" alt="envoyer">
+                    </a>
+                </button>
             </div>
-        </div>
 
-        <div class="coach-similaires-titres">
-            <h2>Coachs similaires à John Doe</h2>
         </div>
+    </div>
 
-        <div class="coach-cards-similaires">
-            {% if coachs %}
-                {% for coach in coachs %}
-                    <div class="coach-card">
-                        <div class="coach-photo">
-                            <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }}">
+    <div class="coach-similaires-titres">
+        <h2>Coachs similaires à John Doe</h2>
+    </div>
+
+    <div class="coach-cards-similaires">
+        {% if coachs %}
+            {% for coach in coachs %}
+                <div class="coach-card">
+                    <div class="coach-photo">
+                        <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }}">
+                    </div>
+                    <div class="coach-info">
+                        <div class="evaluation-right">
+                            {% if moyenne_note %}
+                                {{ moyenne_note|round(1) }}  <!-- Arrondir à 1 décimale -->
+                                <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                            {% else %}
+                                Pas encore de note
+                                <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
+                            {% endif %}
                         </div>
-                        <div class="coach-info">
-                            <div class="evaluation-right">
-                                {% if moyenne_note %}
-                                    {{ moyenne_note|round(1) }}  <!-- Arrondir à 1 décimale -->
-                                    <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
-                                {% else %}
-                                    Pas encore de note
-                                    <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
-                                {% endif %}
-                            </div>
-                            <h6>{{ coach['prenom'] }} {{ coach['nom'] }}</h6>
-                            <p class="city">{{ coach['ville'] }}</p>
-                            <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
-                            <p class="langue">{{ coach['langue'] }}</p>
-                            <div>
-                                <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" id="more-btn">EN SAVOIR PLUS</a>
-                            </div>
+                        <h6>{{ coach['prenom'] }} {{ coach['nom'] }}</h6>
+                        <p class="city">{{ coach['ville'] }}</p>
+                        <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
+                        <p class="langue">{{ coach['langue'] }}</p>
+                        <div>
+                            <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" id="more-btn">EN SAVOIR PLUS</a>
                         </div>
                     </div>
-                {% endfor %}
-            {% else %}
-                <p>Pas de coachs similaires trouvés</p>
-            {% endif %}
-        </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Pas de coachs similaires trouvés</p>
+        {% endif %}
+    </div>
         
 
         <div class="coach-card" id="coach-card-detailed">
@@ -163,3 +230,7 @@
             </div>
           </div>
 {% endblock %}
+
+
+
+
