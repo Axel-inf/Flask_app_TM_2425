@@ -5,11 +5,9 @@ from app.utils import get_profile_image
 from datetime import datetime
 
 
-# Définir le blueprint
 cours_bp = Blueprint('cours', __name__)
 
 
-# Définir la fonction `load_logged_in_user` en haut
 def load_logged_in_user():
     user_id = session.get('user_id')
     print(f"user_id: {user_id}")
@@ -27,7 +25,6 @@ def load_logged_in_user():
         print(f"g.role: {g.role}, g.chemin_image: {g.chemin_image}")
         close_db()
 
-# Utiliser `before_request`
 @cours_bp.before_request
 def before_request():
     load_logged_in_user()
@@ -91,7 +88,7 @@ def recherche():
         
         coachs_with_ratings.append({
             **coach,
-            'moyenne_note': moyenne_note  # Ajoutez la moyenne au coach
+            'moyenne_note': moyenne_note  # Ajout de la moyenne au coach
         })
 
     close_db()
@@ -211,7 +208,7 @@ def modifier_avis(coach_id):
         db = get_db()
         cursor = db.cursor()
 
-        # Vérification si l'avis existe et appartient à l'utilisateur connecté
+        # On vérifie si l'avis existe et appartient à l'utilisateur connecté
         existing_review = cursor.execute("""
             SELECT * 
             FROM Evaluer 
@@ -251,7 +248,7 @@ def supprimer_avis(coach_id):
         db = get_db()
         cursor = db.cursor()
 
-        # Vérification si l'avis existe et appartient à l'utilisateur connecté
+        # On vérifife si l'avis existe et appartient à l'utilisateur connecté
         existing_review = cursor.execute("""
             SELECT * 
             FROM Evaluer 

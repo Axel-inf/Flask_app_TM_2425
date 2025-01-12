@@ -12,8 +12,8 @@ The current directory is a basic Flask application template connected to an SQLi
 
       ```bash
       python -m venv <VIRTUAL-ENVIRONMENT-NAME>
-      ```  
-
+      ``` 
+      
    - Using Visual Studio Code:
      - Type `Ctrl + Maj + P` and enter `Python: Create environment` into the search bar at the top of the window **This requires that the official [Python extension for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ms-python.python) is installed.**
      - Choose `venv` to create a `.venv` virtual environment in the current workspace.
@@ -83,4 +83,3 @@ The current directory is a basic Flask application template connected to an SQLi
             * Debugger is active!
             * Debugger PIN: 107-190-651
       ```
-

@@ -23,12 +23,12 @@ def register():
         print(request.form)
         print(role)
 
-        # On récupère la base de donnée
+        # On récupère la base de données
         db = get_db()
         curseur = db.cursor()
 
         # Si l'email et le mot de passe ont bien une valeur
-        # on essaie d'insérer l'utilisateur dans la base de données
+        # On essaie d'insérer l'utilisateur dans la base de données
         if prenom and nom and email and mot_de_passe:
             try:
                 curseur.execute("INSERT INTO Personnes (prenom, nom, email, mot_de_passe) VALUES (?, ?, ?, ?)",(prenom, nom, email, generate_password_hash(mot_de_passe)))
@@ -65,7 +65,6 @@ def register():
         # Si aucune donnée de formulaire n'est envoyée, on affiche le formulaire d'inscription
         return render_template('auth/register.html')
 
-# Route /auth/login
 @auth_bp.route('/login', methods=('GET', 'POST'))
 def login():
     # Si des données de formulaire sont envoyées vers la route /login (ce qui est le cas lorsque le formulaire de login est envoyé)
@@ -86,8 +85,8 @@ def login():
         # On ferme la connexion à la base de données pour éviter les fuites de mémoire
         close_db()
 
-        # Si aucun utilisateur n'est trouve ou si le mot de passe est incorrect
-        # on crée une variable error 
+        # Si aucun utilisateur n'est trouvé ou si le mot de passe est incorrect
+        # On crée une variable error 
         error = None
         if user is None:
             error = "Email incorrect"
@@ -109,7 +108,6 @@ def login():
     else:
         return render_template('auth/login.html')
 
-# Route /auth/logout
 @auth_bp.route('/logout')
 def logout():
     # Se déconnecter consiste simplement à supprimer le cookie session
@@ -144,7 +142,7 @@ def load_logged_in_user():
         # Définir g.has_course en fonction de l'existence du cours
         g.has_course = True if course else None
 
-        # Utiliser la fonction utilitaire pour obtenir le chemin de l'image
+        # On cherche le chemin de l'image
         g.chemin_image = get_profile_image(user_id)
         print(f"Chemin de l'image de profil: {g.chemin_image}")  # Log de débogage
         close_db()

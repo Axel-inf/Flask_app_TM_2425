@@ -29,7 +29,6 @@ def create_app():
     app.register_blueprint(cours_bp)
 
     
-    # send_email("axel.reichenbach@studentfr.ch", "test", "je fais un test")
 
     # On retourne l'instance de l'application Flask
     return app

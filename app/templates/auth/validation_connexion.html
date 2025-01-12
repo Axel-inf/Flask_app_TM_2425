@@ -8,13 +8,13 @@
   <div class="grid-container-validation">
     <div class="message">
         <h1>Connexion réussie!</h1>
-        <p>Vous serez redirigé vers l'accueil dans quelques secondes...</p>
+        <p>Vous allez être redirigé vers l'accueil...</p>
         <img id="validation_icon" src="{{url_for('static', filename='imgs/icone_validation.svg')}}" alt="Icône validation"/>
     </div>
   </div>
 
   <script>
-    // Redirection vers la page d'accueil après 3 secondes
+    // Redirection vers la page d'accueil après 1 seconde
     setTimeout(function() {
         window.location.href = "{{ url_for('home.landing_page') }}";
     }, 1000);

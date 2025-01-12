@@ -3,13 +3,13 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from app.db.db import get_db, close_db
 from app.utils import get_profile_image
 import os
-# Routes /...
+
 coach_bp = Blueprint('coach', __name__, url_prefix='/coach')
 
 
 @coach_bp.route('/create_course', methods=['GET', 'POST'])
 def create_course():
-    # Vérification si l'utilisateur est connecté
+    # On vérifie si l'utilisateur est connecté
     if not g.user:
         return redirect(url_for('home.landing_page'))
 
@@ -19,7 +19,7 @@ def create_course():
     db = get_db()
     cursor = db.cursor()
 
-    # Vérification si le coach a déjà un cours
+    # On vérifie si le coach a déjà un cours
     cursor.execute("""
         SELECT C.id_cours, C.description, C.tarif, C.disponibilites, P.canton, P.ville, P.langue, Co.biographie
         FROM Coachs Co

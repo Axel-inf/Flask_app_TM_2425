@@ -13,7 +13,7 @@ def login_required(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
     
-        # Si l'utilisateur n'est pas connecté, il ne peut pas accéder à la route, il faut le rediriger vers la route auth.login
+        # Si l'utilisateur n'est pas connecté, il ne peut pas accéder à la route, alors il faut le rediriger vers la route auth.login
         if g.user is None:
             return redirect(url_for('auth.login'))
         
