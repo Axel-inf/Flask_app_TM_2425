@@ -7,12 +7,14 @@
 {% block content %}
 <div class="form-container">
     <img id="illustration_creation_cours" src="{{ url_for('static', filename='imgs/illustration_feedback.png') }}">
-    <form class="inputs-creation" method="post">
-        <h1>Bonjour, nous aimerions avoir votre avis sur {{ prenom }} {{ nom }}</h1>
+    <form class="inputs-creation" method="post" action="{{ url_for('cours.donner_avis', coach_id=coach_id) }}">
+        <h1>Bonjour, nous aimerions avoir votre avis sur {{ coach.prenom }} {{ coach.nom }}</h1>
+        <input type="hidden" name="action" value="{{ 'modifier' if is_edit else 'ajouter' }}">
+
 
         <!-- note -->
         <div class="input-creation" id="input-tarif">
-            <h5>Quelle note donneriez-vous à {{ prenom }} {{ nom }}</h5>
+            <h5>Quelle note donneriez-vous à {{ coach.prenom }} {{ coach.nom }}</h5>
             <input type="number" id="tarif" name="note" min="0" max="5" step="0.1" 
                    placeholder="Donnez votre note sur une échelle de 1 à 5."
                    value="{{ review_data.note }}" />

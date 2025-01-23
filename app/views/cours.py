@@ -125,12 +125,19 @@ def en_savoir_plus(coach_id):
 
     # Requête pour récupérer les coachs similaires
     coachs_similaires = db.execute("""
-        SELECT Personnes.*, Coachs.*, Cours.tarif
+    SELECT 
+        Personnes.*, 
+        Coachs.*, 
+        Cours.tarif,
+        AVG(Evaluer.note) AS moyenne_note
         FROM Personnes
         JOIN Coachs ON Personnes.id_personne = Coachs.id_personne
         JOIN Cours ON Coachs.FK_idcours = Cours.id_cours
+        LEFT JOIN Evaluer ON Evaluer.FK_idpersonnecoach = Coachs.id_personne
         WHERE Personnes.langue = ? AND Personnes.id_personne != ?
+        GROUP BY Personnes.id_personne, Coachs.id_personne, Cours.tarif
     """, (coach['langue'], coach_id)).fetchall()
+
 
     # Requête pour récupérer les avis du coach
     commentaires = db.execute("""
@@ -193,148 +200,133 @@ def en_savoir_plus(coach_id):
     )
 
 
-@cours_bp.route('/cours/modifier_avis/<int:coach_id>', methods=['POST'])
-def modifier_avis(coach_id):
-    # Récupérer les données transmises depuis le formulaire
-    commentaire = request.form.get('commentaire')
-    note = request.form.get('note')
-    date = request.form.get('date')  # Date de l'avis existant
-
-    if not commentaire or not note or not date:
-        flash("Tous les champs sont obligatoires pour modifier l'avis.", "error")
-        return redirect(url_for('cours.en_savoir_plus', coach_id=coach_id))
-
-    try:
-        db = get_db()
-        cursor = db.cursor()
-
-        # On vérifie si l'avis existe et appartient à l'utilisateur connecté
-        existing_review = cursor.execute("""
-            SELECT * 
-            FROM Evaluer 
-            WHERE FK_idpersonneclient = ? AND FK_idpersonnecoach = ? AND date = ?
-        """, (g.user['id_personne'], coach_id, date)).fetchone()
-
-        if existing_review:
-            # Mise à jour de l'avis existant
-            cursor.execute("""
-                UPDATE Evaluer
-                SET commentaire = ?, note = ?
-                WHERE FK_idpersonneclient = ? AND FK_idpersonnecoach = ? AND date = ?
-            """, (commentaire, note, g.user['id_personne'], coach_id, date))
-            flash("Avis modifié avec succès.", "success")
-        else:
-            flash("Avis introuvable ou non autorisé.", "error")
-
-        db.commit()
-    except Exception as e:
-        flash(f"Une erreur s'est produite lors de la modification de l'avis : {e}", "error")
-    finally:
-        close_db()
-
-    return redirect(url_for('cours.en_savoir_plus', coach_id=coach_id))
-
-
-@cours_bp.route('/cours/supprimer_avis/<int:coach_id>', methods=['POST'])
-def supprimer_avis(coach_id):
-    # Récupérer la date de l'avis à supprimer
-    date = request.form.get('date')
-
-    if not date:
-        flash("La date de l'avis est requise pour supprimer l'avis.", "error")
-        return redirect(url_for('cours.en_savoir_plus', coach_id=coach_id))
-
-    try:
-        db = get_db()
-        cursor = db.cursor()
-
-        # On vérifife si l'avis existe et appartient à l'utilisateur connecté
-        existing_review = cursor.execute("""
-            SELECT * 
-            FROM Evaluer 
-            WHERE FK_idpersonneclient = ? AND FK_idpersonnecoach = ? AND date = ?
-        """, (g.user['id_personne'], coach_id, date)).fetchone()
-
-        if existing_review:
-            # Suppression de l'avis
-            cursor.execute("""
-                DELETE FROM Evaluer
-                WHERE FK_idpersonneclient = ? AND FK_idpersonnecoach = ? AND date = ?
-            """, (g.user['id_personne'], coach_id, date))
-            flash("Avis supprimé avec succès.", "success")
-        else:
-            flash("Avis introuvable ou non autorisé.", "error")
-
-        db.commit()
-    except Exception as e:
-        flash(f"Une erreur s'est produite lors de la suppression de l'avis : {e}", "error")
-    finally:
-        close_db()
-
-    return redirect(url_for('cours.en_savoir_plus', coach_id=coach_id))
-
-
-@cours_bp.route('/donner_avis/<int:coach_id>', methods=['GET', 'POST'])
+@cours_bp.route('/donner_avis/<int:coach_id>', methods=['GET', 'POST']) 
 def donner_avis(coach_id):
-    # Vérifier si l'utilisateur est connecté
     if not g.user:
         return redirect(url_for('home.landing_page'))
 
-    # Connexion à la base de données
     db = get_db()
     cursor = db.cursor()
 
-    # Vérifier si l'utilisateur a déjà donné un avis pour ce coach
+    # Récupérer les informations du coach
+    cursor.execute("""
+        SELECT * 
+        FROM Personnes
+        WHERE id_personne = ?
+    """, (coach_id,))
+    coach = cursor.fetchone()
+
+    if not coach:
+        flash("Coach introuvable.", "error")
+        return redirect(url_for('cours.recherche'))
+
+    # Récupérer l'avis existant (s'il existe)
     cursor.execute("""
         SELECT * 
         FROM Evaluer
         WHERE FK_idpersonneclient = ? AND FK_idpersonnecoach = ?
+        ORDER BY date DESC LIMIT 1
     """, (g.user['id_personne'], coach_id))
     existing_review = cursor.fetchone()
 
+    # Pré-remplir les données uniquement si l'action est "modifier"
+    if request.args.get('action') == 'modifier' and existing_review:
+        review_data = {
+            'note': existing_review['note'],
+            'commentaire': existing_review['commentaire'],
+            'date': existing_review['date']
+        }
+        is_edit = True
+    else:
+        # Sinon, le formulaire est vide pour un ajout
+        review_data = {
+            'note': '',
+            'commentaire': '',
+            'date': ''
+        }
+        is_edit = False
+
     if request.method == 'POST':
-        # Récupérer les données envoyées par le formulaire
+        action = request.form.get('action')
         note = request.form.get('note')
         commentaire = request.form.get('commentaire')
 
-        if not note or not commentaire:
-            flash("La note et le commentaire sont obligatoires.", "error")
-            return redirect(url_for('cours.donner_avis', coach_id=coach_id))
+        # Suppression d'un avis
+        if action == 'supprimer' and existing_review:
+            try:
+                cursor.execute("""
+                    DELETE FROM Evaluer
+                    WHERE FK_idpersonneclient = ? AND FK_idpersonnecoach = ? AND date = ?
+                """, (g.user['id_personne'], coach_id, existing_review['date']))
+                db.commit()
+                flash("Votre avis a été supprimé avec succès.", "success")
+            except Exception as e:
+                flash(f"Erreur lors de la suppression de l'avis : {e}", "error")
+                db.rollback()
+            finally:
+                close_db()
+            return redirect(url_for('cours.en_savoir_plus', coach_id=coach_id))
 
-        try:
-            if existing_review:
-                # Mettre à jour l'avis existant
+        # Modification d'un avis existant
+        elif action == 'modifier' and existing_review:
+            if not note or not commentaire:
+                flash("La note et le commentaire sont obligatoires.", "error")
+                return redirect(url_for('cours.donner_avis', coach_id=coach_id))
+
+            try:
                 cursor.execute("""
                     UPDATE Evaluer
-                    SET note = ?, commentaire = ?
-                    WHERE FK_idpersonneclient = ? AND FK_idpersonnecoach = ?
-                """, (note, commentaire, g.user['id_personne'], coach_id))
-                flash("Avis modifié avec succès!", "success")
-            else:
-                # Créer un nouvel avis
+                    SET note = ?, commentaire = ?, date = datetime('now')
+                    WHERE FK_idpersonneclient = ? AND FK_idpersonnecoach = ? AND date = ?
+                """, (note, commentaire, g.user['id_personne'], coach_id, existing_review['date']))
+                db.commit()
+                flash("Votre avis a été modifié avec succès.", "success")
+            except Exception as e:
+                flash(f"Erreur lors de la modification de l'avis : {e}", "error")
+                db.rollback()
+            finally:
+                close_db()
+            return redirect(url_for('cours.validation_avis', coach_id=coach_id))
+
+        # Ajout d'un nouvel avis
+        elif action == 'ajouter':
+            if not note or not commentaire:
+                flash("La note et le commentaire sont obligatoires.", "error")
+                return redirect(url_for('cours.donner_avis', coach_id=coach_id))
+
+            try:
+                # Ajouter un nouvel avis sans toucher aux précédents
                 cursor.execute("""
-                    INSERT INTO Evaluer (FK_idpersonneclient, FK_idpersonnecoach, note, commentaire)
-                    VALUES (?, ?, ?, ?)
+                    INSERT INTO Evaluer (FK_idpersonneclient, FK_idpersonnecoach, note, commentaire, date)
+                    VALUES (?, ?, ?, ?, datetime('now'))
                 """, (g.user['id_personne'], coach_id, note, commentaire))
-                flash("Avis ajouté avec succès!", "success")
+                db.commit()
+                flash("Votre avis a été ajouté avec succès.", "success")
+            except Exception as e:
+                flash(f"Erreur lors de l'ajout de l'avis : {e}", "error")
+                db.rollback()
+            finally:
+                close_db()
 
-            db.commit()
+            return redirect(url_for('cours.validation_avis', coach_id=coach_id))
 
-        except Exception as e:
-            flash(f"Erreur lors de l'enregistrement de l'avis : {e}", "error")
-            db.rollback()
-        finally:
-            close_db()
+    return render_template(
+        'cours/donner_avis.html',
+        coach_id=coach_id,
+        review_data=review_data,  # Affichage des données de l'avis existant ou vide pour un ajout
+        is_edit=is_edit,  # Indique si l'on est en mode modification ou ajout
+        coach=coach
+    )
 
-        return redirect(url_for('cours.validation_avis', coach_id=coach_id))
 
-    # Si un avis existe, transmettre ses détails au gabarit
-    review_data = {
-        'note': existing_review['note'] if existing_review else '',
-        'commentaire': existing_review['commentaire'] if existing_review else ''
-    }
 
-    return render_template('cours/donner_avis.html', coach_id=coach_id, review_data=review_data)
+
+
+
+
+
+
+
 
 
 

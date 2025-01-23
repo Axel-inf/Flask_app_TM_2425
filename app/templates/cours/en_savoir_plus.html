@@ -54,12 +54,13 @@
                         <!-- Menu déroulant -->
                         <div id="menu-{{ loop.index }}" class="menu-actions-dropdown">
                             <!-- Option Modifier -->
-                            <a class="option-menu-avis" id="option-1-avis" href="{{ url_for('cours.donner_avis', coach_id=coach.id_personne) }}">
+                            <a class="option-menu-avis" id="option-1-avis" href="{{ url_for('cours.donner_avis', coach_id=coach.id_personne, action='modifier', date=commentaire.date) }}">
                                 <span>Modifier</span>
-                            </a>  
+                            </a>
+                                
                     
                             <!-- Option Supprimer -->
-                            <form method="POST" action="{{ url_for('cours.supprimer_avis', coach_id=coach.id_personne) }}">
+                            <form method="POST" action="{{ url_for('cours.donner_avis', coach_id=coach.id_personne) }}">
                                 <input type="hidden" name="action" value="supprimer">
                                 <input type="hidden" name="date" value="{{ commentaire.date }}">
                                 <button type="submit" class="option-menu-avis" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet avis ?');">Supprimer</button>
@@ -122,11 +123,9 @@
                 <h6 id="avis">Ajouter un avis ...</h6>
                 
                 <!-- Bouton d'envoi -->
-                <button type="submit" id="vers-avis">
-                    <a href="{{ url_for('cours.donner_avis', coach_id=coach.id_personne, nom=coach.nom, prenom=coach.prenom) }}">
-                        <img src="{{ url_for('static', filename='imgs/ajouter_avis.svg') }}" alt="envoyer">
-                    </a>
-                </button>
+                <a href="{{ url_for('cours.donner_avis', coach_id=coach.id_personne) }}" id="vers-avis">
+                    <img src="{{ url_for('static', filename='imgs/ajouter_avis.svg') }}" alt="Ajouter un avis">
+                </a>
             </div>
 
         </div>
@@ -139,30 +138,34 @@
     <div class="coach-cards-similaires">
         {% if coachs %}
             {% for coach in coachs %}
-                <div class="coach-card">
-                    <div class="coach-photo">
-                        <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }}">
-                    </div>
-                    <div class="coach-info">
+            <div class="coach-card">
+                <div class="coach-photo">
+                    <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }}">
+                </div>
+                <div class="coach-info">
+                    <div class="coach-info-head">
+                        <h6>{{ coach['prenom'] }} {{ coach['nom'] }}</h6>
                         <div class="evaluation-right">
-                            {% if moyenne_note %}
-                                {{ moyenne_note|round(1) }}  <!-- Arrondir à 1 décimale -->
+                            {% if coach['moyenne_note'] %}
+                                {{ coach['moyenne_note']|round(1) }} <!-- Arrondir à 1 décimale -->
                                 <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
                             {% else %}
                                 Pas encore de note
                                 <img src="{{ url_for('static', filename='imgs/icone_etoile.svg') }}" alt="star"/>
                             {% endif %}
                         </div>
-                        <h6>{{ coach['prenom'] }} {{ coach['nom'] }}</h6>
-                        <p class="city">{{ coach['ville'] }}</p>
-                        <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
-                        <p class="langue">{{ coach['langue'] }}</p>
-                        <div>
-                            <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" id="more-btn">EN SAVOIR PLUS</a>
-                        </div>
+                    </div>
+        
+                    <p class="city">{{ coach['ville'] }}</p>
+                    <p class="tarif">{{ coach['tarif'] }} CHF/h</p>
+                    <p class="langue">{{ coach['langue'] }}</p>
+                    <div>
+                        <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" id="more-btn">EN SAVOIR PLUS</a>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
+        {% endfor %}
+        
         {% else %}
             <p>Pas de coachs similaires trouvés</p>
         {% endif %}
@@ -230,7 +233,3 @@
             </div>
           </div>
 {% endblock %}
-
-
-
-
