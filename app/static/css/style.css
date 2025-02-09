@@ -1705,7 +1705,7 @@ fieldset h5 {
   display: block;  /* Afficher le menu lorsque la classe 'show' est présente */
 }
 
-.menu-actions-container:hover .menu-actions-dropdown,
+
 .menu-actions-button:focus + .menu-actions-dropdown {
   display: block; /* Afficher le menu lors du survol du conteneur ou du focus sur le bouton */
 }
