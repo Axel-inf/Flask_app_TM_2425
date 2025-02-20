@@ -10,7 +10,7 @@
         <h1>Trouvez votre futur coach de tennis de table</h1>
         <p>Découvrez notre nouvel outil de recherche de
           coachs de tennis de table 100% gratuit !</p>
-        <a href="" id="bouton_fonce">Y aller</a>
+        <a href="{{ url_for('cours.recherche') }}" id="bouton_fonce">Y aller</a>
       </div>
       <div class="coach-blob-container">
         <img src="{{ url_for('static', filename='imgs/blob_avatars.png') }}" alt="Illustration des coachs et des blobs"/>
