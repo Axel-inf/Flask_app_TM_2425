@@ -22,7 +22,7 @@
 
                     {% if g.role == 'Joueur' %}
                         <li><a class="lien-page" href="{{ url_for('cours.recherche') }}">Recherche de coach</a></li>
-                        <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Mes discussions</a></li>
+                        <li><a class="lien-page" href="{{ url_for('messagerie.discussion') }}">Mes discussions</a></li>
                     {% else %}
                         {% if g.has_course %}
                             <li><a class="lien-page" href="{{ url_for('coach.create_course') }}">Modifier un cours</a></li>
@@ -62,7 +62,7 @@
                 {% else %}
                 <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Accueil</a>
                 <li><a class="lien-page" href="{{ url_for('cours.recherche') }}">Recherche de coach</a>
-                <li><a class="lien-page" href="{{ url_for('home.landing_page') }}">Mes discussions</a>
+                <li><a class="lien-page" href="{{ url_for('messagerie.discussion') }}">Mes discussions</a>
                 <li><a class="lien-page" href="{{ url_for('auth.login') }}">Se connecter</a>
                 <li><a href="{{ url_for('auth.register') }}" id="bouton_fonce">S'INSCRIRE</a>
                 {% endif %}
@@ -96,7 +96,7 @@
             <p class="titre-footer"><b>Explorez</b></p>
             <ul>
                 <li><a href="{{ url_for('cours.recherche') }}">Recherche de coachs</a></li>
-                <li><a href="{{ url_for('home.landing_page') }}">Mes discussions</a></li>
+                <li><a href="{{ url_for('messagerie.discussion') }}">Mes discussions</a></li>
             </ul>
             </div>
             <div class="footer-section">

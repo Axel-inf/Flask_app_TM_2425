@@ -1,0 +1,49 @@
+{% extends 'base_profile.html' %}
+
+{% block title %}
+  Page d'accueil
+{% endblock %}
+
+{% block content%}
+<div class="messagerie-page">
+    <div class="partie-gauche-discu">
+        <h1>Messages</h1>
+        <div class="search-container-contact">
+            <form method="POST" class="search-contact">
+              <button type="submit" class="search-btn-contact">
+                <img src="{{url_for('static', filename='imgs/icone_barre_recherche_.svg') }}" alt="Recherche" class="search-icon">
+              </button>
+              <input type="text" name="search_query" class="search-bar" placeholder="Rechercher">
+            </form>
+        </div>
+    </div>
+    <div class="partie-droite-discu">
+        <div class="partie-droite-discu-haut">
+            <div class="image-infos">
+                <div class="image-contact">
+                    <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}">
+                    <div class="contact-date">
+                        <h6>John Doe</h6>
+                        <p>En ligne aujourd’hui à 16:24</p>
+                    </div>
+                </div>
+                <div class="appel-plus">
+                    <img  src="{{ url_for('static', filename='imgs/appel_barre_top.png') }}">
+                    <img  src="{{ url_for('static', filename='imgs/more_contact.png') }}">
+                </div>
+            </div>
+        </div>
+        <div class="partie-droite-discu-bas">
+            <div class="message-autre-personne">
+                <p class="texte-message">message</p>
+            </div>
+            <div class="message-soi">
+                <p class="texte-message">message</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

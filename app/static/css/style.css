@@ -55,7 +55,8 @@ ul{
   --secondary: #8F9EBB;
   --tertiary: #B5BFD5;
   --fonce: #2C2C2C;
-  --lien:#007AFF;
+  --fonce-opaque:rgba(44, 44, 44, 0.8);
+  --lien: #007AFF;
   --shadow-6dp: 0px 4px 8px rgba(255, 255, 255, 0.15);
   --hover-overlay:rgba(0,0,0,0.04);
   --disabled:rgba(0,0,0,0.38);
@@ -1899,4 +1900,139 @@ fieldset h5 {
   font-size: 16px;
   font-weight: 100%;
   justify-self: center;
+}
+
+
+/*
+-----------------   MESSAGERIE ------------------
+*/
+.messagerie-page{
+  display: flex;
+  justify-content: left;
+  height: 92.1875vh;
+  overflow: hidden;
+  background-color: var(--primary);
+}
+
+.partie-gauche-discu {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap:16px;
+  background-color:var(--fonce-opaque);
+  color: white;
+  padding:24px 80px 0px 80px;
+  width: 33.3vw;
+  margin: 0;
+  box-sizing: border-box;
+  height: 92.1875vh;
+  border-top-left-radius: 32px;
+}
+
+.partie-droite-discu{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  height: 92.1875vh;
+}
+
+.partie-droite-discu-haut{
+  display: flex;
+  flex-direction: row;
+  gap: 46px;
+  padding:0px 80px 0px 40px;
+  background-color: var(--fonce);
+  color: white;
+  width: 100%;
+  margin: 0;
+  box-sizing: border-box;
+  height: 13.56vh;
+}
+
+.partie-droite-discu-bas {
+  display: flex;
+  background-image: url('/static/imgs/fleurs_message.png');
+  background-size: cover; /* Couvre toute la largeur et la hauteur */
+  background-repeat: no-repeat;
+  background-position: center; /* Centre l'image */
+  height: 86.44vh; /* Reste de la hauteur pour occuper toute la page */
+  width: 100%;
+  padding: 64px 80px 0px 40px;
+  margin: 0;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.image-contact{
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  align-items: center;
+}
+.image-infos{
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.appel-plus{
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+}
+
+.message-autre-personne{
+  background-color: var(--primary);
+  padding: 8px 16px;
+  border-radius: 8px 8px 8px 0px;
+  height: 31px;
+  margin-top: 12px;/* à changer */
+}
+
+.texte-message{
+  font-family: "inter", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+.message-soi{
+  background-color: var(--secondary);
+  padding: 8px 16px;
+  border-radius: 8px 8px 0px 8px;
+  height: 31px;
+  margin-top: 12px;/* à changer */
+}
+
+.search-contact {
+  display: flex;
+  align-items: center;
+  width: 330px;
+}
+
+.search-bar-contact {
+  width: 330px;
+  padding: 12px 30px 12px 3.34vw; /* Décalage à gauche de 12px pour laisser de l'espace pour l'icône */
+  border-radius: 30px;
+  border: none;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  background-color: var(--secondary);
+  height: 56px;
+}
+
+/* Bouton de recherche */
+.search-btn-contact {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  left: 5.5vw; /* Décalage de l'icône */
+}
+
+.search-container-contact{
+  margin-top: 0px;
 }
