@@ -1918,7 +1918,6 @@ fieldset h5 {
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap:16px;
   background-color:var(--fonce-opaque);
   color: white;
   padding:24px 80px 0px 80px;
@@ -1929,6 +1928,106 @@ fieldset h5 {
   border-top-left-radius: 32px;
 }
 
+.partie-gauche-discu h1 {
+  margin-bottom: 16px;
+}
+
+.liste-contacts{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-dans-liste {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  margin-top: 16px;
+}
+
+.contact-dans-liste::before {
+  content: "";
+  position: absolute;
+  top: -4px;   /* Dépassement de 4px en haut */
+  left: -4px;  /* Dépassement de 4px à gauche */
+  right: -4px; /* Dépassement de 4px à droite */
+  bottom: -4px;/* Dépassement de 4px en bas */
+  background-color: rgba(255, 255, 255, 0); /* Transparent par défaut */
+  transition: background-color 0.3s ease;
+  border-radius: 12px; /* Optionnel : pour un effet plus arrondi */
+}
+
+.contact-dans-liste:hover::before {
+  background-color: rgba(255, 255, 255, 0.4); /* Overlay blanc à 40% d'opacité */
+}
+
+.contact-dans-liste::after {
+  content: "";
+  position: absolute;
+  bottom: -12.5px; /* Décale la ligne de 12.5px vers le bas */
+  left: 0;
+  width: 100%;
+  height: 1px; /* Épaisseur de la ligne */
+  background-color: white; /* Couleur de la ligne */
+}
+
+.contact-dans-liste:last-child::after {
+  display: none; /* Supprime la ligne après le dernier contact */
+}
+
+.nom-contact-infos{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.date-nbre_message{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+.nbre-message_non_lues{
+  display: flex;
+  justify-content: center;
+  background-color: var(--tertiary);
+  border-radius: 12px;
+  height: 24px;
+  width: 24px;
+}
+
+.search-contact {
+  display: flex;
+  align-items: center;
+  width: 330px;
+}
+
+.search-bar-contact {
+  width: 330px;
+  padding: 12px 30px 12px 3.34vw;
+  border-radius: 30px;
+  border: none;
+  font-family: "inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  outline: none;
+  background-color: var(--secondary);
+  height: 56px;
+}
+
+.search-btn-contact {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  left: 5.5vw;
+}
+
+.search-container-contact{
+  margin-bottom: 24px;
+}
 .partie-droite-discu{
   display: flex;
   flex-direction: column;
@@ -1951,26 +2050,13 @@ fieldset h5 {
   height: 13.56vh;
 }
 
-.partie-droite-discu-bas {
-  display: flex;
-  background-image: url('/static/imgs/fleurs_message.png');
-  background-size: cover; /* Couvre toute la largeur et la hauteur */
-  background-repeat: no-repeat;
-  background-position: center; /* Centre l'image */
-  height: 86.44vh; /* Reste de la hauteur pour occuper toute la page */
-  width: 100%;
-  padding: 64px 80px 0px 40px;
-  margin: 0;
-  box-sizing: border-box;
-  justify-content: space-between;
-}
-
 .image-contact{
   display: flex;
   flex-direction: row;
   gap: 40px;
   align-items: center;
 }
+
 .image-infos{
   display: flex;
   width: 100%;
@@ -1978,61 +2064,64 @@ fieldset h5 {
   align-items: center;
   justify-content: space-between;
 }
+
 .appel-plus{
   display: flex;
   flex-direction: row;
   gap: 28px;
 }
 
-.message-autre-personne{
-  background-color: var(--primary);
-  padding: 8px 16px;
-  border-radius: 8px 8px 8px 0px;
-  height: 31px;
-  margin-top: 12px;/* à changer */
+.partie-droite-discu-bas {
+  display: flex;
+  flex-direction: column;
+  background-image: url('/static/imgs/fleurs_message.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 86.44vh;
+  padding: 64px 80px 0px 40px;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.texte-message{
-  font-family: "inter", sans-serif;
+.message-autre-personne, .message-soi {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 400;
-}
-.message-soi{
-  background-color: var(--secondary);
-  padding: 8px 16px;
-  border-radius: 8px 8px 0px 8px;
-  height: 31px;
-  margin-top: 12px;/* à changer */
+  margin-top: 12px;
 }
 
-.search-contact {
+.message-autre-personne {
+  background-color: var(--primary);
+  border-radius: 8px 8px 8px 0px;
+  align-self: flex-start;
+}
+
+.message-soi {
+  background-color: var(--secondary);
+  border-radius: 8px 8px 0px 8px;
+  align-self: flex-end;
+}
+
+.partie-droite-discu-bas .message-autre-personne + .message-soi,
+.partie-droite-discu-bas .message-soi + .message-autre-personne {
+  margin-top: 32px;
+}
+
+.date-section-message {
   display: flex;
   align-items: center;
-  width: 330px;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
-.search-bar-contact {
-  width: 330px;
-  padding: 12px 30px 12px 3.34vw; /* Décalage à gauche de 12px pour laisser de l'espace pour l'icône */
-  border-radius: 30px;
-  border: none;
-  font-family: "inter", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  outline: none;
-  background-color: var(--secondary);
-  height: 56px;
-}
-
-/* Bouton de recherche */
-.search-btn-contact {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  left: 5.5vw; /* Décalage de l'icône */
-}
-
-.search-container-contact{
-  margin-top: 0px;
+.date-section-message::before,
+.date-section-message::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: white;
+  margin: 0 12px;
 }

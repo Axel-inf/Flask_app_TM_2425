@@ -13,8 +13,32 @@
               <button type="submit" class="search-btn-contact">
                 <img src="{{url_for('static', filename='imgs/icone_barre_recherche_.svg') }}" alt="Recherche" class="search-icon">
               </button>
-              <input type="text" name="search_query" class="search-bar" placeholder="Rechercher">
+              <input type="text" name="search_contact" class="search-bar" placeholder="Rechercher">
             </form>
+        </div>
+        <div class="liste-contacts">
+            <div class="contact-dans-liste">
+                <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}">
+                <div class="nom-contact-infos">
+                    <h6>John Doe</h6>
+                    <p>Bonjour, je vous contacte...</p>
+                </div>
+                <div class="date-nbre_message">
+                    <p>15:47</p>
+                    <p class="nbre-message_non_lues">2</p>
+                </div>
+            </div>
+            <div class="contact-dans-liste">
+                <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}">
+                <div class="nom-contact-infos">
+                    <h6>John Doe</h6>
+                    <p>Bonjour, je vous contacte...</p>
+                </div>
+                <div class="date-nbre_message">
+                    <p>15:47</p>
+                    <p class="nbre-message_non_lues">2</p>
+                </div>
+            </div>
         </div>
     </div>
     <div class="partie-droite-discu">
@@ -22,7 +46,7 @@
             <div class="image-infos">
                 <div class="image-contact">
                     <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}">
-                    <div class="contact-date">
+                    <div class="nom-contact-infos">
                         <h6>John Doe</h6>
                         <p>En ligne aujourd’hui à 16:24</p>
                     </div>
@@ -34,13 +58,15 @@
             </div>
         </div>
         <div class="partie-droite-discu-bas">
+            <div class="date-section-message">
+                <p>Aujourd’hui</p>
+            </div>
             <div class="message-autre-personne">
                 <p class="texte-message">message</p>
             </div>
             <div class="message-soi">
                 <p class="texte-message">message</p>
             </div>
-        </div>
         </div>
     </div>
 </div>
