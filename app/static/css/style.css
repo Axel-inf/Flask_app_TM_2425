@@ -1921,7 +1921,7 @@ fieldset h5 {
   background-color:var(--fonce-opaque);
   color: white;
   padding:24px 80px 0px 80px;
-  width: 33.3vw;
+  width: calc(100vw / 3);
   margin: 0;
   box-sizing: border-box;
   height: 92.1875vh;
@@ -2124,4 +2124,57 @@ fieldset h5 {
   height: 1px;
   background-color: white;
   margin: 0 12px;
+}
+
+.message-bar {
+  position: absolute;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(200vw/3);
+  background-color: var(--fonce); /* Couleur sombre */
+  padding-left: 1.1vw;
+  padding-right: 0.83vw;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.message-contenu {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  background-color: var(--fonce); /* Un peu plus clair que le fond */
+  outline: none;
+}
+
+.message-contenu::placeholder {
+  color: white;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.diviseur{
+  width: 2px;
+  height: 24px;
+  margin-left: 20px;
+}
+
+.envoyer-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }

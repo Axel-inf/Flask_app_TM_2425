@@ -67,6 +67,20 @@
             <div class="message-soi">
                 <p class="texte-message">message</p>
             </div>
+            <form class="message-bar">
+                <input type="text" name="envoie-message" class="message-contenu" placeholder="Écrivez ici...">
+                
+                <div class="icons">
+                    <img src="{{url_for('static', filename='imgs/mic.svg') }}" alt="Micro" class="icon">
+                    <img src="{{url_for('static', filename='imgs/image-envoie.svg') }}" alt="Image" class="icon">
+                    <img src="{{url_for('static', filename='imgs/div_vertical.svg') }}" alt="diviseur" class="diviseur">
+                    <button type="submit" class="envoyer-btn">
+                        <img src="{{url_for('static', filename='imgs/envoie.svg') }}" alt="Envoyer" class="icon">
+                    </button>
+                </div>
+            </form>
+            
+            
         </div>
     </div>
 </div>
