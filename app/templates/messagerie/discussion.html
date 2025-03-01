@@ -17,73 +17,77 @@
             </form>
         </div>
         <div class="liste-contacts">
-            <div class="contact-dans-liste">
-                <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}">
-                <div class="nom-contact-infos">
-                    <h6>John Doe</h6>
-                    <p>Bonjour, je vous contacte...</p>
+            {% for coach in coaches %}
+                <div class="contact-dans-liste">
+                    <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + (coach_image if coach_image else 'user.svg')) }}" alt="Photo de {{ coach['nom'] }} ">
+                    <div class="nom-contact-infos">
+                        <h6>{{ coach_prenom }} {{ coach_nom }}</h6>
+                        <p>Dernier message...</p>
+                    </div>
+                    <div class="date-nbre_message">
+                        <p>15:47</p>
+                        <p class="nbre-message_non_lues">2</p>
+                    </div>
                 </div>
-                <div class="date-nbre_message">
-                    <p>15:47</p>
-                    <p class="nbre-message_non_lues">2</p>
-                </div>
-            </div>
-            <div class="contact-dans-liste">
-                <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}">
-                <div class="nom-contact-infos">
-                    <h6>John Doe</h6>
-                    <p>Bonjour, je vous contacte...</p>
-                </div>
-                <div class="date-nbre_message">
-                    <p>15:47</p>
-                    <p class="nbre-message_non_lues">2</p>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
+    {% if coach_id %}
     <div class="partie-droite-discu">
         <div class="partie-droite-discu-haut">
             <div class="image-infos">
                 <div class="image-contact">
-                    <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}">
+                    <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + (coach_image if coach_image else 'user.svg')) }}" alt="Photo de {{ coach_nom }} ">
                     <div class="nom-contact-infos">
-                        <h6>John Doe</h6>
-                        <p>En ligne aujourd’hui à 16:24</p>
+                        <h6>{{ coach_prenom }} {{ coach_nom }}</h6>
+                        <p>En ligne le</p>
                     </div>
                 </div>
                 <div class="appel-plus">
-                    <img  src="{{ url_for('static', filename='imgs/appel_barre_top.png') }}">
-                    <img  src="{{ url_for('static', filename='imgs/more_contact.png') }}">
+                    <img src="{{ url_for('static', filename='imgs/appel_barre_top.png') }}">
+                    <img src="{{ url_for('static', filename='imgs/more_contact.png') }}">
                 </div>
             </div>
         </div>
         <div class="partie-droite-discu-bas">
             <div class="date-section-message">
-                <p>Aujourd’hui</p>
+                <p>Aujourd'hui</p>
             </div>
-            <div class="message-autre-personne">
-                <p class="texte-message">message</p>
-            </div>
-            <div class="message-soi">
-                <p class="texte-message">message</p>
-            </div>
-            <form class="message-bar">
+            {% for message in messages %}
+                <div class="{% if message[0] == utilisateur_id %}message-soi{% else %}message-autre-personne{% endif %}">
+                    <p class="texte-message">{{ message[4] }}</p>
+                </div>
+            {% endfor %}
+            <form action="{{ url_for('messagerie.envoyer_message', coach_id=coach_id) }}" class="message-bar">
                 <input type="text" name="envoie-message" class="message-contenu" placeholder="Écrivez ici...">
-                
                 <div class="icons">
-                    <img src="{{url_for('static', filename='imgs/mic.svg') }}" alt="Micro" class="icon">
-                    <img src="{{url_for('static', filename='imgs/image-envoie.svg') }}" alt="Image" class="icon">
-                    <img src="{{url_for('static', filename='imgs/div_vertical.svg') }}" alt="diviseur" class="diviseur">
+                    <img src="{{ url_for('static', filename='imgs/mic.svg') }}" alt="Micro" class="icon">
+                    <img src="{{ url_for('static', filename='imgs/image-envoie.svg') }}" alt="Image" class="icon">
+                    <img src="{{ url_for('static', filename='imgs/div_vertical.svg') }}" alt="diviseur" class="diviseur">
                     <button type="submit" class="envoyer-btn">
-                        <img src="{{url_for('static', filename='imgs/envoie.svg') }}" alt="Envoyer" class="icon">
+                        <img src="{{ url_for('static', filename='imgs/envoie.svg') }}" alt="Envoyer" class="icon">
                     </button>
                 </div>
             </form>
-            
-            
         </div>
     </div>
-</div>
+{% else %}
+    <div class="partie-droite-discu">
+        <div class="partie-droite-discu-haut">
+            <div class="image-infos">
+                <div class="image-contact">
+                    <div class="nom-contact-infos">
+                        <h6></h6>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="partie-droite-discu-bas">
+        </div>
+    </div>
+{% endif %}
+
 
 
 {% endblock %}

@@ -227,7 +227,7 @@
                       
 
                     <div class="card-buttons-contacter">
-                        <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" class="more-btn">CONTACTER <img src="{{url_for('static', filename='imgs/icone_contacter.svg') }}"/></a>
+                        <a href="{{ url_for('messagerie.discussion', coach_id=coach['id_personne']) }}" class="more-btn">CONTACTER <img src="{{url_for('static', filename='imgs/icone_contacter.svg') }}"/></a>
                     </div>
                 </div>
             </div>

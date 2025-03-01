@@ -65,7 +65,7 @@
           <div class="coach-card">
             <div class="coach-photo">
               <div class="card-buttons-contacter-little">
-                <a href="{{ url_for('cours.en_savoir_plus', coach_id=coach['id_personne']) }}" class="more-btn">CONTACTER <img src="{{url_for('static', filename='imgs/icone_contacter.svg') }}"/></a>
+                <a href="{{ url_for('messagerie.discussion', coach_id=coach['id_personne']) }}" class="more-btn">CONTACTER <img src="{{url_for('static', filename='imgs/icone_contacter.svg') }}"/></a>
               </div>
               <img src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }} ">
             </div>
