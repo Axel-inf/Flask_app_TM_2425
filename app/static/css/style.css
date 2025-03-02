@@ -2135,7 +2135,6 @@ fieldset h5 {
   width: calc(200vw/3);
   height: 56px;
   background-color: var(--fonce); /* Couleur sombre */
-  padding-left: 1.1vw;
   padding-right: 0.83vw;
   border-radius: 8px;
   box-sizing: border-box;
