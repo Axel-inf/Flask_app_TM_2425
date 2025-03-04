@@ -1265,6 +1265,9 @@ fieldset h5 {
   font-weight: 400;
   outline: none;
   background-color: var(--secondary);
+}
+
+#barre-recherche{
   height: 56px;
 }
 
@@ -1920,7 +1923,7 @@ fieldset h5 {
   align-items: start;
   background-color:var(--fonce-opaque);
   color: white;
-  padding:24px 80px 0px 80px;
+  padding:24px 16px 0px 80px;
   width: calc(100vw / 3);
   margin: 0;
   box-sizing: border-box;
@@ -1936,30 +1939,16 @@ fieldset h5 {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
 
 .contact-dans-liste {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 12px;
   position: relative;
   margin-top: 16px;
-}
-
-.contact-dans-liste::before {
-  content: "";
-  position: absolute;
-  top: -4px;   /* Dépassement de 4px en haut */
-  left: -4px;  /* Dépassement de 4px à gauche */
-  right: -4px; /* Dépassement de 4px à droite */
-  bottom: -4px;/* Dépassement de 4px en bas */
-  background-color: rgba(255, 255, 255, 0); /* Transparent par défaut */
-  transition: background-color 0.3s ease;
-  border-radius: 12px; /* Optionnel : pour un effet plus arrondi */
-}
-
-.contact-dans-liste:hover::before {
-  background-color: rgba(255, 255, 255, 0.4); /* Overlay blanc à 40% d'opacité */
 }
 
 .contact-dans-liste::after {
@@ -1972,8 +1961,31 @@ fieldset h5 {
   background-color: white; /* Couleur de la ligne */
 }
 
+.contact-dans-liste::before {
+  content: "";
+  position: absolute;
+  top: -12.5px;   /* Dépassement de 4px en haut */
+  left: -8px;  /* Dépassement de 4px à gauche */
+  right: -8px; /* Dépassement de 4px à droite */
+  bottom: -12.5px;/* Dépassement de 4px en bas */
+  background-color: rgba(255, 255, 255, 0); /* Transparent par défaut */
+  transition: background-color 0.3s ease;
+  border-radius: 12px; /* Optionnel : pour un effet plus arrondi */
+}
+
+.contact-dans-liste:hover::before {
+  background-color: rgba(255, 255, 255, 0.4); /* Overlay blanc à 40% d'opacité */
+}
+
 .contact-dans-liste:last-child::after {
   display: none; /* Supprime la ligne après le dernier contact */
+}
+
+.image-nom-dernier-message{
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
 }
 
 .nom-contact-infos{
@@ -2006,7 +2018,7 @@ fieldset h5 {
 
 .search-bar-contact {
   width: 330px;
-  padding: 12px 30px 12px 3.34vw;
+  padding: 5px 30px 10.5px 3.34vw;
   border-radius: 30px;
   border: none;
   font-family: "inter", sans-serif;
@@ -2014,7 +2026,6 @@ fieldset h5 {
   font-weight: 400;
   outline: none;
   background-color: var(--secondary);
-  height: 56px;
 }
 
 .search-btn-contact {
@@ -2085,24 +2096,31 @@ fieldset h5 {
 }
 
 .message-autre-personne, .message-soi {
-  padding: 8px 16px;
-  border-radius: 8px;
+  display: flex;
+  align-items: flex-end;
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 400;
   margin-top: 12px;
 }
 
-.message-autre-personne {
+.message-autre-personne .texte-message {
   background-color: var(--primary);
   border-radius: 8px 8px 8px 0px;
+  padding: 8px 16px;
   align-self: flex-start;
 }
 
-.message-soi {
+.message-soi .texte-message {
   background-color: var(--secondary);
   border-radius: 8px 8px 0px 8px;
   align-self: flex-end;
+  padding: 8px 16px;
+}
+
+.message-heure{
+  color: white;
+  margin-left: 10px;
 }
 
 .partie-droite-discu-bas .message-autre-personne + .message-soi,

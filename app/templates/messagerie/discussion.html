@@ -18,11 +18,13 @@
         </div>
         <div class="liste-contacts">
             {% for coach in coaches %}
-                <div class="contact-dans-liste">
-                    <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + (coach_image if coach_image else 'user.svg')) }}" alt="Photo de {{ coach['nom'] }} ">
-                    <div class="nom-contact-infos">
-                        <h6>{{ coach_prenom }} {{ coach_nom }}</h6>
-                        <p>Dernier message...</p>
+                <div class="contact-dans-liste" onclick="ouvrirDiscussion('{{ coach['coach_id'] }}')">
+                    <div class="image-nom-dernier-message">
+                        <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }} ">
+                        <div class="nom-contact-infos">
+                            <h6>{{ coach['prenom'] }} {{ coach['nom'] }}</h6>
+                            <p>{{ coach['dernier_message'] }}</p>
+                        </div>
                     </div>
                     <div class="date-nbre_message">
                         <p>15:47</p>
@@ -30,71 +32,68 @@
                     </div>
                 </div>
             {% endfor %}
+
         </div>
     </div>
-    {% if coach_id %}
-
-    <div class="partie-droite-discu">
-        <div class="partie-droite-discu-haut">
-            <div class="image-infos">
-                <div class="image-contact">
-                    <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + (coach_image if coach_image else 'user.svg')) }}" alt="Photo de {{ coach_nom }} ">
-                    <div class="nom-contact-infos">
-                        <h6>{{ coach_prenom }} {{ coach_nom }}</h6>
-                        <p>En ligne le</p>
+    {% if coach_nom %}
+        <div class="partie-droite-discu">
+            <div class="partie-droite-discu-haut">
+                <div class="image-infos">
+                    <div class="image-contact">
+                        <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + (coach_image if coach_image else 'user.svg')) }}" alt="Photo de {{ coach_nom }} ">
+                        <div class="nom-contact-infos">
+                            <h6>{{ coach_prenom }} {{ coach_nom }}</h6>
+                            <p>En ligne le</p>
+                        </div>
                     </div>
-                </div>
-                <div class="appel-plus">
-                    <img src="{{ url_for('static', filename='imgs/appel_barre_top.png') }}">
-                    <img src="{{ url_for('static', filename='imgs/more_contact.png') }}">
+                    <div class="appel-plus">
+                        <img src="{{ url_for('static', filename='imgs/appel_barre_top.png') }}">
+                        <img src="{{ url_for('static', filename='imgs/more_contact.png') }}">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="partie-droite-discu-bas">
-            {% set last_date = None %}
-            {% for message in messages %}
-                {% set message_date = message[3][:10] %}  {# Extraire YYYY-MM-DD #}
+            <div class="partie-droite-discu-bas">
+                {% set ns = namespace(last_date=None) %}
+                {% for message in messages %}
+                    {% set message_date = message[3][:10] %}  {# Extraire YYYY-MM-DD #}
 
-                {% if last_date is none or last_date != message_date %}
-                    <div class="date-section-message">
-                        {% if message_date == current_date.strftime('%Y-%m-%d') %}
-                            <p>Aujourd'hui</p>
-                        {% elif message_date == (current_date - timedelta(days=1)).strftime('%Y-%m-%d') %}
-                            <p>Hier</p>
-                        {% else %}
-                            <p>{{ message_date }}</p>
-                        {% endif %}
+                    {% if ns.last_date is none or ns.last_date != message_date %}
+                        <div class="date-section-message">
+                            {% if message_date == current_date.strftime('%Y-%m-%d') %}
+                                <p>Aujourd'hui</p>
+                            {% elif message_date == (current_date - timedelta(days=1)).strftime('%Y-%m-%d') %}
+                                <p>Hier</p>
+                            {% else %}
+                                <p>{{ message_date }}</p>
+                            {% endif %}
+                        </div>
+                        {% set ns.last_date = message_date %} {# Mise à jour après l'affichage du diviseur #}
+                    {% endif %}
+                    <div class="{% if message[0] == utilisateur_id %}message-soi{% else %}message-autre-personne{% endif %}">
+                        <p class="texte-message">{{ message[4] }}</p>
+                        <span class="message-heure">{{ message[3][11:16] }}</span>
                     </div>
-                    {% set last_date = message_date %} {# Mise à jour après l'affichage du diviseur #}
-                {% endif %}
-
-                <div class="{% if message[0] == utilisateur_id %}message-soi{% else %}message-autre-personne{% endif %}">
-                    <p class="texte-message">{{ message[4] }}</p>
-                    <span class="message-heure">{{ message[3][11:16] }}</span>
-                </div>
-            {% endfor %}
-            <form action="{{ url_for('messagerie.discussion', coach_id=coach_id) if coach_id else url_for('messagerie.discussion') }}" 
-                  method="POST" class="message-bar">
-                <input type="text" name="envoie-message" class="message-contenu" placeholder="Écrivez ici...">
-                <div class="icons">
-                    <img src="{{ url_for('static', filename='imgs/mic.svg') }}" alt="Micro" class="icon">
-                    <img src="{{ url_for('static', filename='imgs/image-envoie.svg') }}" alt="Image" class="icon">
-                    <img src="{{ url_for('static', filename='imgs/div_vertical.svg') }}" alt="diviseur" class="diviseur">
-                    <button type="submit" class="envoyer-btn">
-                        <img src="{{ url_for('static', filename='imgs/envoie.svg') }}" alt="Envoyer" class="icon">
-                    </button>
-                </div>
-            </form>
-        </div> 
-    </div>
+                {% endfor %}
+                <form action="{{ url_for('messagerie.discussion', coach_id=coach_id) if coach_id else url_for('messagerie.discussion') }}" 
+                    method="POST" class="message-bar">
+                    <input type="text" name="envoie-message" class="message-contenu" placeholder="Écrivez ici...">
+                    <div class="icons">
+                        <img src="{{ url_for('static', filename='imgs/mic.svg') }}" alt="Micro" class="icon">
+                        <img src="{{ url_for('static', filename='imgs/image-envoie.svg') }}" alt="Image" class="icon">
+                        <img src="{{ url_for('static', filename='imgs/div_vertical.svg') }}" alt="diviseur" class="diviseur">
+                        <button type="submit" class="envoyer-btn">
+                            <img src="{{ url_for('static', filename='imgs/envoie.svg') }}" alt="Envoyer" class="icon">
+                        </button>
+                    </div>
+                </form>
+            </div> 
+        </div>
     {% else %}
         <div class="partie-droite-discu">
             <div class="partie-droite-discu-haut">
                 <div class="image-infos">
                     <div class="image-contact">
                         <div class="nom-contact-infos">
-                            <h6></h6>
-                            <p></p>
                         </div>
                     </div>
                 </div>
@@ -105,5 +104,11 @@
     {% endif %}
 
 
+<script>
+    function ouvrirDiscussion(coach_id) {
+        window.location.href = "/messagerie/discussion/" + coach_id;
+    }
+</script>
+        
 
 {% endblock %}
