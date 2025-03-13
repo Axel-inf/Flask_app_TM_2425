@@ -10,10 +10,10 @@
         <h1>Messages</h1>
         <div class="search-container-contact">
             <form method="POST" class="search-contact">
-              <button type="submit" class="search-btn-contact">
-                <img src="{{url_for('static', filename='imgs/icone_barre_recherche_.svg') }}" alt="Recherche" class="search-icon">
-              </button>
-              <input type="text" name="search_contact" class="search-bar" placeholder="Rechercher">
+                <button type="submit" class="search-btn-contact">
+                    <img src="{{ url_for('static', filename='imgs/icone_barre_recherche_.svg') }}" alt="Recherche" class="search-icon">
+                </button>
+                <input type="text" name="search_contact" class="search-bar" placeholder="Rechercher">
             </form>
         </div>
         <div class="liste-contacts">
@@ -27,14 +27,15 @@
                         </div>
                     </div>
                     <div class="date-nbre_message">
-                        <p>15:47</p>
-                        <p class="nbre-message_non_lues">2</p>
+                        <!-- Affichage de l'heure du dernier message -->
+                        <p>{{ coach['derniere_date_message'][11:16] }}</p> <!-- Extrait de l'heure -->
+                        <p class="nbre-message_non_lues">2</p><!-- à modifier -->
                     </div>
                 </div>
             {% endfor %}
-
         </div>
     </div>
+
     {% if coach_nom %}
         <div class="partie-droite-discu">
             <div class="partie-droite-discu-haut">
@@ -69,14 +70,17 @@
                         </div>
                         {% set ns.last_date = message_date %} {# Mise à jour après l'affichage du diviseur #}
                     {% endif %}
-                    <div class="{% if message[0] == utilisateur_id %}message-soi{% else %}message-autre-personne{% endif %}">
+                    <div class="{% if message[0] == user_id %}message-soi{% else %}message-autre-personne{% endif %}">
                         <p class="texte-message">{{ message[4] }}</p>
                         <span class="message-heure">{{ message[3][11:16] }}</span>
-                    </div>
+                    </div>                    
                 {% endfor %}
-                <form action="{{ url_for('messagerie.discussion', coach_id=coach_id) if coach_id else url_for('messagerie.discussion') }}" 
-                    method="POST" class="message-bar">
+                <form action="{{ url_for('messagerie.discussion', coach_id=coach_id) if coach_id else url_for('messagerie.discussion') }}" method="POST" class="message-bar">
+                    
+                    <input type="hidden" name="coach_id" value="{{ coach_id }}">
+                    
                     <input type="text" name="envoie-message" class="message-contenu" placeholder="Écrivez ici...">
+                    
                     <div class="icons">
                         <img src="{{ url_for('static', filename='imgs/mic.svg') }}" alt="Micro" class="icon">
                         <img src="{{ url_for('static', filename='imgs/image-envoie.svg') }}" alt="Image" class="icon">
@@ -86,6 +90,7 @@
                         </button>
                     </div>
                 </form>
+
             </div> 
         </div>
     {% else %}

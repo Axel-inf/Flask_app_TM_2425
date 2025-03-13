@@ -2090,9 +2090,10 @@ fieldset h5 {
   background-repeat: no-repeat;
   background-position: center;
   height: 86.44vh;
-  padding: 64px 80px 0px 40px;
+  padding: 64px 80px 40px 40px;
   margin: 0;
   box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 .message-autre-personne, .message-soi {
@@ -2104,23 +2105,35 @@ fieldset h5 {
   margin-top: 12px;
 }
 
+.message-autre-personne {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: end;
+}
+
 .message-autre-personne .texte-message {
-  background-color: var(--primary);
-  border-radius: 8px 8px 8px 0px;
+  background-color: var(--secondary);
+  border-radius: 8px 8px 0px 8px;
   padding: 8px 16px;
   align-self: flex-start;
 }
 
 .message-soi .texte-message {
-  background-color: var(--secondary);
-  border-radius: 8px 8px 0px 8px;
+  background-color: var(--primary);
+  border-radius: 8px 8px 8px 0px;
   align-self: flex-end;
   padding: 8px 16px;
 }
 
-.message-heure{
+.message-soi .message-heure{
   color: white;
   margin-left: 10px;
+}
+
+.message-autre-personne .message-heure{
+  display: flex;
+  color: white;
+  margin-right: 10px;
 }
 
 .partie-droite-discu-bas .message-autre-personne + .message-soi,
