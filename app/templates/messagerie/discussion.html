@@ -17,25 +17,30 @@
             </form>
         </div>
         <div class="liste-contacts">
-            {% for coach in coaches %}
-                <div class="contact-dans-liste" onclick="ouvrirDiscussion('{{ coach['coach_id'] }}')">
+            {% for contact in contacts %}
+                <div class="contact-dans-liste" onclick="ouvrirDiscussion('{{ contact['contact_id'] }}')">
                     <div class="image-nom-dernier-message">
-                        <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + coach['chemin_vers_image']) }}" alt="Photo de {{ coach['nom'] }} ">
+                        <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + contact['chemin_vers_image']) }}" alt="Photo de {{ contact['nom'] }}">
                         <div class="nom-contact-infos">
-                            <h6>{{ coach['prenom'] }} {{ coach['nom'] }}</h6>
-                            <p>{{ coach['dernier_message'] }}</p>
+                            <h6>{{ contact['prenom'] }} {{ contact['nom'] }}</h6>
+                            <p>{{ contact['dernier_message'] }}</p>
                         </div>
                     </div>
                     <div class="date-nbre_message">
-                        <!-- Affichage de l'heure du dernier message -->
-                        <p>{{ coach['derniere_date_message'][11:16] }}</p> <!-- Extrait de l'heure -->
-                        <p class="nbre-message_non_lues">2</p><!-- à modifier -->
+                        <p>
+                            {% if contact['derniere_date_message'] %}
+                                {{ contact['derniere_date_message'][11:16] }}
+                            {% else %}
+                                Aucun message
+                            {% endif %}
+                        </p>  
+                        <p class="nbre-message_non_lues">2</p>
                     </div>
                 </div>
             {% endfor %}
-        </div>
+        </div>        
     </div>
-
+    <!-- Cette partie fonctionne correctement -->
     {% if coach_nom %}
         <div class="partie-droite-discu">
             <div class="partie-droite-discu-haut">
@@ -43,7 +48,7 @@
                     <div class="image-contact">
                         <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + (coach_image if coach_image else 'user.svg')) }}" alt="Photo de {{ coach_nom }} ">
                         <div class="nom-contact-infos">
-                            <h6>{{ coach_prenom }} {{ coach_nom }}</h6>
+                            <h6>{{ coach_prenom }} {{ coach_nom }}</h6> 
                             <p>En ligne le</p>
                         </div>
                     </div>
@@ -57,7 +62,7 @@
                 {% set ns = namespace(last_date=None) %}
                 {% for message in messages %}
                     {% set message_date = message[3][:10] %}  {# Extraire YYYY-MM-DD #}
-
+            
                     {% if ns.last_date is none or ns.last_date != message_date %}
                         <div class="date-section-message">
                             {% if message_date == current_date.strftime('%Y-%m-%d') %}
@@ -70,17 +75,15 @@
                         </div>
                         {% set ns.last_date = message_date %} {# Mise à jour après l'affichage du diviseur #}
                     {% endif %}
+            
                     <div class="{% if message[0] == user_id %}message-soi{% else %}message-autre-personne{% endif %}">
                         <p class="texte-message">{{ message[4] }}</p>
                         <span class="message-heure">{{ message[3][11:16] }}</span>
                     </div>                    
                 {% endfor %}
                 <form action="{{ url_for('messagerie.discussion', coach_id=coach_id) if coach_id else url_for('messagerie.discussion') }}" method="POST" class="message-bar">
-                    
                     <input type="hidden" name="coach_id" value="{{ coach_id }}">
-                    
                     <input type="text" name="envoie-message" class="message-contenu" placeholder="Écrivez ici...">
-                    
                     <div class="icons">
                         <img src="{{ url_for('static', filename='imgs/mic.svg') }}" alt="Micro" class="icon">
                         <img src="{{ url_for('static', filename='imgs/image-envoie.svg') }}" alt="Image" class="icon">
@@ -89,10 +92,9 @@
                             <img src="{{ url_for('static', filename='imgs/envoie.svg') }}" alt="Envoyer" class="icon">
                         </button>
                     </div>
-                </form>
-
-            </div> 
-        </div>
+                </form>   
+            </div>    
+        </div>     
     {% else %}
         <div class="partie-droite-discu">
             <div class="partie-droite-discu-haut">
