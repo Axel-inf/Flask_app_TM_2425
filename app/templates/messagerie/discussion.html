@@ -17,7 +17,7 @@
             </form>
         </div>
         <div class="liste-contacts">
-            {% for contact in contacts %}
+            {% for contact in contacts|sort(attribute='derniere_date_message', reverse=true) %}
                 <div class="contact-dans-liste" onclick="ouvrirDiscussion('{{ contact['contact_id'] }}')">
                     <div class="image-nom-dernier-message">
                         <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + contact['chemin_vers_image']) }}" alt="Photo de {{ contact['nom'] }}">
@@ -29,18 +29,33 @@
                     <div class="date-nbre_message">
                         <p>
                             {% if contact['derniere_date_message'] %}
-                                {{ contact['derniere_date_message'][11:16] }}
+                                {% set derniere_date = contact['derniere_date_message'] %}
+                                {% set current_date = current_date.strftime('%Y-%m-%d') %}
+                                {% set date_dernier_message = derniere_date[:10] %}
+                                {% set heure_dernier_message = derniere_date[11:16] %}
+                    
+                                {% set today = current_date %}
+                                
+                                {% if date_dernier_message == today %}
+                                    <!-- Si la date est aujourd'hui, afficher l'heure et les minutes -->
+                                    {{ heure_dernier_message }}
+                                {% elif date_dernier_message == yesterday %}
+                                    <!-- Si la date est hier, afficher "Hier" -->
+                                    Hier
+                                {% else %}
+                                    <!-- Afficher la date au format jour.mois.année -->
+                                    {{ date_dernier_message[8:10] }}.{{ date_dernier_message[5:7] }}.{{ date_dernier_message[2:4] }}
+                                {% endif %}
                             {% else %}
                                 Aucun message
                             {% endif %}
-                        </p>  
-                        <p class="nbre-message_non_lues">2</p>
-                    </div>
+                        </p>     
+                        <p class="nbre-message_non_lues">2</p>   
+                    </div>                    
                 </div>
             {% endfor %}
-        </div>        
+        </div>                
     </div>
-    <!-- Cette partie fonctionne correctement -->
     {% if coach_nom %}
         <div class="partie-droite-discu">
             <div class="partie-droite-discu-haut">
@@ -110,12 +125,74 @@
         </div>
     {% endif %}
 
-
+    <div id="overlay" class="overlay" style="display: none;" onclick="fermerOverlay()">
+        <img id="image-agrandie" alt="Image agrandie">
+        <h6>{{ coach_prenom }} {{ coach_nom }}</h6> 
+        <img id="grand-tel" src="{{ url_for('static', filename='imgs/grand_tel.svg') }}">
+        <div class="details-coach-overlay">
+            <div class="apropos-overlay">
+                <h6>À propos</h6>
+                <p>Passionné de tennis de table</p><!-- à changer -->
+            </div>
+            <div class="tel-overlay">
+                <h6>Numéro de téléphone</h6>
+                <p>+41 79 752 32 14</p><!-- à changer -->
+            </div>
+            <div class="notif-section">
+                <h6>Notifications</h6>
+                <div class="rectangle-notif">
+                    <img id="notif-icone" src="{{ url_for('static', filename='imgs/notif.svg') }}">
+                    <select id="notif-select" required name="notif">
+                        <option value="">Activées</option><!-- ne fait actuellement rien -->
+                        <option value="">Désactivées</option>
+                    </select>
+                </div>
+            </div>
+            <div class="media-overlay">
+                <h6>Médias (42)</h6><!-- à changer (le nombre) -->
+                <p>...</p><!-- à afficher -->
+            </div>
+        </div>
+        <div class="signal-section">
+            <img id="drapeau-signalement" src="{{ url_for('static', filename='imgs/drapeau-signalement.svg') }}">
+            <p>Signaler</p>
+        </div>
+    </div>
+    
 <script>
     function ouvrirDiscussion(coach_id) {
         window.location.href = "/messagerie/discussion/" + coach_id;
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll("#profile-petit").forEach(image => {
+        image.addEventListener("click", function(event) {
+            event.stopPropagation();
+            let overlay = document.getElementById("overlay");
+            let imgAgrandie = document.getElementById("image-agrandie");
+
+            imgAgrandie.src = this.src;
+            overlay.style.display = "flex";
+        });
+    });
+
+    function fermerOverlay() {
+        document.getElementById("overlay").style.display = "none";
+    }
+
+    // Fermer l'overlay si on clique en dehors
+    document.addEventListener("click", function(event) {
+        let overlay = document.getElementById("overlay");
+        if (overlay.style.display === "flex" && !overlay.contains(event.target)) {
+            fermerOverlay();
+        }
+    });
+
+    // Assurer que l'overlay est caché au chargement
+    document.getElementById("overlay").style.display = "none";
+});
 </script>
+    
         
 
 {% endblock %}

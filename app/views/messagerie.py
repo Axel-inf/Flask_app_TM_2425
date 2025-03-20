@@ -54,6 +54,9 @@ def discussion(coach_id=None):
 
     db = get_db()
     cursor = db.cursor()
+    # Calcul de la date d'hier
+    current_date = datetime.now()
+    yesterday = (current_date - timedelta(days=1)).strftime('%Y-%m-%d')
 
     search_contact = request.form.get('search_contact')
 
@@ -96,7 +99,7 @@ def discussion(coach_id=None):
             """, (user_id, coach_id, coach_id, user_id))
             messages = cursor.fetchall()
 
-    # ✅ Récupérer les discussions existantes et appliquer un filtre si nécessaire
+        # Récupérer les discussions existantes et appliquer un filtre si nécessaire
     if search_contact:
         # Recherche parmi tous les contacts si pas de coach_id
         cursor.execute("""
@@ -125,7 +128,8 @@ def discussion(coach_id=None):
                     END AS contact_id
                 FROM Messagerie 
                 WHERE FK_idpersonneclient = ? OR FK_idpersonnecoach = ?
-            """, (user_id, user_id, user_id))
+                ORDER BY (SELECT MAX(date) FROM Messagerie WHERE (FK_idpersonneclient = ? AND FK_idpersonnecoach = ?) OR (FK_idpersonneclient = ? AND FK_idpersonnecoach = ?)) DESC
+            """, (user_id, user_id, user_id, user_id, coach_id, coach_id, user_id))
         else:
             cursor.execute("""
                 SELECT DISTINCT 
@@ -135,7 +139,9 @@ def discussion(coach_id=None):
                     END AS contact_id
                 FROM Messagerie 
                 WHERE FK_idpersonneclient = ? OR FK_idpersonnecoach = ?
-            """, (user_id, user_id, user_id))
+                ORDER BY (SELECT MAX(date) FROM Messagerie WHERE (FK_idpersonneclient = ? AND FK_idpersonnecoach = ?) OR (FK_idpersonneclient = ? AND FK_idpersonnecoach = ?)) DESC
+            """, (user_id, user_id, user_id, user_id, user_id, user_id, user_id))
+
 
     contact_ids = cursor.fetchall()
 
@@ -179,6 +185,7 @@ def discussion(coach_id=None):
                            coach_image=coach_image, 
                            coach_prenom=coach_prenom, 
                            current_date=datetime.now(), 
+                           yesterday=yesterday,
                            timedelta=timedelta, 
                            contacts=contacts,
                            user_id=user_id)
