@@ -8,14 +8,14 @@
 <div class="messagerie-page">
     <div class="partie-gauche-discu">
         <h1>Messages</h1>
-        <div class="search-container-contact">
-            <form method="POST" class="search-contact">
+        <div class="search-container-contact"> 
+            <form method="POST" class="search-contact" action="{{ url_for('messagerie.discussion')}}">
                 <button type="submit" class="search-btn-contact">
                     <img src="{{ url_for('static', filename='imgs/icone_barre_recherche_.svg') }}" alt="Recherche" class="search-icon">
                 </button>
                 <input type="text" name="search_contact" class="search-bar" placeholder="Rechercher">
             </form>
-        </div>
+        </div>        
         <div class="liste-contacts">
             {% for contact in contacts|sort(attribute='derniere_date_message', reverse=true) %}
                 <div class="contact-dans-liste" onclick="ouvrirDiscussion('{{ contact['contact_id'] }}')">
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="partie-droite-discu-bas">
+            <div class="partie-droite-discu-bas" id="messages-container" style="overflow-y: auto;">
                 {% set ns = namespace(last_date=None) %}
                 {% for message in messages %}
                     {% set message_date = message[3][:10] %}  {# Extraire YYYY-MM-DD #}
@@ -190,7 +190,16 @@
 
     // Assurer que l'overlay est caché au chargement
     document.getElementById("overlay").style.display = "none";
-});
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var messageContainer = document.getElementById("messages-container");
+        if (messageContainer) {
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        }
+    });
+
+
 </script>
     
         
