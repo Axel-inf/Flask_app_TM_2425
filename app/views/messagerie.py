@@ -39,7 +39,7 @@ def envoyer_message(coach_id):
 
     close_db()
 
-    return redirect(url_for('messagerie.discussion', coach_id=coach_id))
+    return redirect(url_for('messagerie.discussion', coach_id=coach_id, role=g.role))
 
 
 
@@ -189,5 +189,5 @@ def discussion(coach_id=None):
                            yesterday=yesterday,
                            timedelta=timedelta, 
                            contacts=contacts,
-                           user_id=user_id)
+                           user_id=user_id, role=g.role)
 
