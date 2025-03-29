@@ -43,7 +43,7 @@
                                     <!-- Si la date est hier, afficher "Hier" -->
                                     Hier
                                 {% else %}
-                                    <!-- Afficher la date au format jour.mois.année -->
+                                    <!-- Sinon, afficher la date au format jour.mois.année -->
                                     {{ date_dernier_message[8:10] }}.{{ date_dernier_message[5:7] }}.{{ date_dernier_message[2:4] }}
                                 {% endif %}
                             {% else %}

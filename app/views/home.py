@@ -1,7 +1,6 @@
 from flask import (Blueprint, flash, g, redirect, render_template, request, session, url_for)
 from app.utils import get_profile_image
 
-# Routes /...
 home_bp = Blueprint('home', __name__)
 
 

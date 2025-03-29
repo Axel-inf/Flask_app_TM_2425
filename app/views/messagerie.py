@@ -32,9 +32,9 @@ def envoyer_message(coach_id):
             INSERT INTO Messagerie (FK_idpersonneclient, FK_idpersonnecoach, id_message, date, message)
             VALUES (?, ?, ?, ?, ?)
         """, (user_id, coach_id, id_message, datetime.now().strftime('%Y-%m-%d %H:%M:%S'), contenu))
-        db.commit()  # ✅ Assure que le message est bien enregistré immédiatement
+        db.commit()  # Assure que le message est bien enregistré immédiatement
     except Exception as e:
-        print(f"📩 ERROR: {e}")
+        print(f"ERROR: {e}")
 
 
     close_db()
@@ -60,7 +60,7 @@ def discussion(coach_id=None):
 
     search_contact = request.form.get('search_contact')
 
-    # ✅ Si c'est un POST, récupérer coach_id depuis le formulaire
+    # Si c'est un POST, récupérer coach_id depuis le formulaire
     if request.method == 'POST':
         form_coach_id = request.form.get('coach_id')
         if form_coach_id:
@@ -79,7 +79,7 @@ def discussion(coach_id=None):
                     VALUES (?, ?, datetime('now'), ?)""", (user_id, coach_id, message_contenu))
             db.commit()
 
-    # ✅ Récupérer les messages de la discussion
+    # Récupérer les messages de la discussion
     messages = []
     coach_nom = None
     coach_prenom = None
