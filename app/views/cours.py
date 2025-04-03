@@ -162,6 +162,7 @@ def en_savoir_plus(coach_id):
         action = request.form.get('action')
         client_id = g.user['id_personne']
         date = request.form.get('date')
+        print(request.form)
 
         # Modifier un avis
         if action == 'modifier':
@@ -250,6 +251,11 @@ def donner_avis(coach_id):
         action = request.form.get('action')
         note = request.form.get('note')
         commentaire = request.form.get('commentaire')
+        date = request.form.get('date')  # Vérifie si la date est bien reçue
+
+        print("Action:", action)
+        print("Date:", date)
+
 
         # Suppression d'un avis
         if action == 'supprimer' and existing_review:
