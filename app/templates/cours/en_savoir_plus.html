@@ -21,7 +21,11 @@
                 <div class="commentaire">
                     <div class="ligne-haut-avis">
                         <div class="infos-client-avis">
+                            {% if commentaire.chemin_vers_image %}
                             <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + commentaire.chemin_vers_image) }}" alt="Photo de profil" class="avatar">
+                            {% else %}
+                            <img id="profile-petit" src="{{ url_for('static', filename='imgs/user.svg') }}" alt="Photo de profil par défaut" class="avatar">
+                            {% endif %}
                             <h6>{{ commentaire.prenom }} {{ commentaire.nom }}</h6>
                         </div>
             

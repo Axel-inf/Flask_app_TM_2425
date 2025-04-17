@@ -5,8 +5,8 @@ from app.config import EMAIL_HOST, EMAIL_PORT, EMAIL_PASSWORD, EMAIL_ADDRESS
 
 def send_email(to_address, subject, message, cc_addresses=None):
     # Création de l'objet email
-    email = MIMEMultipart()
-    email['From'] = EMAIL_ADDRESS
+    email = MIMEMultipart('alternative')
+    email['From'] = f"ttcoach.ch <{EMAIL_ADDRESS}>"
     email['To'] = to_address
     email['Subject'] = subject
 
@@ -17,7 +17,15 @@ def send_email(to_address, subject, message, cc_addresses=None):
 
     # Ajout du corps de l'email en version HTML (cela permet d'utiliser des tags html dans le message)
     # Pour utiliser une simple chaîne de caractère, il suffit de remplacer par MIMEText(message,'plain')
-    email.attach(MIMEText(message, 'html'))
+    # Partie texte brute (alternative au HTML)
+    texte_simple = "Bonjour,\nVoici un e-mail de test pour vérifier que tout fonctionne.\nCode à usage unique : ######"
+
+    # Partie HTML
+    message_html = message  # Ton paramètre HTML est déjà bon
+
+    email.attach(MIMEText(texte_simple, 'plain'))  # version texte simple
+    email.attach(MIMEText(message_html, 'html'))   # version HTML
+
 
     # Connexion au serveur SMTP et envoi de l'email
     try:
