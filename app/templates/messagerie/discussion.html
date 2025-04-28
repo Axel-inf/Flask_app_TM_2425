@@ -23,7 +23,18 @@
                         <img id="profile-petit" src="{{ url_for('static', filename='uploads/' + contact['chemin_vers_image']) }}" alt="Photo de {{ contact['nom'] }}">
                         <div class="nom-contact-infos">
                             <h6>{{ contact['prenom'] }} {{ contact['nom'] }}</h6>
-                            <p>{{ contact['dernier_message'] }}</p>
+                            
+                            <p style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                {% set message = contact['dernier_message'] %}
+                                {% if message|length > 28 %}
+                                    {% set short_message = message[:28].rsplit(' ', 1)[0] %}
+                                    {{ short_message }}...
+                                {% else %}
+                                    {{ message }}
+                                {% endif %}
+                            </p>
+                                  
+                              
                         </div>
                     </div>
                     <div class="date-nbre_message">
