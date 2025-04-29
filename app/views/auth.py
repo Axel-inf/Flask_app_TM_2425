@@ -31,7 +31,7 @@ def register():
         # On essaie d'insérer l'utilisateur dans la base de données
         if prenom and nom and email and mot_de_passe:
             try:
-                curseur.execute("INSERT INTO Personnes (prenom, nom, email, mot_de_passe) VALUES (?, ?, ?, ?)",(prenom, nom, email, generate_password_hash(mot_de_passe)))
+                curseur.execute("INSERT INTO Personnes (prenom, nom, email, mot_de_passe) VALUES (?, ?, ?, ?)",(prenom, nom, email, generate_password_hash(mot_de_passe, method='pbkdf2:sha256')))
                 # db.commit() permet de valider une modification de la base de données
                
                 
