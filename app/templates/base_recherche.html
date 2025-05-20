@@ -102,18 +102,17 @@
             </ul>
             </div>
             <div class="footer-section">
-            <p class="titre-footer"><b>Mentions légals</b></p>
+            <p class="titre-footer"><a href="{{ url_for('legal.mentions_legales') }}" id="mentions_legales"><b>Mentions légales</b></a></p>
             <ul>
-                <li>Politique de confidentialité</li>
-                <li>Conditions d’utilisation</li>
-                <li>Conditions générales</li>
+                <li><a href="{{ url_for('legal.politique_confidentialite') }}">Politique de confidentialité</a></li><!--+politique de cookies-->
+                <li><a href="{{ url_for('legal.conditions_utilisation') }}">Conditions générales d'utilisation</a></li>
             </ul>
             </div>
             <div class="footer-section">
             <p class="titre-footer"><b>Contactez-nous</b></p>
             <ul>
-                <li>ttcoach.tm@gmail.com</li><!-- à modifier -->
-                <li>+41 79 286 98 16</li><!-- à modifier -->
+                <li>ttcoach.tm@gmail.com</li>
+                <li>+41 79 255 74 48</li>
             </ul>
 
             </div>

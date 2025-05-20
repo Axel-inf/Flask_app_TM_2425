@@ -12,6 +12,7 @@ from app.views.coach import coach_bp
 from app.views.cours import cours_bp
 from app.views.messagerie import messagerie_bp
 from app.views.password import password_bp
+from app.views.legal import legal_bp
 
 # Fonction automatiquement appelée par le framework Flask lors de l'exécution de la commande python -m flask run permettant de lancer le projet
 # La fonction retourne une instance de l'application créée
@@ -31,6 +32,7 @@ def create_app():
     app.register_blueprint(cours_bp)
     app.register_blueprint(messagerie_bp)
     app.register_blueprint(password_bp)
+    app.register_blueprint(legal_bp)
 
     
 
