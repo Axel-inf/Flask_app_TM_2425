@@ -64,6 +64,7 @@ ul{
   --red: #FA1C1C;
 }
 
+
 #header {
   display: flex;
   height: 80px;
@@ -493,6 +494,7 @@ form h1 {
 /*
 -----------------   HOME ------------------
 */
+
 .partie1 {
   display: flex;
   background-color: var(--primary);
@@ -509,6 +511,11 @@ form h1 {
 
 .slogan {
   width: 620px;
+}
+.coach-blob-container {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
 }
 
 #bouton_fonce {
@@ -538,10 +545,7 @@ color: white;
 margin-bottom: 48px;
 }
 
-.coach-blob-container {
-  height: 524px;
-  width: 660px;
-}
+
 
 .partie2 {
   display: flex;
